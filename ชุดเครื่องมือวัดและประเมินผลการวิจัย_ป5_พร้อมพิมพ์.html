@@ -1,0 +1,799 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>ชุดเครื่องมือวัดและประเมินผลการวิจัย ป.5 - ครูเตชินท์ อินทมล</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    @page { size: A4; margin: 1.2cm 1.5cm; }
+    * { box-sizing: border-box; font-family: 'Sarabun', sans-serif; }
+    body { background-color: #f3f4f6; margin: 0; padding: 20px; color: #111827; font-size: 14pt; line-height: 1.5; }
+    .page { background: white; width: 210mm; min-height: 297mm; margin: 0 auto 25px auto; padding: 18mm 20mm; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1); position: relative; }
+    @media print {
+      body { background: white; padding: 0; }
+      .page { box-shadow: none; margin: 0; width: 100%; min-height: auto; padding: 0; page-break-after: always; }
+      .no-print { display: none !important; }
+    }
+    .print-btn-bar { max-width: 210mm; margin: 0 auto 15px auto; display: flex; justify-content: space-between; align-items: center; background: #1e3a8a; color: white; padding: 12px 20px; border-radius: 8px; }
+    .btn { background: #2563eb; color: white; border: none; padding: 8px 16px; border-radius: 6px; font-size: 14pt; cursor: pointer; font-weight: 600; }
+    .btn:hover { background: #1d4ed8; }
+    h1 { font-size: 19pt; text-align: center; margin: 0 0 8px 0; font-weight: 800; color: #1e3a8a; }
+    h2 { font-size: 15pt; text-align: center; margin: 0 0 12px 0; font-weight: 700; color: #374151; }
+    h3 { font-size: 14pt; margin: 12px 0 8px 0; font-weight: 700; border-bottom: 2px solid #1e3a8a; padding-bottom: 4px; color: #1e3a8a; }
+    p { margin: 6px 0; text-align: justify; }
+    table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 12.5pt; }
+    th, td { border: 1px solid #94a3b8; padding: 5px 8px; }
+    th { background-color: #f1f5f9; font-weight: 700; text-align: center; color: #1e3a8a; }
+    .center { text-align: center; }
+    .box { border-left: 4px solid #1e3a8a; background: #f8fafc; padding: 10px 14px; border-radius: 0 6px 6px 0; margin: 10px 0; font-size: 13pt; color: #334155; }
+    .part-title { background: #e0e7ff; color: #1e3a8a; padding: 4px 10px; font-weight: 700; font-size: 13pt; border-radius: 4px; margin: 10px 0 6px 0; border-left: 4px solid #1e3a8a; }
+    .opt { margin: 2px 0 2px 20px; font-size: 13pt; color: #374151; }
+    .footer-sig { margin-top: 25px; text-align: right; line-height: 1.8; font-size: 13.5pt; }
+  </style>
+</head>
+<body>
+
+<div class="print-btn-bar no-print">
+  <div><strong>ชุดเครื่องมือวัดและประเมินผลการวิจัย ป.5 (ฉบับพิมพ์จริง)</strong> | ครูเตชินท์ อินทมล</div>
+  <button class="btn" onclick="window.print()">🖨️ สั่งพิมพ์เอกสารทั้งหมด (Print A4)</button>
+</div>
+
+<!-- PAGE 1: COVER -->
+<div class="page" style="display:flex; flex-direction:column; justify-content:center; text-align:center;">
+  <div style="border: 2px solid #1e3a8a; padding: 40px 25px; border-radius: 12px;">
+    <h1 style="color:#1e3a8a; font-size:22pt; margin-bottom:12px;">ชุดเครื่องมือวัดและประเมินผลการวิจัยในชั้นเรียน</h1>
+    <h2 style="font-size:15pt; color:#4b5563; margin-bottom:25px;">(Research Instruments & Evaluation Forms)</h2>
+    
+    <p style="text-align:center; font-size:15pt; font-weight:700; margin-bottom:8px;">การพัฒนาทักษะการเรียนรู้รายวิชาเทคโนโลยี (วิทยาการคำนวณ) กลุ่มสาระการเรียนรู้วิทยาศาสตร์และเทคโนโลยี</p>
+    <p style="text-align:center; font-size:15pt; font-weight:600; margin-bottom:8px;">โดยใช้นวัตกรรมสื่อปฏิสัมพันธ์ผ่านกล้องร่วมกับแฟลชการ์ดรูปธรรมและการจัดการเรียนรู้แบบ Pair Programming</p>
+    <p style="text-align:center; font-size:15pt; font-weight:600; margin-bottom:35px;">ของนักเรียนชั้นประถมศึกษาปีที่ 5 โรงเรียนบ้านโนนป่าหว้านเชียงฮาย ภาคเรียนที่ 1 ปีการศึกษา 2569</p>
+
+    <div style="margin: 35px 0;">
+      <p style="text-align:center; font-size:15pt; font-weight:700;">ผู้วิจัยและผู้ประเมิน</p>
+      <p style="text-align:center; font-size:17pt; font-weight:800; color:#1e3a8a;">นายเตชินท์  อินทมล</p>
+      <p style="text-align:center; font-size:14pt;">ตำแหน่ง ครู (ไม่มีวิทยฐานะ)</p>
+      <p style="text-align:center; font-size:14pt;">โรงเรียนบ้านโนนป่าหว้านเชียงฮาย</p>
+      <p style="text-align:center; font-size:14pt;">สำนักงานเขตพื้นที่การศึกษาประถมศึกษาหนองบัวลำภู เขต 2</p>
+    </div>
+
+    <div style="margin-top: 25px; text-align:left; background:#f8fafc; padding:15px; border-radius:8px; border: 1px solid #e2e8f0;">
+      <strong style="color:#1e3a8a;">เอกสารในชุดเครื่องมือวัดผลการวิจัย:</strong>
+      <ol style="margin: 8px 0 0 20px; line-height:1.8; font-size:13.5pt;">
+        <li>แบบทดสอบวัดผลสัมฤทธิ์ทางการเรียนรู้ 20 ข้อ (ปรนัย 4 ตัวเลือก) ตามตัวชี้วัด ว 4.2 ป.5/1 - 2</li>
+        <li>กระดาษคำตอบสำหรับนักเรียน + เฉลยคำตอบและตารางวิเคราะห์ตัวชี้วัด (สำหรับครูผู้ตรวจ)</li>
+        <li>แบบประเมินรูบริกส์ทักษะการคิดเชิงคำนวณ (CT 4 ด้าน) + แบบบันทึกคะแนนเปล่ารายบุคคล (N = 8)</li>
+        <li>แบบสอบถามความพึงพอใจของนักเรียน (5 ข้อ) + แบบสรุปผลคะแนนเปล่ารายบุคคล (N = 8)</li>
+      </ol>
+    </div>
+  </div>
+</div>
+
+<!-- PAGE 2: EXAM P1 (Q1 - Q7) -->
+<div class="page">
+  <div style="border-bottom: 1px solid #94a3b8; padding-bottom: 4px; margin-bottom: 12px; font-size: 11pt; color: #64748b; display: flex; justify-content: space-between;">
+    <span>ชุดเครื่องมือวัดผลการวิจัย: แบบทดสอบวัดผลสัมฤทธิ์ (หน้า 1)</span>
+    <span>โรงเรียนบ้านโนนป่าหว้านเชียงฮาย สพป.หนองบัวลำภู เขต 2</span>
+  </div>
+  <h1>แบบทดสอบวัดผลสัมฤทธิ์ทางการเรียนรู้วิทยาการคำนวณ</h1>
+  <h2>เรื่อง การใช้เหตุผลเชิงตรรกะและการเขียนโปรแกรมอย่างง่าย ชั้น ป.5 (20 ข้อ 20 คะแนน เวลา 40 นาที)</h2>
+  <div class="box">
+    <strong>📌 คำชี้แจงสำหรับนักเรียน:</strong> ให้นักเรียนอ่านคำถามอย่างรอบคอบ แล้วทำเครื่องหมายกากบาท ( X ) ทับตัวอักษร ก, ข, ค หรือ ง ที่ถูกต้องที่สุดเพียงคำตอบเดียวลงในกระดาษคำตอบ
+  </div>
+  <div class="part-title">ตอนที่ 1: การใช้เหตุผลเชิงตรรกะและการแก้ปัญหาในชีวิตประจำวัน (ตัวชี้วัด ว 4.2 ป.5/1)</div>
+
+  <div style="margin:8px 0 10px 0;">
+    <strong>ข้อที่ 1. พิจารณาขั้นตอนการทอดไข่เจียวต่อไปนี้:
+  [ กล่อง 1 ] ตอกไข่ใส่ชาม ปรุงรส แล้วตีให้เข้ากัน
+  [ กล่อง 2 ] ตั้งกระทะใส่น้ำมันและเปิดเตาแก๊ส
+  [ กล่อง 3 ] เทไข่ลงในกระทะที่มีน้ำมันร้อน
+  [ กล่อง 4 ] ตักไข่เจียวที่สุกแล้วใส่จาน
+ข้อใดเรียงลำดับขั้นตอนการทอดไข่เจียวได้ถูกต้องตั้งแต่ต้นจนจบ?</strong>
+    
+    <div class="opt">ก. กล่อง 1 ➔ กล่อง 2 ➔ กล่อง 3 ➔ กล่อง 4</div>
+    <div class="opt">ข. กล่อง 3 ➔ กล่อง 1 ➔ กล่อง 2 ➔ กล่อง 4</div>
+    <div class="opt">ค. กล่อง 2 ➔ กล่อง 4 ➔ กล่อง 1 ➔ กล่อง 3</div>
+    <div class="opt">ง. กล่อง 4 ➔ กล่อง 3 ➔ กล่อง 2 ➔ กล่อง 1</div>
+  </div>
+
+  <div style="margin:8px 0 10px 0;">
+    <strong>ข้อที่ 2. ก่อนออกจากบ้านไปโรงเรียน นักเรียนสังเกตเห็นท้องฟ้ามีเมฆดำมืด ลมพัดแรง และมีเสียงฟ้าร้อง นักเรียนควรตัดสินใจอย่างไรจึงจะเหมาะสมที่สุด?</strong>
+    
+    <div class="opt">ก. เตรียมร่มหรือเสื้อกันฝนใส่กระเป๋าติดตัวไปด้วย</div>
+    <div class="opt">ข. สวมแว่นกันแดดและหมวกปีกกว้างก่อนออกจากบ้าน</div>
+    <div class="opt">ค. นอนต่อที่บ้านเพราะคิดว่าฝนตกหนักคงไม่มีใครไปเรียน</div>
+    <div class="opt">ง. รีบวิ่งออกจากบ้านทันทีโดยไม่ต้องเตรียมอะไร</div>
+  </div>
+
+  <div style="margin:8px 0 10px 0;">
+    <strong>ข้อที่ 3. ถ้านักเรียนต้องเดินทางถึงโรงเรียนเวลา 07.45 น. โดยมีกิจกรรมตอนเช้าคือ แต่งตัว 15 นาที กินข้าว 15 นาที และเดินทาง 15 นาที นักเรียนควรตื่นนอนเวลาใดเป็นอย่างช้าที่สุดจึงจะไม่ไปโรงเรียนสาย?</strong>
+    
+    <div class="opt">ก. เวลา 07.00 น.</div>
+    <div class="opt">ข. เวลา 07.30 น.</div>
+    <div class="opt">ค. เวลา 07.40 น.</div>
+    <div class="opt">ง. เวลา 08.00 น.</div>
+  </div>
+
+  <div style="margin:8px 0 10px 0;">
+    <strong>ข้อที่ 4. นักเรียนจัดสมุดและหนังสือใส่กระเป๋านักเรียนตามตารางสอนของวันพรุ่งนี้ การกระทำนี้ส่งผลดีอย่างไร?</strong>
+    
+    <div class="opt">ก. ช่วยให้กระเป๋าไม่หนักเกินไป และมีหนังสือเรียนครบทุกวิชาอย่างเป็นระเบียบ</div>
+    <div class="opt">ข. ช่วยให้ไม่ต้องทำการบ้านที่คุณครูสั่ง</div>
+    <div class="opt">ค. ช่วยให้คอมพิวเตอร์ในห้องเรียนทำงานได้เร็วขึ้น</div>
+    <div class="opt">ง. ช่วยให้ได้คะแนนสอบเต็มทุกวิชาโดยไม่ต้องอ่านหนังสือ</div>
+  </div>
+
+  <div style="margin:8px 0 10px 0;">
+    <strong>ข้อที่ 5. พิจารณาแบบรูปลูกศรบอกทิศทางต่อไปนี้:
+[ ⬆️ เดินหน้า ] ➔ [ ➡️ เลี้ยวขวา ] ➔ [ ⬆️ เดินหน้า ] ➔ [ ➡️ เลี้ยวขวา ] ➔ [ ⬆️ เดินหน้า ] ➔ [  ❓  ]
+ลูกศรในช่อง [ ❓ ] ควรเป็นลูกศรบอกทิศทางในข้อใดตามแบบรูป?</strong>
+    
+    <div class="opt">ก. [ ➡️ เลี้ยวขวา ]</div>
+    <div class="opt">ข. [ ⬆️ เดินหน้า ]</div>
+    <div class="opt">ค. [ ⬅️ เลี้ยวซ้าย ]</div>
+    <div class="opt">ง. [ ⬇️ ถอยหลัง ]</div>
+  </div>
+  <div class="part-title">ตอนที่ 2: การออกแบบโปรแกรมและการจัดลำดับคำสั่ง (ตัวชี้วัด ว 4.2 ป.5/2)</div>
+
+  <div style="margin:8px 0 10px 0;">
+    <strong>ข้อที่ 6. ก่อนที่เราจะเปิดคอมพิวเตอร์เขียนโปรแกรม ทำไมคุณครูจึงให้นักเรียนฝึกจัดเรียง "บัตรคำสั่ง" บนโต๊ะก่อน?</strong>
+    
+    <div class="opt">ก. เพื่อช่วยให้เราเห็นลำดับขั้นตอนชัดเจน วางแผนได้ถูกต้อง และลดข้อผิดพลาด</div>
+    <div class="opt">ข. เพื่อช่วยให้เครื่องคอมพิวเตอร์ประหยัดไฟ</div>
+    <div class="opt">ค. เพื่อตกแต่งห้องเรียนให้มีสีสันสวยงาม</div>
+    <div class="opt">ง. เพื่อให้เล่นเกมชนะโดยไม่ต้องใช้สมาธิ</div>
+  </div>
+</div>
+
+<!-- PAGE 3: EXAM P2 (Q7 - Q13) -->
+<div class="page">
+  <div style="border-bottom: 1px solid #94a3b8; padding-bottom: 4px; margin-bottom: 12px; font-size: 11pt; color: #64748b; display: flex; justify-content: space-between;">
+    <span>ชุดเครื่องมือวัดผลการวิจัย: แบบทดสอบวัดผลสัมฤทธิ์ (หน้า 2)</span>
+    <span>โรงเรียนบ้านโนนป่าหว้านเชียงฮาย สพป.หนองบัวลำภู เขต 2</span>
+  </div>
+
+  <div style="margin:8px 0 10px 0;">
+    <strong>ข้อที่ 7. พิจารณาแผนที่ตารางทางเดินด้านล่าง:
+หากต้องการสั่งให้หุ่นยนต์ 🤖 เดินไปเก็บ "ผลแอปเปิ้ล 🍎" ควรเลือกใช้ชุดคำสั่งในข้อใด?</strong>
+    
+    <div style="margin: 6px 0 10px 14px;">
+      <table style="border-collapse: collapse; margin: 0 auto;">
+        <tr>
+          <td style="width:75px; height:36px; border:1.5px solid #475569; text-align:center; background:#f8fafc; font-weight:600; font-size:10.5pt; color:#334155;">ช่องที่ 3</td>
+          <td style="width:75px; height:36px; border:2px solid #dc2626; text-align:center; background:#fef2f2; font-weight:bold; font-size:10.5pt; color:#991b1b;">🍎 ผลแอปเปิ้ล</td>
+          <td style="width:75px; height:36px; border:1.5px solid #cbd5e1; text-align:center; background:#f1f5f9;"></td>
+          <td style="width:75px; height:36px; border:1.5px solid #cbd5e1; text-align:center; background:#f1f5f9;"></td>
+        </tr>
+        <tr>
+          <td style="width:75px; height:36px; border:1.5px solid #475569; text-align:center; background:#f8fafc; font-weight:600; font-size:10.5pt; color:#334155;">ช่องที่ 2</td>
+          <td style="width:75px; height:36px; border:1.5px solid #cbd5e1; text-align:center; background:#f1f5f9;"></td>
+          <td style="width:75px; height:36px; border:1.5px solid #cbd5e1; text-align:center; background:#f1f5f9;"></td>
+          <td style="width:75px; height:36px; border:1.5px solid #cbd5e1; text-align:center; background:#f1f5f9;"></td>
+        </tr>
+        <tr>
+          <td style="width:75px; height:36px; border:1.5px solid #475569; text-align:center; background:#f8fafc; font-weight:600; font-size:10.5pt; color:#334155;">ช่องที่ 1</td>
+          <td style="width:75px; height:36px; border:1.5px solid #cbd5e1; text-align:center; background:#f1f5f9;"></td>
+          <td style="width:75px; height:36px; border:1.5px solid #cbd5e1; text-align:center; background:#f1f5f9;"></td>
+          <td style="width:75px; height:36px; border:1.5px solid #cbd5e1; text-align:center; background:#f1f5f9;"></td>
+        </tr>
+        <tr>
+          <td style="width:75px; height:36px; border:2px solid #2563eb; text-align:center; background:#dbeafe; font-weight:bold; font-size:10pt; color:#1e3a8a;">🤖<br>จุดเริ่ม (⬆️)</td>
+          <td style="width:75px; height:36px; border:1.5px solid #cbd5e1; text-align:center; background:#f1f5f9;"></td>
+          <td style="width:75px; height:36px; border:1.5px solid #cbd5e1; text-align:center; background:#f1f5f9;"></td>
+          <td style="width:75px; height:36px; border:1.5px solid #cbd5e1; text-align:center; background:#f1f5f9;"></td>
+        </tr>
+      </table>
+    </div>
+    <div class="opt">ก. เดินหน้า ➔ เดินหน้า ➔ เดินหน้า ➔ เลี้ยวขวา ➔ เดินหน้า</div>
+    <div class="opt">ข. เลี้ยวขวา ➔ เลี้ยวขวา ➔ เลี้ยวขวา ➔ เดินหน้า</div>
+    <div class="opt">ค. เดินหน้า ➔ เลี้ยวซ้าย ➔ ถอยหลัง ➔ เลี้ยวขวา</div>
+    <div class="opt">ง. ถอยหลัง ➔ ถอยหลัง ➔ ถอยหลัง ➔ เลี้ยวขวา</div>
+  </div>
+
+  <div style="margin:8px 0 10px 0;">
+    <strong>ข้อที่ 8. พิจารณาภาพเปรียบเทียบก่อนและหลังการสั่งคำสั่งด้านล่าง:
+  [ ก่อนสั่งคำสั่ง ]: หุ่นยนต์อยู่ที่ช่องเดิม หันหน้าขึ้น ( ⬆️ )
+  [ หลังสั่ง "เลี้ยวขวา" ]: หุ่นยนต์อยู่ที่ช่องเดิม หันหน้าไปทางขวา ( ➡️ )
+จากภาพ เมื่อสั่งคำสั่ง "เลี้ยวขวา" 1 ครั้ง ตัวละครมีการทำงานอย่างไร?</strong>
+    
+    <div class="opt">ก. ตัวละครจะหมุนตัวเปลี่ยนทิศทางอยู่กับที่ โดยยังไม่เดินข้ามไปช่องอื่น</div>
+    <div class="opt">ข. ตัวละครจะก้าวเดินไปข้างหน้าทันที 1 ช่อง</div>
+    <div class="opt">ค. ตัวละครจะเดินถอยหลังกลับไปจุดเริ่มต้น</div>
+    <div class="opt">ง. ตัวละครจะกระโดดข้ามสิ่งกีดขวางทันที</div>
+  </div>
+
+  <div style="margin:8px 0 10px 0;">
+    <strong>ข้อที่ 9. ถ้าต้องการให้ตัวละครเดินตรงไปข้างหน้า 10 ช่อง แทนที่จะต้องวางบัตรคำสั่ง "เดินหน้า" เรียงต่อกันถึง 10 ใบ เราควรเลือกใช้คำสั่งใดเพื่อช่วยให้โปรแกรมสั้นกระชับที่สุด?</strong>
+    
+    <div class="opt">ก. ใช้คำสั่ง "ทำซ้ำ 10 ครั้ง" ครอบคำสั่งเดินหน้า</div>
+    <div class="opt">ข. ใช้คำสั่ง "เลี้ยวขวา 10 ครั้ง"</div>
+    <div class="opt">ค. ใช้คำสั่ง "หยุดการทำงาน"</div>
+    <div class="opt">ง. ลบคำสั่งเดินหน้าออกทั้งหมด</div>
+  </div>
+
+  <div style="margin:8px 0 10px 0;">
+    <strong>ข้อที่ 10. ถ้ามีคำสั่งว่า: "ถ้า เจอก้อนหิน ให้กระโดดหลบ มิฉะนั้น ให้เดินหน้าต่อ"
+หากตัวละครเดินไปแล้ว "ไม่พบก้อนหิน" ตัวละครจะปฏิบัติตามข้อใด?</strong>
+    
+    <div class="opt">ก. เดินหน้าต่อ</div>
+    <div class="opt">ข. กระโดดหลบ</div>
+    <div class="opt">ค. หยุดยืนนิ่งถาวร</div>
+    <div class="opt">ง. หมุนตัวกลับหลังหัน</div>
+  </div>
+  <div class="part-title">ตอนที่ 3: บล็อกคำสั่งในโปรแกรม Scratch ภาษาไทย (ตัวชี้วัด ว 4.2 ป.5/2)</div>
+
+  <div style="margin:8px 0 10px 0;">
+    <strong>ข้อที่ 11. ในโปรแกรม Scratch หากต้องการให้ชุดคำสั่งเริ่มทำงานเมื่อผู้ใช้กดคลิกที่ "ธงสีเขียว 🚩" จะต้องใช้บล็อกคำสั่งใด?</strong>
+    
+    <div class="opt">ก. บล็อก [ เมื่อคลิก ธงเขียว ]</div>
+    <div class="opt">ข. บล็อก [ เคลื่อนที่ 10 ก้าว ]</div>
+    <div class="opt">ค. บล็อก [ วนซ้ำตลอด ]</div>
+    <div class="opt">ง. บล็อก [ พูดว่า สวัสดี ]</div>
+  </div>
+
+  <div style="margin:8px 0 10px 0;">
+    <strong>ข้อที่ 12. ถ้าต้องการสั่งให้ตัวละครใน Scratch เดินก้าวไปข้างหน้า ต้องเลือกใช้บล็อกคำสั่งสีฟ้าในข้อใด?</strong>
+    
+    <div class="opt">ก. บล็อก [ เคลื่อนที่ 10 ก้าว ]</div>
+    <div class="opt">ข. บล็อก [ เล่นเสียงเหมียว ]</div>
+    <div class="opt">ค. บล็อก [ รอนาน 1 วินาที ]</div>
+    <div class="opt">ง. บล็อก [ ซ่อนตัวละคร ]</div>
+  </div>
+
+  <div style="margin:8px 0 10px 0;">
+    <strong>ข้อที่ 13. พิจารณาบล็อกคำสั่งในโปรแกรม Scratch ด้านล่าง:
+  ╔═ [ ทำซ้ำ 4 ครั้ง ] ════════════════════╗
+  ║    │  เคลื่อนที่ 10 ก้าว               ║
+  ║    │  หมุนขวา 90 องศา                  ║
+  ╚════════════════════════════════════════╝
+จากภาพ บล็อกคำสั่งนี้เหมาะสำหรับสั่งให้ตัวละครวาดรูปทรงเรขาคณิตชนิดใด?</strong>
+    
+    <div class="opt">ก. รูปสี่เหลี่ยมจัตุรัส (มี 4 ด้าน 4 มุม)</div>
+    <div class="opt">ข. รูปวงกลม</div>
+    <div class="opt">ค. รูปเส้นตรงเส้นเดียว</div>
+    <div class="opt">ง. รูปสามเหลี่ยม</div>
+  </div>
+</div>
+
+<!-- PAGE 4: EXAM P3 (Q14 - Q20) + Answer Sheet -->
+<div class="page">
+  <div style="border-bottom: 1px solid #94a3b8; padding-bottom: 4px; margin-bottom: 12px; font-size: 11pt; color: #64748b; display: flex; justify-content: space-between;">
+    <span>ชุดเครื่องมือวัดผลการวิจัย: แบบทดสอบวัดผลสัมฤทธิ์ (หน้า 3)</span>
+    <span>โรงเรียนบ้านโนนป่าหว้านเชียงฮาย สพป.หนองบัวลำภู เขต 2</span>
+  </div>
+
+  <div style="margin:8px 0 10px 0;">
+    <strong>ข้อที่ 14. พิจารณาบล็อกคำสั่งในโปรแกรม Scratch ด้านล่าง:
+  ╔═ [ ถ้า < แตะสีแดง? > แล้ว ] ═══════════╗
+  ║    │  กลับไปจุดเริ่มต้น                ║
+  ╚════════════════════════════════════════╝
+หากตัวละครเดินไปแล้ว "ไม่แตะสีแดง" ตัวละครจะทำงานอย่างไร?</strong>
+    
+    <div class="opt">ก. ไม่กลับไปจุดเริ่มต้น และข้ามไปทำคำสั่งถัดไป</div>
+    <div class="opt">ข. กลับไปจุดเริ่มต้นทันที</div>
+    <div class="opt">ค. ปิดเครื่องคอมพิวเตอร์</div>
+    <div class="opt">ง. ลบตัวละครทิ้ง</div>
+  </div>
+
+  <div style="margin:8px 0 10px 0;">
+    <strong>ข้อที่ 15. ถ้าตัวละครกำลัง "หันหน้าลงด้านล่าง" แล้วต้องการสั่งให้ตัวละครเลี้ยวไปทางมือขวาของตัวละคร นักเรียนควรทำอย่างไรเพื่อไม่ให้สับสนทิศทาง?</strong>
+    
+    <div class="opt">ก. จินตนาการหมุนตัวเราเองให้หันไปทางเดียวกับตัวละคร แล้วดูว่ามือขวาอยู่ทางใด</div>
+    <div class="opt">ข. ดูตามมือขวาของตัวเราเองทันทีโดยไม่ต้องสนใจทิศทางของตัวละคร</div>
+    <div class="opt">ค. สุ่มหยิบบัตรคำสั่งใบไหนก็ได้มาวาง</div>
+    <div class="opt">ง. หลับตาแล้วกดแป้นพิมพ์รัวๆ</div>
+  </div>
+  <div class="part-title">ตอนที่ 4: การตรวจหาข้อผิดพลาด (บั๊ก) และการทำงานร่วมกันแบบ Pair Programming (ตัวชี้วัด ว 4.2 ป.5/2)</div>
+
+  <div style="margin:8px 0 10px 0;">
+    <strong>ข้อที่ 16. ในวิชาการเขียนโปรแกรมคอมพิวเตอร์ คำว่า "บั๊ก (Bug)" มีความหมายตรงกับข้อใด?</strong>
+    
+    <div class="opt">ก. ข้อผิดพลาดในโปรแกรมที่ทำให้คำสั่งทำงานไม่ถูกต้องตามต้องการ</div>
+    <div class="opt">ข. มดหรือแมลงที่บินมาเกาะอยู่บนหน้าจอคอมพิวเตอร์</div>
+    <div class="opt">ค. ปุ่มบนแป้นพิมพ์ที่ใช้สำหรับพิมพ์ตัวเลข</div>
+    <div class="opt">ง. สายไฟของเครื่องคอมพิวเตอร์ที่เสียบไม่แน่น</div>
+  </div>
+
+  <div style="margin:8px 0 10px 0;">
+    <strong>ข้อที่ 17. เมื่อนักเรียนเขียนโปรแกรมแล้วพบว่า ตัวละครเดินไปไม่ถึงเส้นชัย นักเรียนควรทำอย่างไรเป็นลำดับแรก?</strong>
+    
+    <div class="opt">ก. ค่อยๆ ตรวจดูบล็อกคำสั่งทีละบรรทัดเพื่อหาจุดที่สั่งผิด แล้วแก้ไขเฉพาะจุดนั้น</div>
+    <div class="opt">ข. ลบโปรแกรมทั้งหมดทิ้งทันที แล้วเริ่มต้นทำใหม่ตั้งแต่ต้น</div>
+    <div class="opt">ค. ปิดเครื่องคอมพิวเตอร์แล้วบอกครูว่าทำไม่ได้</div>
+    <div class="opt">ง. โทษเพื่อนร่วมกลุ่มว่าทำงานผิด</div>
+  </div>
+
+  <div style="margin:8px 0 10px 0;">
+    <strong>ข้อที่ 18. พิจารณาสคริปต์คำสั่งในโปรแกรม Scratch ด้านล่าง:
+  [ เมื่อคลิก ธงเขียว ]
+  ╔═ [ วนซ้ำตลอด ] ════════════════════════╗
+  ║    │  เคลื่อนที่ 10 ก้าว               ║
+  ║    │  หมุนขวา 15 องศา                  ║
+  ╚════════════════════════════════════════╝
+นักเรียนพบว่าตัวละคร "เดินหมุนวนเป็นวงกลมไม่ยอมหยุด" ข้อผิดพลาดนี้เกิดจากสาเหตุใด?</strong>
+    
+    <div class="opt">ก. ใส่บล็อกคำสั่ง [ วนซ้ำตลอด ] โดยไม่ได้ใส่เงื่อนไขสั่งให้หยุดเดิน</div>
+    <div class="opt">ข. หน้าจอคอมพิวเตอร์มีความสว่างน้อยเกินไป</div>
+    <div class="opt">ค. เมาส์คอมพิวเตอร์ไม่มีแบตเตอรี่</div>
+    <div class="opt">ง. ไม่ได้เปิดเสียงลำโพงคอมพิวเตอร์</div>
+  </div>
+
+  <div style="margin:8px 0 10px 0;">
+    <strong>ข้อที่ 19. ในการทำกิจกรรมแบบจับคู่เขียนโปรแกรมกับเพื่อน (Pair Programming) สมาชิกในคู่ควรช่วยกันทำงานอย่างไรจึงจะดีที่สุด?</strong>
+    
+    <div class="opt">ก. คนหนึ่งช่วยดูแผนที่และวางแผน อีกคนหนึ่งเป็นคนใส่คำสั่ง แล้วสลับหน้าที่กัน</div>
+    <div class="opt">ข. คนหนึ่งทำงานทั้งหมด อีกคนหนึ่งนั่งเล่นเกม</div>
+    <div class="opt">ค. แย่งกันใช้เมาส์และแป้นพิมพ์พร้อมกัน</div>
+    <div class="opt">ง. คนหนึ่งเป็นหัวหน้าสั่ง อีกคนหนึ่งห้ามออกความคิดเห็น</div>
+  </div>
+
+  <div style="margin:8px 0 10px 0;">
+    <strong>ข้อที่ 20. ประโยชน์สำคัญที่สุดของการเรียนวิชาวิทยาการคำนวณและการฝึกเขียนโปรแกรมในระดับชั้น ป.5 คือข้อใด?</strong>
+    
+    <div class="opt">ก. ฝึกทักษะการคิดอย่างมีเหตุผล และรู้จักแก้ปัญหาอย่างเป็นขั้นตอนในชีวิตประจำวัน</div>
+    <div class="opt">ข. เพื่อให้สามารถเล่นเกมคอมพิวเตอร์ชนะเพื่อนคนอื่น</div>
+    <div class="opt">ค. เพื่อให้พิมพ์ตัวอักษรบนแป้นพิมพ์ได้เร็วที่สุด</div>
+    <div class="opt">ง. เพื่อบังคับให้นักเรียนทุกคนต้องโตไปเป็นโปรแกรมเมอร์เท่านั้น</div>
+  </div>
+
+  <div style="margin-top: 15px; border: 2px solid #1e3a8a; border-radius: 8px; padding: 10px 14px; background: #f8fafc;">
+    <div style="text-align: center; font-weight: 800; font-size: 13.5pt; color: #1e3a8a; margin-bottom: 6px;">
+      📝 กระดาษคำตอบสำหรับนักเรียน (กากบาท X ทับตัวอักษรที่ถูกต้อง)
+    </div>
+    <div style="display: flex; justify-content: space-between; font-size: 11.5pt; margin-bottom: 6px;">
+      <span>ชื่อ-สกุล: .............................................................. ชั้น ป.5 เลขที่: .....</span>
+      <span>[  ] ก่อนเรียน &nbsp;&nbsp; [  ] หลังเรียน &nbsp;&nbsp; <strong>คะแนน: ....../20</strong></span>
+    </div>
+    <table style="font-size:11pt; margin:4px 0;">
+      <tr style="background:#e2e8f0; font-weight:700;">
+        <th>ข้อ</th><th>ก</th><th>ข</th><th>ค</th><th>ง</th>
+        <th style="background:#fff; border:none; width:12px;"></th>
+        <th>ข้อ</th><th>ก</th><th>ข</th><th>ค</th><th>ง</th>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>1</strong></td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td>
+        <td style="background:#fff; border:none;"></td>
+        <td class="center"><strong>11</strong></td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>2</strong></td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td>
+        <td style="background:#fff; border:none;"></td>
+        <td class="center"><strong>12</strong></td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>3</strong></td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td>
+        <td style="background:#fff; border:none;"></td>
+        <td class="center"><strong>13</strong></td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>4</strong></td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td>
+        <td style="background:#fff; border:none;"></td>
+        <td class="center"><strong>14</strong></td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>5</strong></td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td>
+        <td style="background:#fff; border:none;"></td>
+        <td class="center"><strong>15</strong></td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>6</strong></td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td>
+        <td style="background:#fff; border:none;"></td>
+        <td class="center"><strong>16</strong></td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>7</strong></td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td>
+        <td style="background:#fff; border:none;"></td>
+        <td class="center"><strong>17</strong></td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>8</strong></td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td>
+        <td style="background:#fff; border:none;"></td>
+        <td class="center"><strong>18</strong></td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>9</strong></td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td>
+        <td style="background:#fff; border:none;"></td>
+        <td class="center"><strong>19</strong></td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>10</strong></td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td>
+        <td style="background:#fff; border:none;"></td>
+        <td class="center"><strong>20</strong></td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td><td class="center">( &nbsp; )</td>
+      </tr>
+
+    </table>
+  </div>
+</div>
+
+<!-- PAGE 5: ANSWER KEY & CRITERIA (For Teacher) -->
+<div class="page">
+  <div style="border-bottom: 1px solid #94a3b8; padding-bottom: 4px; margin-bottom: 12px; font-size: 11pt; color: #64748b; display: flex; justify-content: space-between;">
+    <span>ชุดเครื่องมือวัดผลการวิจัย: เฉลยและเกณฑ์การวัด (หน้า 4)</span>
+    <span>สำหรับครูผู้สอน: นายเตชินท์ อินทมล</span>
+  </div>
+  <h1>เฉลยคำตอบและตารางวิเคราะห์ตัวชี้วัดตามหลักสูตร (สำหรับครูผู้สอน)</h1>
+  <h2>รายวิชาเทคโนโลยี (วิทยาการคำนวณ) ว15101 ชั้น ป.5 โรงเรียนบ้านโนนป่าหว้านเชียงฮาย</h2>
+  
+  <table>
+    <thead>
+      <tr>
+        <th style="width:6%;">ข้อ</th>
+        <th style="width:12%;">ตัวชี้วัด</th>
+        <th style="width:25%;">สาระการเรียนรู้ / หัวข้อประเมิน</th>
+        <th style="width:7%;">เฉลย</th>
+        <th style="width:50%;">เหตุผลและคำอธิบายเฉลย</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td class="center"><strong>1</strong></td>
+        <td class="center" style="font-size:10.5pt; font-weight:600; color:#1e3a8a;">ว 4.2 ป.5/1</td>
+        <td>การเรียงลำดับขั้นตอนการทำงาน (อัลกอริทึมในชีวิตประจำวัน)</td>
+        <td class="center" style="font-weight:800; color:#dc2626; font-size:13pt;">ก</td>
+        <td style="font-size:11.5pt;">การทำงานต้องมีลำดับขั้นตอนที่ถูกต้องตามเหตุและผล เริ่มจากตีไข่ในชาม (กล่อง 1) ➔ ตั้งกระทะใส่น้ำมันให้ร้อน (กล่อง 2) ➔ เทไข่ลงกระทะ (กล่อง 3) ➔ ตักใส่จานเมื่อสุก (กล่อง 4)</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>2</strong></td>
+        <td class="center" style="font-size:10.5pt; font-weight:600; color:#1e3a8a;">ว 4.2 ป.5/1</td>
+        <td>การใช้เหตุผลเชิงตรรกะในการแก้ปัญหา</td>
+        <td class="center" style="font-weight:800; color:#dc2626; font-size:13pt;">ก</td>
+        <td style="font-size:11.5pt;">การใช้เหตุผลเชิงตรรกะคือการนำข้อมูลและเงื่อนไข (เมฆดำ ฟ้าร้อง บ่งบอกว่าฝนใกล้ตก) มาใช้ตัดสินใจเตรียมร่มหรือเสื้อกันฝนเพื่อป้องกันไม่ให้เปียกฝน</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>3</strong></td>
+        <td class="center" style="font-size:10.5pt; font-weight:600; color:#1e3a8a;">ว 4.2 ป.5/1</td>
+        <td>การวางแผนเวลาในการเดินทาง</td>
+        <td class="center" style="font-weight:800; color:#dc2626; font-size:13pt;">ก</td>
+        <td style="font-size:11.5pt;">เวลากิจกรรมทั้งหมดรวมกันคือ แต่งตัว 15 นาที + กินข้าว 15 นาที + เดินทาง 15 นาที = 45 นาที คำนวณเวลาย้อนหลังจาก 07.45 น. ถอยหลังไป 45 นาที จะได้เวลาตื่นนอนคือ 07.00 น.</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>4</strong></td>
+        <td class="center" style="font-size:10.5pt; font-weight:600; color:#1e3a8a;">ว 4.2 ป.5/1</td>
+        <td>การจัดหมวดหมู่และการแก้ปัญหาอย่างเป็นระบบ</td>
+        <td class="center" style="font-weight:800; color:#dc2626; font-size:13pt;">ก</td>
+        <td style="font-size:11.5pt;">การจัดกระเป๋าตามตารางสอนเป็นการแก้ปัญหาอย่างเป็นระบบ ช่วยคัดแยกเฉพาะสิ่งที่จำเป็นต้องใช้ในวันนั้น ทำให้พกพาสะดวกและไม่ลืมอุปกรณ์การเรียน</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>5</strong></td>
+        <td class="center" style="font-size:10.5pt; font-weight:600; color:#1e3a8a;">ว 4.2 ป.5/1</td>
+        <td>การสังเกตแบบรูปทิศทาง (Pattern)</td>
+        <td class="center" style="font-weight:800; color:#dc2626; font-size:13pt;">ก</td>
+        <td style="font-size:11.5pt;">แบบรูปนี้เป็นแบบรูปสลับซ้ำกันระหว่าง [เดินหน้า] และ [เลี้ยวขวา] เมื่อลำดับก่อนหน้าคือ [เดินหน้า] ลำดับถัดไปจึงต้องเป็น [เลี้ยวขวา]</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>6</strong></td>
+        <td class="center" style="font-size:10.5pt; font-weight:600; color:#1e3a8a;">ว 4.2 ป.5/2</td>
+        <td>การวางแผนด้วยบัตรคำสั่งก่อนเขียนโปรแกรม</td>
+        <td class="center" style="font-weight:800; color:#dc2626; font-size:13pt;">ก</td>
+        <td style="font-size:11.5pt;">การวางแผนด้วยบัตรคำสั่ง (Unplugged Coding) ช่วยให้ผู้เรียนมองเห็นขั้นตอนการทำงานของโปรแกรมอย่างเป็นรูปธรรม ช่วยตรวจสอบความถูกต้องก่อนลงมือพิมพ์โค้ดจริงในคอมพิวเตอร์</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>7</strong></td>
+        <td class="center" style="font-size:10.5pt; font-weight:600; color:#1e3a8a;">ว 4.2 ป.5/2</td>
+        <td>การจัดลำดับคำสั่งในตารางทางเดิน (Sequencing)</td>
+        <td class="center" style="font-weight:800; color:#dc2626; font-size:13pt;">ก</td>
+        <td style="font-size:11.5pt;">จากตาราง หุ่นยนต์หันหน้าขึ้น (⬆️) ต้องเดินหน้า 3 ช่องเพื่อไปยังช่องที่ 3 จากนั้นสั่งเลี้ยวขวาเพื่อหันหน้าไปทางผลแอปเปิ้ล แล้วสั่งเดินหน้าอีก 1 ช่องเพื่อเข้าไปเก็บผลแอปเปิ้ล</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>8</strong></td>
+        <td class="center" style="font-size:10.5pt; font-weight:600; color:#1e3a8a;">ว 4.2 ป.5/2</td>
+        <td>ความเข้าใจคำสั่งเลี้ยวและทิศทาง</td>
+        <td class="center" style="font-weight:800; color:#dc2626; font-size:13pt;">ก</td>
+        <td style="font-size:11.5pt;">คำสั่งเลี้ยวขวาหรือเลี้ยวซ้าย จะทำหน้าที่หมุนเปลี่ยนทิศทางการหันหน้าของตัวละครอยู่กับที่ในช่องเดิมเท่านั้น ยังไม่มีการเคลื่อนที่ข้ามช่องจนกว่าจะมีคำสั่งเดินหน้า</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>9</strong></td>
+        <td class="center" style="font-size:10.5pt; font-weight:600; color:#1e3a8a;">ว 4.2 ป.5/2</td>
+        <td>การใช้คำสั่งทำซ้ำ (Loop)</td>
+        <td class="center" style="font-weight:800; color:#dc2626; font-size:13pt;">ก</td>
+        <td style="font-size:11.5pt;">คำสั่งวนซ้ำ (ทำซ้ำ 10 ครั้ง) ใช้สำหรับการทำงานเดิมซ้ำๆ หลายรอบ ช่วยลดความยาวของโค้ด ทำให้โปรแกรมสั้น กระชับ อ่านเข้าใจง่าย</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>10</strong></td>
+        <td class="center" style="font-size:10.5pt; font-weight:600; color:#1e3a8a;">ว 4.2 ป.5/2</td>
+        <td>การใช้คำสั่งแบบมีเงื่อนไข (If-Then-Else)</td>
+        <td class="center" style="font-weight:800; color:#dc2626; font-size:13pt;">ก</td>
+        <td style="font-size:11.5pt;">เงื่อนไขบอกว่า 'ถ้าเจอก้อนหิน ให้กระโดด มิฉะนั้น (ถ้าไม่เจอ) ให้เดินหน้าต่อ' ดังนั้นเมื่อไม่พบก้อนหิน ตัวละครจึงต้องทำคำสั่งเดินหน้าต่อ</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>11</strong></td>
+        <td class="center" style="font-size:10.5pt; font-weight:600; color:#1e3a8a;">ว 4.2 ป.5/2</td>
+        <td>บล็อกเริ่มต้นเหตุการณ์ใน Scratch</td>
+        <td class="center" style="font-weight:800; color:#dc2626; font-size:13pt;">ก</td>
+        <td style="font-size:11.5pt;">บล็อก 'เมื่อคลิก ธงเขียว' (สีเหลืองทอง) ในกลุ่มเหตุการณ์ (Events) เป็นบล็อกเริ่มต้นมาตรฐานที่ใช้สั่งให้โปรแกรมเริ่มรันเมื่อผู้ใช้กดปุ่มธงเขียว</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>12</strong></td>
+        <td class="center" style="font-size:10.5pt; font-weight:600; color:#1e3a8a;">ว 4.2 ป.5/2</td>
+        <td>บล็อกการเคลื่อนที่ของตัวละคร</td>
+        <td class="center" style="font-weight:800; color:#dc2626; font-size:13pt;">ก</td>
+        <td style="font-size:11.5pt;">บล็อก 'เคลื่อนที่ 10 ก้าว' อยู่ในกลุ่มการเคลื่อนที่ (Motion สีฟ้า) ใช้สำหรับสั่งให้ตัวละครเดินตรงไปข้างหน้าตามทิศทางที่หันหน้าอยู่</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>13</strong></td>
+        <td class="center" style="font-size:10.5pt; font-weight:600; color:#1e3a8a;">ว 4.2 ป.5/2</td>
+        <td>บล็อกคำสั่งทำซ้ำใน Scratch</td>
+        <td class="center" style="font-weight:800; color:#dc2626; font-size:13pt;">ก</td>
+        <td style="font-size:11.5pt;">คำสั่งเคลื่อนที่ 10 ก้าว แล้วหมุนขวา 90 องศา ซ้ำกัน 4 ครั้ง จะทำให้ตัวละครวาดเส้นตรง 4 ด้านและเลี้ยว 90 องศา 4 มุม เกิดเป็นรูปสี่เหลี่ยมจัตุรัสพอดี</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>14</strong></td>
+        <td class="center" style="font-size:10.5pt; font-weight:600; color:#1e3a8a;">ว 4.2 ป.5/2</td>
+        <td>บล็อกเงื่อนไขใน Scratch</td>
+        <td class="center" style="font-weight:800; color:#dc2626; font-size:13pt;">ก</td>
+        <td style="font-size:11.5pt;">บล็อก 'ถ้า...แล้ว' คำสั่งด้านในจะทำงานเมื่อเงื่อนไขเป็นจริงเท่านั้น ถ้าตัวละครไม่แตะสีแดง คำสั่งกลับจุดเริ่มต้นจะไม่ทำงาน และตัวละครจะข้ามไปทำคำสั่งถัดไป</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>15</strong></td>
+        <td class="center" style="font-size:10.5pt; font-weight:600; color:#1e3a8a;">ว 4.2 ป.5/2</td>
+        <td>การกำหนดทิศทางซ้าย-ขวาของตัวละคร</td>
+        <td class="center" style="font-weight:800; color:#dc2626; font-size:13pt;">ก</td>
+        <td style="font-size:11.5pt;">การมองมุมมองของตัวละคร (มุมมองบุคคลที่หนึ่ง) ช่วยแก้ปัญหาสับสนทิศทางซ้าย-ขวา เมื่อตัวละครหันหน้าไปในทิศทางที่ไม่ตรงกับสายตาของเรา</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>16</strong></td>
+        <td class="center" style="font-size:10.5pt; font-weight:600; color:#1e3a8a;">ว 4.2 ป.5/2</td>
+        <td>ความหมายของข้อผิดพลาด (Bug)</td>
+        <td class="center" style="font-weight:800; color:#dc2626; font-size:13pt;">ก</td>
+        <td style="font-size:11.5pt;">Bug เป็นคำศัพท์ที่ใช้เรียกจุดผิดพลาดในคำสั่งของโปรแกรม ที่ส่งผลให้โปรแกรมทำงานผิดเพี้ยนหรือไม่ได้ผลลัพธ์ตามเป้าหมาย</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>17</strong></td>
+        <td class="center" style="font-size:10.5pt; font-weight:600; color:#1e3a8a;">ว 4.2 ป.5/2</td>
+        <td>การตรวจหาและแก้ไขข้อผิดพลาด (Debugging)</td>
+        <td class="center" style="font-weight:800; color:#dc2626; font-size:13pt;">ก</td>
+        <td style="font-size:11.5pt;">การแก้ไขข้อผิดพลาด (Debugging) อย่างเป็นระบบ คือการค่อยๆ ตรวจสอบและไล่ลำดับคำสั่งทีละขั้น เพื่อค้นหาสาเหตุแล้วแก้ไขเฉพาะจุดที่ผิดพลาด</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>18</strong></td>
+        <td class="center" style="font-size:10.5pt; font-weight:600; color:#1e3a8a;">ว 4.2 ป.5/2</td>
+        <td>การวิเคราะห์สาเหตุของข้อผิดพลาด</td>
+        <td class="center" style="font-weight:800; color:#dc2626; font-size:13pt;">ก</td>
+        <td style="font-size:11.5pt;">การทำงานวนซ้ำไม่ยอมหยุด เกิดจากการใช้บล็อกคำสั่ง 'วนซ้ำตลอด' (Forever Loop) โดยไม่มีคำสั่งหรือเงื่อนไขในการหยุดทำงาน</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>19</strong></td>
+        <td class="center" style="font-size:10.5pt; font-weight:600; color:#1e3a8a;">ว 4.2 ป.5/2</td>
+        <td>การทำงานร่วมกันแบบจับคู่เขียนโปรแกรม (Pair Programming)</td>
+        <td class="center" style="font-weight:800; color:#dc2626; font-size:13pt;">ก</td>
+        <td style="font-size:11.5pt;">การจับคู่เขียนโปรแกรม (Pair Programming) แบ่งเป็นบทบาทผู้นำทาง (ช่วยคิดวางแผน) และผู้ขับเคลื่อน (ลงมือป้อนคำสั่ง) และผลัดกันสลับหน้าที่ ช่วยให้เกิดการแลกเปลี่ยนเรียนรู้และลดข้อผิดพลาด</td>
+      </tr>
+
+      <tr>
+        <td class="center"><strong>20</strong></td>
+        <td class="center" style="font-size:10.5pt; font-weight:600; color:#1e3a8a;">ว 4.2 ป.5/2</td>
+        <td>ประโยชน์ของการเรียนรู้วิทยาการคำนวณ</td>
+        <td class="center" style="font-weight:800; color:#dc2626; font-size:13pt;">ก</td>
+        <td style="font-size:11.5pt;">เป้าหมายสูงสุดของวิชาวิทยาการคำนวณคือการปลูกฝังกระบวนการคิดเชิงคำนวณ การคิดอย่างมีวิจารณญาณ และการแก้ปัญหาอย่างเป็นระบบ เพื่อนำไปประยุกต์ใช้ในชีวิตประจำวันและการเรียนรู้ทุกวิชา</td>
+      </tr>
+
+    </tbody>
+  </table>
+
+  <div style="margin-top: 12px; border-top: 1px solid #cbd5e1; padding-top: 8px; font-size: 11.5pt;">
+    <strong>เกณฑ์การแปลผลคะแนนผลสัมฤทธิ์ทางการเรียน (เต็ม 20 คะแนน):</strong><br>
+    • <strong>16 - 20 คะแนน (ร้อยละ 80 - 100):</strong> ระดับ ดีมาก (4) - ยอดเยี่ยม ออกแบบอัลกอริทึมและเขียนโปรแกรม Scratch ได้คล่องแคล่ว<br>
+    • <strong>13 - 15 คะแนน (ร้อยละ 65 - 79):</strong> ระดับ ดี (3) - เข้าใจตรรกะดี สามารถตรวจหาและแก้บั๊กได้ด้วยตนเอง<br>
+    • <strong>10 - 12 คะแนน (ร้อยละ 50 - 64):</strong> ระดับ พอใช้ (2) - ผ่านเกณฑ์ขั้นต่ำตามหลักสูตร เข้าใจพื้นฐานแต่ต้องชี้แนะเรื่องเงื่อนไขและลูป<br>
+    • <strong>ต่ำกว่า 10 คะแนน (ต่ำกว่าร้อยละ 50):</strong> ปรับปรุง (1) - ยังไม่ผ่านเกณฑ์ ควรได้รับการสอนเสริมด้วยแฟลชการ์ดรูปธรรมและเทคนิค Pair Programming
+  </div>
+</div>
+
+<!-- PAGE 6: CT RUBRICS & BLANK / EVALUATED SCORE SHEET -->
+<div class="page">
+  <div style="border-bottom: 1px solid #94a3b8; padding-bottom: 4px; margin-bottom: 12px; font-size: 11pt; color: #64748b; display: flex; justify-content: space-between;">
+    <span>ชุดเครื่องมือวัดผลการวิจัย: แบบประเมินทักษะการปฏิบัติ (หน้า 5)</span>
+    <span>สำหรับครูผู้สอน: นายเตชินท์ อินทมล</span>
+  </div>
+  <h1>เกณฑ์การประเมินรูบริกส์ทักษะการแก้ปัญหาและการเขียนโปรแกรม</h1>
+  <h2>ตามตัวชี้วัด ว 4.2 ป.5/1 และ ป.5/2 (สำหรับครูผู้สอนสังเกตและประเมินพฤติกรรมระหว่างเรียน)</h2>
+  
+  <table>
+    <thead>
+      <tr>
+        <th style="width:22%;">ด้านที่ประเมิน (ตัวชี้วัด ป.5)</th>
+        <th style="width:20%;">ดีมาก (4 คะแนน)</th>
+        <th style="width:19%;">ดี (3 คะแนน)</th>
+        <th style="width:19%;">พอใช้ (2 คะแนน)</th>
+        <th style="width:20%;">ปรับปรุง (1 คะแนน)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>1. การใช้เหตุผลเชิงตรรกะในการแก้ปัญหา</strong><br><span style="font-size:10pt; color:#1e3a8a;">(ว 4.2 ป.5/1)</span></td>
+        <td>วิเคราะห์ปัญหาและเงื่อนไขได้ถูกต้องด้วยตนเอง อธิบายเหตุผลในการเลือกเส้นทางและหลบสิ่งกีดขวางได้อย่างชัดเจน</td>
+        <td>วิเคราะห์ปัญหาและเข้าใจเงื่อนไขได้ถูกต้องเป็นส่วนใหญ่ สามารถเลือกเส้นทางแก้ปัญหาได้ถูกต้อง</td>
+        <td>เข้าใจเงื่อนไขของปัญหาได้บ้าง แต่ยังสับสน ต้องมีครูหรือเพื่อนคู่หูคอยชี้แนะถามนำ</td>
+        <td>ไม่เข้าใจเงื่อนไขของปัญหา ไม่สนใจสิ่งกีดขวาง ไม่สามารถบอกเหตุผลในการแก้ปัญหาได้</td>
+      </tr>
+      <tr>
+        <td><strong>2. การวางแผนและอธิบายขั้นตอนการทำงาน</strong><br><span style="font-size:10pt; color:#1e3a8a;">(ว 4.2 ป.5/1)</span></td>
+        <td>วางแผนจัดเรียงบัตรคำสั่งลูกศรเป็นขั้นตอนได้อย่างถูกต้อง แม่นยำ ครบถ้วนตั้งแต่รอบแรก และอธิบายขั้นตอนได้</td>
+        <td>วางแผนจัดเรียงบัตรคำสั่งลูกศรได้ถูกต้องเป็นส่วนใหญ่ อาจมีสลับที่เล็กน้อยแต่ตรวจสอบแก้ไขได้เอง</td>
+        <td>จัดเรียงบัตรคำสั่งได้บางส่วน ยังสับสนทิศทางซ้าย-ขวา ต้องให้เพื่อนบัดดี้คอยช่วยเหลือ</td>
+        <td>ไม่สามารถจัดเรียงบัตรคำสั่งเป็นขั้นตอนได้ วางบัตรคำสั่งสลับไปมาโดยไม่มีการวางแผน</td>
+      </tr>
+      <tr>
+        <td><strong>3. การออกแบบและเขียนโปรแกรมอย่างง่าย</strong><br><span style="font-size:10pt; color:#1e3a8a;">(ว 4.2 ป.5/2)</span></td>
+        <td>เลือกและลากบล็อกคำสั่ง Scratch ภาษาไทยมาต่อกันได้อย่างถูกต้อง คล่องแคล่ว ตัวละครเคลื่อนที่ตามเป้าหมายได้สมบูรณ์</td>
+        <td>ลากบล็อกคำสั่ง Scratch มาต่อได้ถูกต้องตามแผน แต่อาจใช้เวลาค้นหาบล็อกคำสั่งหรือต้องเทียบดูบัตรคำสั่ง</td>
+        <td>ต่อบล็อกคำสั่งได้บางส่วน ยังใช้คำสั่งเยิ่นเย้อ หรือต้องให้ครูช่วยชี้แนะตำแหน่งบล็อกคำสั่ง</td>
+        <td>ไม่สามารถต่อบล็อกคำสั่ง Scratch ได้ ลากบล็อกไม่ถูกต้อง หรือไม่กล้าลงมือปฏิบัติ</td>
+      </tr>
+      <tr>
+        <td><strong>4. การตรวจหาและแก้ไขข้อผิดพลาด</strong><br><span style="font-size:10pt; color:#1e3a8a;">(ว 4.2 ป.5/2)</span></td>
+        <td>เมื่อโปรแกรมทำงานผิดพลาด สามารถตรวจสอบโค้ดทีละบรรทัด ระบุจุดผิดพลาดและลงมือแก้ไข (แก้บั๊ก) ได้สำเร็จด้วยตนเอง</td>
+        <td>รู้ว่าโปรแกรมทำงานผิดพลาด และสามารถหาจุดผิดพลาดพบเพื่อแก้ไขได้เมื่อเพื่อนคู่หูช่วยทักทาย</td>
+        <td>เมื่อโปรแกรมผิดพลาด ใช้วิธีลองผิดลองถูกเพื่อสุ่มแก้ไข ไม่ได้วิเคราะห์หาสาเหตุที่แท้จริง</td>
+        <td>เมื่อโปรแกรมผิดพลาด จะกดลบคำสั่งทั้งหมดทิ้ง หรือถอดใจยอมแพ้ไม่ยอมแก้ไข</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:16px;">แบบบันทึกผลการประเมินทักษะรายบุคคล (ประเมินจริง N = 8)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:6%;">เลขที่</th><th style="width:26%;">ชื่อ - สกุล ผู้เรียน</th>
+        <th style="width:11%;">1. ตรรกะ<br>(4)</th>
+        <th style="width:11%;">2. วางแผน<br>(4)</th>
+        <th style="width:11%;">3. โปรแกรม<br>(4)</th>
+        <th style="width:11%;">4. แก้บั๊ก<br>(4)</th>
+        <th style="width:8%;">รวม<br>(16)</th>
+        <th style="width:8%;">เฉลี่ย<br>(4.00)</th>
+        <th style="width:9%;">ระดับ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="center">1</td><td>เด็กชายภูฟ้า  แสงศรี</td><td class="center">2</td><td class="center">3</td><td class="center">3</td><td class="center">3</td><td class="center">11</td><td class="center">2.75</td><td class="center" style="font-weight:600; color:#1e3a8a;">ดี</td></tr>
+      <tr><td class="center">2</td><td>เด็กหญิงพิชญาภา  แสงศรี</td><td class="center">3</td><td class="center">4</td><td class="center">3</td><td class="center">3</td><td class="center">13</td><td class="center">3.25</td><td class="center" style="font-weight:600; color:#1e3a8a;">ดี</td></tr>
+      <tr><td class="center">3</td><td>เด็กหญิงสิริวิมล  สาวิสิทธิ์</td><td class="center">3</td><td class="center">3</td><td class="center">3</td><td class="center">3</td><td class="center">12</td><td class="center">3.00</td><td class="center" style="font-weight:600; color:#1e3a8a;">ดี</td></tr>
+      <tr><td class="center">4</td><td>เด็กหญิงสาวิตรี  สายสมคุณ</td><td class="center">3</td><td class="center">3</td><td class="center">3</td><td class="center">3</td><td class="center">12</td><td class="center">3.00</td><td class="center" style="font-weight:600; color:#1e3a8a;">ดี</td></tr>
+      <tr><td class="center">5</td><td>เด็กหญิงณัฐณิชา  นันทโพธิ์เดช</td><td class="center">3</td><td class="center">4</td><td class="center">3</td><td class="center">3</td><td class="center">13</td><td class="center">3.25</td><td class="center" style="font-weight:600; color:#1e3a8a;">ดี</td></tr>
+      <tr><td class="center">6</td><td>เด็กหญิงรฐา  สอนเต็ม</td><td class="center">3</td><td class="center">3</td><td class="center">3</td><td class="center">3</td><td class="center">12</td><td class="center">3.00</td><td class="center" style="font-weight:600; color:#1e3a8a;">ดี</td></tr>
+      <tr><td class="center">7</td><td>เด็กหญิงกัญญาพัชร  วาจาชื่น</td><td class="center">3</td><td class="center">4</td><td class="center">4</td><td class="center">3</td><td class="center">14</td><td class="center">3.50</td><td class="center" style="font-weight:700; color:#15803d;">ดีมาก</td></tr>
+      <tr><td class="center">8</td><td>เด็กหญิงกัญญารัตน์  บัวบง</td><td class="center">2</td><td class="center">3</td><td class="center">2</td><td class="center">2</td><td class="center">9</td><td class="center">2.25</td><td class="center" style="color:#b45309;">พอใช้</td></tr>
+      <tr style="background:#f1f5f9; font-weight:700;">
+        <td colspan="2" class="center">ค่าเฉลี่ยรวม (X̄) และร้อยละ</td>
+        <td class="center">2.75</td><td class="center">3.38</td><td class="center">3.00</td><td class="center">2.88</td><td class="center">12.00</td><td class="center">3.00</td><td class="center" style="color:#1e3a8a;">ดี (75%)</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top: 10px; font-size: 11pt; color: #475569;">
+    * เกณฑ์การตัดสินคุณภาพ: 3.51 - 4.00 = ดีมาก / 2.51 - 3.50 = ดี / 1.51 - 2.50 = พอใช้ / 1.00 - 1.50 = ปรับปรุง (ผ่านเกณฑ์ระดับ ดี ขึ้นไป คิดเป็นร้อยละ 87.50)
+  </div>
+
+  <div class="footer-sig" style="margin-top:14px;">
+    ลงชื่อ.................................................................... ครูผู้ประเมิน<br>
+    ( นายเตชินท์  อินทมล )<br>
+    ตำแหน่ง ครู (ไม่มีวิทยฐานะ) โรงเรียนบ้านโนนป่าหว้านเชียงฮาย
+  </div>
+</div>
+
+<!-- PAGE 7: SATISFACTION QUESTIONNAIRE + BLANK SUMMARY SHEET -->
+<div class="page">
+  <div style="border-bottom: 1px solid #94a3b8; padding-bottom: 4px; margin-bottom: 12px; font-size: 11pt; color: #64748b; display: flex; justify-content: space-between;">
+    <span>ชุดเครื่องมือวัดผลการวิจัย: แบบประเมินความพึงพอใจ (หน้า 6)</span>
+    <span>โรงเรียนบ้านโนนป่าหว้านเชียงฮาย สพป.หนองบัวลำภู เขต 2</span>
+  </div>
+  <h1>แบบสอบถามความพึงพอใจของนักเรียนต่อการจัดกิจกรรมการเรียนรู้</h1>
+  <h2>(ฉบับพิมพ์แจกให้นักเรียนทำจริงด้วยตนเอง)</h2>
+  
+  <div class="box">
+    <strong>คำชี้แจงสำหรับนักเรียน:</strong> ให้นักเรียนอ่านข้อความแต่ละข้อ แล้วทำเครื่องหมาย กากบาท ( X ) ลงในช่องที่ตรงกับความรู้สึกของนักเรียนมากที่สุด<br>
+    <strong>5 = ชอบมากที่สุด &nbsp;&nbsp; 4 = ชอบมาก &nbsp;&nbsp; 3 = ปานกลาง &nbsp;&nbsp; 2 = ชอบน้อย &nbsp;&nbsp; 1 = ไม่ชอบเลย</strong>
+  </div>
+
+  <p style="font-size:13pt; margin-bottom:10px;"><strong>ชื่อ - สกุล นักเรียน:</strong> .......................................................................................... <strong>ชั้น ป.5 &nbsp;&nbsp; เลขที่:</strong> ..........</p>
+
+  <table>
+    <thead>
+      <tr>
+        <th style="width:7%;">ข้อที่</th>
+        <th style="width:53%;">ข้อความแสดงความรู้สึกและความคิดเห็น</th>
+        <th style="width:8%;">มากที่สุด<br>(5)</th>
+        <th style="width:8%;">มาก<br>(4)</th>
+        <th style="width:8%;">ปานกลาง<br>(3)</th>
+        <th style="width:8%;">น้อย<br>(2)</th>
+        <th style="width:8%;">น้อยที่สุด<br>(1)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="center">1</td>
+        <td>หนูชอบการเรียนรู้โดยใช้สื่อปฏิสัมพันธ์ผ่านกล้องและการสั่งการด้วยท่าทางมือ เพราะทำให้เข้าใจลำดับคำสั่งได้ง่ายและสนุก</td>
+        <td class="center">[ &nbsp; ]</td><td class="center">[ &nbsp; ]</td><td class="center">[ &nbsp; ]</td><td class="center">[ &nbsp; ]</td><td class="center">[ &nbsp; ]</td>
+      </tr>
+      <tr>
+        <td class="center">2</td>
+        <td>การจัดวางแฟลชการ์ดคำสั่งรูปธรรมบนโต๊ะ ช่วยให้หนูเข้าใจเรื่องทิศทางซ้าย-ขวา และลำดับขั้นตอนได้ชัดเจน ไม่สับสน</td>
+        <td class="center">[ &nbsp; ]</td><td class="center">[ &nbsp; ]</td><td class="center">[ &nbsp; ]</td><td class="center">[ &nbsp; ]</td><td class="center">[ &nbsp; ]</td>
+      </tr>
+      <tr>
+        <td class="center">3</td>
+        <td>การจับคู่ทำงานร่วมกับเพื่อนแบบ Pair Programming (ผู้นำทาง Navigator และผู้ขับเคลื่อน Driver) ทำให้ได้ช่วยกันคิด ได้พูดคุย และช่วยเหลือกัน</td>
+        <td class="center">[ &nbsp; ]</td><td class="center">[ &nbsp; ]</td><td class="center">[ &nbsp; ]</td><td class="center">[ &nbsp; ]</td><td class="center">[ &nbsp; ]</td>
+      </tr>
+      <tr>
+        <td class="center">4</td>
+        <td>หนูรู้สึกท้าทายและสนุกเวลาโปรแกรมทำงานผิดพลาด แล้วได้ร่วมมือกับเพื่อนช่วยกันตรวจหาจุดผิดและแก้ไขให้ถูกต้อง (แก้บั๊ก)</td>
+        <td class="center">[ &nbsp; ]</td><td class="center">[ &nbsp; ]</td><td class="center">[ &nbsp; ]</td><td class="center">[ &nbsp; ]</td><td class="center">[ &nbsp; ]</td>
+      </tr>
+      <tr>
+        <td class="center">5</td>
+        <td>หนูมีความสุขในการเรียน และอยากเรียนวิชาวิทยาการคำนวณด้วยกิจกรรมเชิงรุกแบบนี้อีกในครั้งต่อไป</td>
+        <td class="center">[ &nbsp; ]</td><td class="center">[ &nbsp; ]</td><td class="center">[ &nbsp; ]</td><td class="center">[ &nbsp; ]</td><td class="center">[ &nbsp; ]</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3 style="margin-top:16px;">แบบสรุปผลการประเมินความพึงพอใจรายบุคคล (ประเมินจริง N = 8)</h3>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:6%;">เลขที่</th><th style="width:28%;">ชื่อ - สกุล ผู้เรียน</th>
+        <th style="width:9%;">ข้อ 1<br>(5)</th><th style="width:9%;">ข้อ 2<br>(5)</th><th style="width:9%;">ข้อ 3<br>(5)</th><th style="width:9%;">ข้อ 4<br>(5)</th><th style="width:9%;">ข้อ 5<br>(5)</th>
+        <th style="width:9%;">รวม<br>(25)</th><th style="width:10%;">เฉลี่ย<br>(5.00)</th>
+        <th style="width:11%;">ระดับ</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td class="center">1</td><td>เด็กชายภูฟ้า  แสงศรี</td><td class="center">5</td><td class="center">5</td><td class="center">5</td><td class="center">5</td><td class="center">5</td><td class="center">25</td><td class="center">5.00</td><td class="center" style="color:#15803d; font-weight:600;">มากที่สุด</td></tr>
+      <tr><td class="center">2</td><td>เด็กหญิงพิชญาภา  แสงศรี</td><td class="center">4</td><td class="center">4</td><td class="center">5</td><td class="center">4</td><td class="center">4</td><td class="center">21</td><td class="center">4.20</td><td class="center" style="color:#1e3a8a;">มาก</td></tr>
+      <tr><td class="center">3</td><td>เด็กหญิงสิริวิมล  สาวิสิทธิ์</td><td class="center">5</td><td class="center">4</td><td class="center">5</td><td class="center">5</td><td class="center">4</td><td class="center">23</td><td class="center">4.60</td><td class="center" style="color:#15803d; font-weight:600;">มากที่สุด</td></tr>
+      <tr><td class="center">4</td><td>เด็กหญิงสาวิตรี  สายสมคุณ</td><td class="center">4</td><td class="center">4</td><td class="center">4</td><td class="center">4</td><td class="center">4</td><td class="center">20</td><td class="center">4.00</td><td class="center" style="color:#1e3a8a;">มาก</td></tr>
+      <tr><td class="center">5</td><td>เด็กหญิงณัฐณิชา  นันทโพธิ์เดช</td><td class="center">4</td><td class="center">4</td><td class="center">4</td><td class="center">4</td><td class="center">4</td><td class="center">20</td><td class="center">4.00</td><td class="center" style="color:#1e3a8a;">มาก</td></tr>
+      <tr><td class="center">6</td><td>เด็กหญิงรฐา  สอนเต็ม</td><td class="center">4</td><td class="center">4</td><td class="center">5</td><td class="center">4</td><td class="center">4</td><td class="center">21</td><td class="center">4.20</td><td class="center" style="color:#1e3a8a;">มาก</td></tr>
+      <tr><td class="center">7</td><td>เด็กหญิงกัญญาพัชร  วาจาชื่น</td><td class="center">4</td><td class="center">4</td><td class="center">4</td><td class="center">4</td><td class="center">4</td><td class="center">20</td><td class="center">4.00</td><td class="center" style="color:#1e3a8a;">มาก</td></tr>
+      <tr><td class="center">8</td><td>เด็กหญิงกัญญารัตน์  บัวบง</td><td class="center">5</td><td class="center">5</td><td class="center">5</td><td class="center">5</td><td class="center">5</td><td class="center">25</td><td class="center">5.00</td><td class="center" style="color:#15803d; font-weight:600;">มากที่สุด</td></tr>
+      <tr style="background:#f1f5f9; font-weight:700;">
+        <td colspan="2" class="center">ค่าเฉลี่ยรายข้อและเฉลี่ยรวม (X̄)</td>
+        <td class="center">4.38</td><td class="center">4.25</td><td class="center">4.63</td><td class="center">4.38</td><td class="center">4.25</td>
+        <td class="center">21.88</td><td class="center">4.38</td>
+        <td class="center" style="color:#1e3a8a;">มาก</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="margin-top: 10px; font-size: 11pt; color: #475569;">
+    * เกณฑ์การแปลความหมาย: 4.51 - 5.00 = มากที่สุด / 3.51 - 4.50 = มาก / 2.51 - 3.50 = ปรับปรุง / น้อยกว่า 2.50 = น้อย (บรรลุเป้าหมาย PA ระดับ "มาก" ขึ้นไป)
+  </div>
+
+  <div class="footer-sig" style="margin-top:14px;">
+    ลงชื่อ.................................................................... ครูผู้รวบรวม<br>
+    ( นายเตชินท์  อินทมล )<br>
+    ตำแหน่ง ครู (ไม่มีวิทยฐานะ) โรงเรียนบ้านโนนป่าหว้านเชียงฮาย
+  </div>
+</div>
+
+</body>
+</html>

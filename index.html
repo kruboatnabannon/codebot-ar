@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CodeBot AR Adventure - วิทยาการคำนวณ ป.4-ป.5 (Active Learning)</title>
+  <link rel="stylesheet" href="css/style.css?v=7.4_mode_first_practice_and_challenge_flow">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🤖</text></svg>">
+</head>
+<body>
+  <div id="app-container">
+    <!-- Welcome Screen & Student Registration (Landing Screen) -->
+    <section id="welcome-screen">
+      <div class="welcome-box">
+        <!-- STEP 1: Innovation Intro & Creator Credit -->
+        <div id="welcome-step-1" class="welcome-step-content">
+          <div class="welcome-header">
+            <span class="welcome-logo-badge">🤖🚀</span>
+            <h1 class="welcome-title">CodeBot AR Adventure</h1>
+            <p class="welcome-subtitle">
+              สื่อนวัตกรรมการเรียนรู้เชิงรุก (Active Learning) รายวิชาเทคโนโลยี (วิทยาการคำนวณ) ชั้น ป.4 - ป.5 ตามมาตรฐาน ว 4.2
+            </p>
+          </div>
+
+          <!-- Developer & School Banner -->
+          <div class="developer-banner" style="margin: 12px 0 16px 0; background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(88, 28, 135, 0.4)); border: 1.5px solid rgba(96, 165, 250, 0.5); border-radius: 16px; padding: 14px 20px;">
+            <span class="dev-avatar" style="font-size: 2.8rem;">👨‍🏫</span>
+            <div>
+              <div class="dev-info-title" style="color: #fbbf24; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px;">💡 สื่อนวัตกรรมการเรียนรู้พัฒนาโดย:</div>
+              <div class="dev-name" style="font-size: 1.25rem; font-weight: 800; color: #ffffff;">นายเตชินท์ อินทมล (ตำแหน่ง ครู)</div>
+              <div class="dev-school" style="font-size: 0.95rem; color: #93c5fd;">โรงเรียนบ้านโนนป่าหว้านเชียงฮาย สำนักงานเขตพื้นที่การศึกษาประถมศึกษาหนองบัวลำภู เขต 2</div>
+            </div>
+          </div>
+
+          <!-- 4 Feature Cards Grid: อธิบายว่าโปรแกรมนี้คืออะไร -->
+          <div class="welcome-cards-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-bottom: 14px;">
+            <div class="welcome-feature-card">
+              <span class="feat-icon">🤖</span>
+              <h3 class="feat-title">นวัตกรรม AR สั่งการไร้สัมผัส</h3>
+              <p class="feat-desc">
+                ใช้เทคโนโลยี Hand Tracking ตรวจจับท่าทางนิ้วมือผ่านกล้องเว็บแคมแบบเรียลไทม์ ปลอดภัย สนุก และไม่ต้องสัมผัสหน้าจอ
+              </p>
+            </div>
+            <div class="welcome-feature-card">
+              <span class="feat-icon">🤝</span>
+              <h3 class="feat-title">คู่หู Active Learning</h3>
+              <p class="feat-desc">
+                จำลองการทำงานแบบ <strong>Pair Programming</strong> สลับบทบาทเป็น <strong>Driver</strong> (คุมหน้ากล้อง) และ <strong>Navigator</strong> (ผู้นำทางวางแผน)
+              </p>
+            </div>
+            <div class="welcome-feature-card">
+              <span class="feat-icon">🎯</span>
+              <h3 class="feat-title">วิทยาการคำนวณ ว 4.2</h3>
+              <p class="feat-desc">
+                ครอบคลุม 10 ด่านเข้มข้น: <strong>ป.4</strong> (อัลกอริทึม ลำดับขั้นตอน ลูป) และ <strong>ป.5</strong> (แพทเทิร์น ลูปผสม เงื่อนไข ดีบัก)
+              </p>
+            </div>
+            <div class="welcome-feature-card">
+              <span class="feat-icon">📜</span>
+              <h3 class="feat-title">เกียรติบัตร & สถิติ Top Score</h3>
+              <p class="feat-desc">
+                ประทับตราเกียรติยศลงภาพถ่าย AR และพิมพ์ <strong>เกียรติบัตรอิเล็กทรอนิกส์ A4</strong> ได้ทันทีหลังพิชิตภารกิจ
+              </p>
+            </div>
+          </div>
+
+          <!-- Gestures Guide Summary -->
+          <div class="welcome-mode-selection" style="margin-top: 10px;">
+            <div class="welcome-mode-card active" style="cursor: default; border-color: #38bdf8;">
+              <div class="wmode-badge" style="background: #0284c7; color: #fff;">คู่มือท่าทางมือ (Hand Gestures)</div>
+              <div class="wmode-desc" style="font-size: 0.9rem; line-height: 1.7; color: #cbd5e1; margin-top: 4px;">
+                ☝️ <strong>1 นิ้ว</strong> = เดินหน้า &nbsp;|&nbsp; 
+                🖐️ <strong>มือซ้าย</strong> = หันซ้าย &nbsp;|&nbsp; 
+                🖐️ <strong>มือขวา</strong> = หันขวา &nbsp;|&nbsp; 
+                🤟 <strong>3 นิ้ว</strong> = วนลูป / กุญแจ &nbsp;|&nbsp; 
+                🫰 <strong>มินิฮาร์ท</strong> = รันโค้ด &nbsp;|&nbsp; 
+                🙅 <strong>10 นิ้ว / กากบาท</strong> = รีเซ็ต &nbsp;|&nbsp; 
+                👎 <strong>คว่ำมือ</strong> = ลบล่าสุด
+              </div>
+              <div id="welcome-top-score-card" style="margin-top: 8px; padding: 6px 14px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
+                <span style="font-size: 0.85rem; color: #fbbf24; font-weight: bold;">👑 สถิติคะแนนสูงสุด (Top Score):</span>
+                <span id="welcome-top-score-val" style="font-size: 0.95rem; color: #fef08a; font-weight: 800;">กำลังโหลด...</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 1: CHOOSE GAME MODE FIRST (เลือกโหมดการเล่นก่อน) -->
+          <div style="margin-top: 18px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
+              <h3 style="margin: 0; font-size: 1.15rem; font-weight: 800; color: #38bdf8; display: flex; align-items: center; gap: 8px;">
+                <span>🎮</span> <span>เลือกโหมดการเล่น (Select Game Mode)</span>
+              </h3>
+              <span class="pair-badge" style="font-size: 0.76rem; padding: 2px 8px;">ขั้นตอนที่ 1</span>
+            </div>
+
+            <!-- Mode Choice Buttons (Practice vs Challenge) -->
+            <div class="welcome-mode-choice-grid">
+              <button type="button" class="welcome-mode-choice-btn active mode-practice" id="btn-choice-mode-practice">
+                <span class="wmode-big-icon">🛡️</span>
+                <div class="wmode-big-info">
+                  <div class="wmode-big-title">โหมดฝึกซ้อม (Practice Mode)</div>
+                  <div class="wmode-big-desc">ไม่จำกัดเวลา • เลือกชั้น ป.4 หรือ ป.5 • เลือกเล่นด่าน 1 ถึง 10 ได้อิสระ</div>
+                </div>
+                <span class="wmode-arrow">➔</span>
+              </button>
+
+              <button type="button" class="welcome-mode-choice-btn mode-challenge" id="btn-choice-mode-challenge">
+                <span class="wmode-big-icon">⚡</span>
+                <div class="wmode-big-info">
+                  <div class="wmode-big-title">โหมดประลองความเร็ว (Challenge Mode)</div>
+                  <div class="wmode-big-desc">จับเวลา 75 วิ/ด่าน • หัวใจ ❤️ 3 ดวง • ลุย 10 ด่านต่อเนื่อง • ลุ้น Top Score</div>
+                </div>
+                <span class="wmode-arrow">➔</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- SUB-PANEL A: เมื่อกดโหมดฝึกซ้อม -> เลือกชั้น และเลือกด่าน 1-10 เป็นบล็อก -->
+          <div id="panel-practice-config" class="welcome-start-config-card" style="margin-top: 12px; padding: 18px 20px; background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95)); border: 2px solid #10b981; border-radius: 18px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);">
+            
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.4rem;">🛡️</span>
+                <div>
+                  <h3 style="margin: 0; font-size: 1.15rem; font-weight: 800; color: #34d399;">โหมดฝึกซ้อม: เลือกชั้นเรียน และ เลือกระดับด่าน (1 - 10)</h3>
+                  <span style="font-size: 0.8rem; color: #94a3b8;">เลือกชั้น ป.4 หรือ ป.5 แล้วแตะเลือกบล็อกด่านที่ต้องการเล่น</span>
+                </div>
+              </div>
+              <div class="pair-badge" style="font-size: 0.78rem; padding: 3px 10px; background: rgba(16, 185, 129, 0.2); border-color: #10b981; color: #34d399;">
+                🛡️ ฝึกซ้อมอิสระ
+              </div>
+            </div>
+
+            <!-- 1. Grade Selection Toggle: ป.4 vs ป.5 (บล็อกการ์ตูน) -->
+            <div class="welcome-grade-choice-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+              <button type="button" class="welcome-grade-btn active" id="btn-welcome-grade-p4" data-grade="p4">
+                <span class="wgrade-icon">🎒</span>
+                <div class="wgrade-info">
+                  <div class="wgrade-name">ชั้นประถมศึกษาปีที่ 4</div>
+                  <div class="wgrade-sub">10 ภารกิจ (อัลกอริทึม, ลำดับขั้นตอน, บล็อกลูป)</div>
+                </div>
+                <span class="wgrade-check">✓</span>
+              </button>
+
+              <button type="button" class="welcome-grade-btn" id="btn-welcome-grade-p5" data-grade="p5">
+                <span class="wgrade-icon">🎓</span>
+                <div class="wgrade-info">
+                  <div class="wgrade-name">ชั้นประถมศึกษาปีที่ 5</div>
+                  <div class="wgrade-sub">10 ภารกิจ (เหตุผลตรรกะ, ลูปผสม, เงื่อนไข, ดีบัก)</div>
+                </div>
+                <span class="wgrade-check">✓</span>
+              </button>
+            </div>
+
+            <!-- 2. Selected Level Preview Banner -->
+            <div id="welcome-selected-level-banner" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 12px; padding: 10px 16px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.25rem;">🚩</span>
+                <div>
+                  <span style="font-size: 0.75rem; color: #94a3b8; display: block;">ด่านที่เลือกจะเริ่มเล่น:</span>
+                  <span id="welcome-selected-level-title" style="font-size: 0.95rem; font-weight: 800; color: #fef08a;">
+                    ด่านที่ 1: ก้าวแรกของโค้ดบอท
+                  </span>
+                </div>
+              </div>
+              <span id="welcome-selected-concept-badge" style="font-size: 0.75rem; padding: 3px 10px; border-radius: 8px; background: rgba(16, 185, 129, 0.2); color: #34d399; font-weight: 700;">
+                ลำดับขั้นตอน
+              </span>
+            </div>
+
+            <!-- 3. Cartoon Level Grid (5 columns x 2 rows = 10 blocks) -->
+            <div class="cartoon-level-grid" id="welcome-cartoon-level-grid">
+              <!-- Dynamically rendered 1-10 tiles -->
+            </div>
+
+            <!-- 4. Launch Action Buttons for Practice -->
+            <div class="welcome-actions" style="margin-top: 16px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px;">
+              <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; width: 100%;">
+                <button id="btn-quick-start" class="btn-start-mission" style="flex: 1; min-width: 260px; padding: 14px 28px; font-size: 1.15rem; font-weight: 900; background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 5px 22px rgba(16, 185, 129, 0.55); border-radius: 14px;">
+                  🚀 เริ่มฝึกซ้อม ชั้น ป.4 ด่านที่ 1 ทันที!
+                </button>
+                <button id="btn-goto-step2" class="btn-start-mission" style="padding: 14px 24px; font-size: 0.98rem; font-weight: 700; background: linear-gradient(135deg, #2563eb, #7c3aed); box-shadow: 0 4px 18px rgba(99, 102, 241, 0.45); border-radius: 14px;">
+                  ⚙️ ตั้งชื่อทีมผู้เล่น ➔
+                </button>
+              </div>
+              <span class="welcome-hint-text" style="color: #94a3b8; font-size: 0.82rem;">
+                💡 แตะเลือกบล็อกด่าน 1-10 ด้านบน แล้วกดปุ่ม "เริ่มฝึกซ้อม" หรือแตะซ้ำที่บล็อกเพื่อเข้าสู่เกมได้ทันที
+              </span>
+            </div>
+
+          </div>
+
+          <!-- SUB-PANEL B: เมื่อกดโหมดประลอง -> เอาเมนูฝึกออก แล้วเลือกชั้น เป็นบล็อกเหมือนกัน แต่ไม่ให้เลือกด่าน! -->
+          <div id="panel-challenge-config" class="welcome-start-config-card" style="display: none; margin-top: 12px; padding: 18px 20px; background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(45, 20, 20, 0.95)); border: 2px solid #ef4444; border-radius: 18px; box-shadow: 0 10px 30px rgba(239, 68, 68, 0.25);">
+            
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+              <div style="display: flex; align-items: center; gap: 8px;">
+                <span style="font-size: 1.4rem;">⚡</span>
+                <div>
+                  <h3 style="margin: 0; font-size: 1.15rem; font-weight: 800; color: #f87171;">โหมดประลองความเร็ว: เลือกระดับชั้นเรียน</h3>
+                  <span style="font-size: 0.8rem; color: #cbd5e1;">ลุยต่อเนื่อง 10 ด่านตั้งแต่ด่านที่ 1 เพื่อสะสมคะแนนและชิงอันดับ Top Score</span>
+                </div>
+              </div>
+              <div class="pair-badge" style="font-size: 0.78rem; padding: 3px 10px; background: rgba(239, 68, 68, 0.2); border-color: #ef4444; color: #f87171;">
+                ⚡ แข่งขันจับเวลา
+              </div>
+            </div>
+
+            <!-- Challenge Rules Alert -->
+            <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 12px; padding: 12px 16px; margin-bottom: 14px; color: #fecaca; font-size: 0.88rem; line-height: 1.6;">
+              ⏱️ <strong>กติกาการแข่งขัน:</strong> จับเวลา <strong>75 วินาที/ด่าน</strong>, มีพลังชีวิตหัวใจ ❤️ <strong>3 ดวง</strong>, ระบบจะเริ่มตั้งแต่ <strong>ด่านที่ 1 ต่อเนื่องไปจนถึงด่านที่ 10</strong> (ไม่มีเมนูเลือกข้ามด่าน เพื่อความโปร่งใสและยุติธรรมในการจัดอันดับคะแนนและพิมพ์เกียรติบัตร)
+            </div>
+
+            <!-- 1. Grade Selection for Challenge: ป.4 vs ป.5 (บล็อกการ์ตูนเหมือนกัน!) -->
+            <div style="margin-bottom: 14px;">
+              <label style="font-size: 0.88rem; font-weight: 700; color: #f87171; display: block; margin-bottom: 8px;">🎓 เลือกระดับชั้นที่จะประลอง:</label>
+              <div class="welcome-grade-choice-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+                <button type="button" class="welcome-grade-btn active" id="btn-challenge-grade-p4" data-grade="p4">
+                  <span class="wgrade-icon">🎒</span>
+                  <div class="wgrade-info">
+                    <div class="wgrade-name">ชั้นประถมศึกษาปีที่ 4</div>
+                    <div class="wgrade-sub">10 ภารกิจต่อเนื่อง (อัลกอริทึม & ลูปพื้นฐาน)</div>
+                  </div>
+                  <span class="wgrade-check">✓</span>
+                </button>
+
+                <button type="button" class="welcome-grade-btn" id="btn-challenge-grade-p5" data-grade="p5">
+                  <span class="wgrade-icon">🎓</span>
+                  <div class="wgrade-info">
+                    <div class="wgrade-name">ชั้นประถมศึกษาปีที่ 5</div>
+                    <div class="wgrade-sub">10 ภารกิจต่อเนื่อง (เหตุผลตรรกะ & ลูปผสม)</div>
+                  </div>
+                  <span class="wgrade-check">✓</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Quick Team Name Inputs inside Challenge Panel -->
+            <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 12px 16px; margin-bottom: 14px;">
+              <div style="font-size: 0.85rem; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">📝 ข้อมูลทีมผู้เข้าแข่งขัน:</div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px;">
+                <div>
+                  <label style="font-size: 0.76rem; color: #94a3b8;">🏷️ ชื่อทีม:</label>
+                  <input type="text" id="input-challenge-team-name" value="ทีมนักสำรวจ 01" style="width: 100%; padding: 6px 10px; background: rgba(0,0,0,0.4); border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 0.88rem;">
+                </div>
+                <div>
+                  <label style="font-size: 0.76rem; color: #94a3b8;">🎮 คนที่ 1 (Driver):</label>
+                  <input type="text" id="input-challenge-driver-name" value="ต้นกล้า" style="width: 100%; padding: 6px 10px; background: rgba(0,0,0,0.4); border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 0.88rem;">
+                </div>
+                <div>
+                  <label style="font-size: 0.76rem; color: #94a3b8;">🗺️ คนที่ 2 (Navigator):</label>
+                  <input type="text" id="input-challenge-nav-name" value="ฟ้าใส" style="width: 100%; padding: 6px 10px; background: rgba(0,0,0,0.4); border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 0.88rem;">
+                </div>
+              </div>
+            </div>
+
+            <!-- Launch Action Button for Challenge -->
+            <div class="welcome-actions" style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
+              <button id="btn-start-challenge-direct" class="btn-start-mission" style="width: 100%; max-width: 440px; padding: 14px 28px; font-size: 1.18rem; font-weight: 900; background: linear-gradient(135deg, #ef4444, #b91c1c); box-shadow: 0 5px 22px rgba(239, 68, 68, 0.55); border-radius: 14px;">
+                ⚡ เริ่มประลองความเร็ว ชั้น ป.4 (เริ่มด่านที่ 1) 🚀
+              </button>
+              <span class="welcome-hint-text" style="color: #94a3b8; font-size: 0.82rem;">
+                💡 โหมดประลองเริ่มตั้งแต่ด่านที่ 1 มีระบบจับเวลาและ Game Over หากพลังชีวิตหมด
+              </span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- STEP 2: Team Registration & Mode Selection -->
+        <div id="welcome-step-2" class="welcome-step-content" style="display: none;">
+          <!-- Step Indicator Header -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.12);">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <span style="font-size: 1.8rem;">📝</span>
+              <div>
+                <h2 style="font-size: 1.35rem; font-weight: 800; color: #38bdf8; margin: 0;">ลงทะเบียนทีมผู้เข้าแข่งขัน</h2>
+                <span style="font-size: 0.82rem; color: #94a3b8;">ขั้นตอนที่ 2 จาก 2: กรอกข้อมูลคู่หูและเลือกโหมดการเล่น</span>
+              </div>
+            </div>
+            <button id="btn-back-to-step1" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.85rem;">
+              ⬅ ย้อนกลับไปหน้าแรก
+            </button>
+          </div>
+
+          <!-- Registration Form Section -->
+          <div class="welcome-form-section" style="padding-top: 0;">
+            <div class="form-grid">
+              <div class="form-group full-width">
+                <label for="input-team-name">🏷️ ชื่อทีม / ชื่อคู่หู:</label>
+                <input type="text" id="input-team-name" placeholder="เช่น ยานอพอลโล, ซูเปอร์โค้ด" value="ทีมนักสำรวจ 01">
+              </div>
+              <div class="form-group">
+                <label for="input-driver-name">🎮 คนที่ 1 (Driver สั่งการ):</label>
+                <input type="text" id="input-driver-name" placeholder="เช่น ต้นกล้า" value="ต้นกล้า">
+              </div>
+              <div class="form-group">
+                <label for="input-navigator-name">🗺️ คนที่ 2 (Navigator วางแผน):</label>
+                <input type="text" id="input-navigator-name" placeholder="เช่น ฟ้าใส" value="ฟ้าใส">
+              </div>
+              <div class="form-group full-width">
+                <label for="input-grade-level">🎓 เลือกระดับชั้นการเรียนรู้:</label>
+                <select id="input-grade-level">
+                  <option value="p5" selected>ประถมศึกษาปีที่ 5 (การใช้เหตุผลเชิงตรรกะ ลูปผสม เงื่อนไข If-Then ว 4.2)</option>
+                  <option value="p4">ประถมศึกษาปีที่ 4 (อัลกอริทึม ลำดับขั้นตอน ลูปเบื้องต้น ว 4.2)</option>
+                </select>
+              </div>
+              <div class="form-group full-width">
+                <label>🎮 เลือกโหมดการเล่น (Game Mode):</label>
+                <div class="mode-select-grid">
+                  <button type="button" class="mode-card-btn active" id="btn-mode-practice" data-mode="PRACTICE">
+                    <span class="mode-card-icon">🛡️</span>
+                    <div class="mode-card-info">
+                      <strong class="mode-card-title">โหมดฝึกซ้อม (Practice)</strong>
+                      <p class="mode-card-desc">ไม่จำกัดเวลา รันโค้ดได้อิสระ ฝึกคิดวิเคราะห์และแก้ปัญหาตามสบาย</p>
+                    </div>
+                  </button>
+                  <button type="button" class="mode-card-btn" id="btn-mode-challenge" data-mode="CHALLENGE">
+                    <span class="mode-card-icon">⚡</span>
+                    <div class="mode-card-info">
+                      <strong class="mode-card-title">โหมดประลอง (Challenge)</strong>
+                      <p class="mode-card-desc">จับเวลา 75 วิ/ด่าน, หัวใจ ❤️ 3 ดวง, มี Time Bonus XP และ Game Over</p>
+                    </div>
+                  </button>
+                </div>
+
+                <!-- Practice Level Select inside Welcome Screen -->
+                <div id="welcome-practice-levels-section" style="margin-top: 10px; padding: 10px 14px; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 10px;">
+                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 4px;">
+                    <span style="font-size: 0.84rem; font-weight: 700; color: #34d399;">🎯 เลือกระดับด่านที่จะเริ่มฝึก (1 - 10):</span>
+                    <span id="welcome-level-title-preview" style="font-size: 0.8rem; font-weight: 600; color: #a7f3d0;">ด่านที่ 1: ก้าวแรกของโค้ดบอท</span>
+                  </div>
+                  <div class="level-blocks-container" id="welcome-level-blocks-container">
+                    <!-- Populated blocks 1-10 -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div class="welcome-actions" style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
+            <button id="btn-back-to-step1-bottom" class="btn btn-secondary" style="padding: 10px 18px; font-size: 0.95rem;">
+              ⬅ ย้อนกลับ
+            </button>
+            <button id="btn-start-mission" class="btn-start-mission" style="padding: 12px 36px; font-size: 1.15rem;">
+              <span>🚀</span> เริ่มต้นการผจญภัยสู่ด่านที่ 1
+            </button>
+          </div>
+          <div style="text-align: center; margin-top: 10px;">
+            <span class="welcome-hint-text">💡 เมื่อกดเริ่ม สามารถใช้กล้องเว็บแคมหรือคลิกปุ่มบนหน้าจอเพื่อเล่นได้ทันที</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Top Navigation & Classroom Stats Bar (Clean & Focused) -->
+    <!-- Top Navigation: Clean, Minimal, Single Row -->
+    <header id="game-header" class="top-nav">
+      <div class="header-left" style="display: flex; align-items: center; gap: 12px;">
+        <span class="brand-logo" style="font-size: 1.3rem;">🤖</span>
+        <span style="font-weight: 800; font-size: 1rem; color: #60a5fa; letter-spacing: -0.5px;">CodeBot AR</span>
+        <span id="team-name-badge" class="pair-badge" style="font-size: 0.8rem; padding: 2px 8px; background: rgba(59, 130, 246, 0.2); border-color: #3b82f6; color: #93c5fd;">🚀 ทีม: อวกาศ 01</span>
+      </div>
+
+      <!-- Center: Challenge Mode HUD (Only appears in Challenge Mode) -->
+      <div class="header-center" style="display: flex; align-items: center; gap: 8px;">
+        <div class="stat-pill timer-pill" id="nav-timer-pill" style="display: none; padding: 2px 8px;" title="เวลานับถอยหลัง">
+          <span class="timer-icon">⏱️</span>
+          <span id="nav-timer-text" style="font-size: 0.82rem; font-weight: 800;">01:15</span>
+        </div>
+        <div class="stat-pill lives-pill" id="nav-lives-pill" style="display: none; padding: 2px 8px;" title="พลังงานชีวิต">
+          <span id="nav-lives-text" style="font-size: 0.82rem; letter-spacing: 1px;">❤️❤️❤️</span>
+        </div>
+      </div>
+
+      <!-- Right: Essential Game HUD (Stars, Mission Briefing, Sound) -->
+      <div class="header-right" style="display: flex; align-items: center; gap: 8px;">
+        <div class="stat-pill" style="padding: 2px 8px;" title="ดาวสะสม">
+          <span style="font-size: 0.9rem;">⭐</span>
+          <span class="value" id="stat-total-stars" style="font-size: 0.85rem; font-weight: 800; color: #fbbf24;">0</span>
+        </div>
+        <button id="btn-open-knowledge" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.8rem; background: rgba(56, 189, 248, 0.15); border-color: #38bdf8; color: #7dd3fc;" title="ดูมโนทัศน์และฟังโจทย์ภารกิจ">
+          💡 โจทย์ภารกิจ
+        </button>
+        <button id="btn-open-game-menu" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.82rem; font-weight: 700; background: rgba(56, 189, 248, 0.2); border-color: #38bdf8; color: #7dd3fc; display: flex; align-items: center; gap: 4px;" title="เปิดเมนูเกม เลือกด่าน และตั้งค่า">
+          ⚙️ เมนูเกม
+        </button>
+        <button id="btn-toggle-sound" class="btn btn-secondary" style="padding: 4px 8px; font-size: 0.82rem;" title="เปิด/ปิดเสียง">
+          🔊
+        </button>
+      </div>
+    </header>
+
+    <!-- Main Game Stage Split View (Compact, Zero Overflow) -->
+    <main class="main-stage">
+      <!-- Left: Camera & AR Interactive Space -->
+      <section class="camera-panel">
+        <div class="panel-header" style="padding: 6px 12px;">
+          <div class="panel-title" style="font-size: 0.86rem;">
+            <span class="status-indicator" id="camera-status"></span>
+            <span>📷 กล้อง AR ตรวจจับท่าทาง (หรือคลิกปุ่มด้านล่าง)</span>
+          </div>
+        </div>
+
+        <div class="viewport-wrapper">
+          <!-- Hidden raw webcam video -->
+          <video id="webcam-video" playsinline autoplay muted></video>
+          <!-- Mirrored AR Canvas -->
+          <canvas id="ar-canvas"></canvas>
+        </div>
+
+        <!-- Compact Dynamic Gesture Legend Bar -->
+        <div class="gesture-guide-bar" id="gesture-guide-bar">
+          <div class="guide-chip"><span class="chip-badge">☝️ 1 นิ้ว</span> เดินหน้า</div>
+          <div class="guide-chip"><span class="chip-badge">🖐️ ซ้าย</span> หันซ้าย</div>
+          <div class="guide-chip"><span class="chip-badge">🖐️ ขวา</span> หันขวา</div>
+          <div class="guide-chip"><span class="chip-badge">🤟 3 นิ้ว</span> ลูป/กุญแจ</div>
+          <div class="guide-chip"><span class="chip-badge">🫰 ฮาร์ท</span> รันโค้ด</div>
+          <div class="guide-chip"><span class="chip-badge">🙅 10 นิ้ว</span> รีเซ็ต</div>
+        </div>
+
+        <!-- Touch/Click block buttons under camera -->
+        <div class="ar-touch-zones" id="ar-bottom-buttons" style="padding: 6px 8px; background: rgba(15,23,42,0.9);">
+          <!-- Dynamically populated per level -->
+        </div>
+      </section>
+
+      <!-- Right: Grid Board & Code Timeline -->
+      <section class="game-panel">
+        <!-- Mission & Level Info (Clean Single Row) -->
+        <div class="mission-infobar" style="padding: 6px 12px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; width: 100%; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+              <span class="mission-title" id="level-title-display" style="font-size: 0.88rem;">ด่านที่ 1: ก้าวแรกของโค้ดบอท</span>
+              <span class="pair-badge" id="level-concept-badge" style="font-size: 0.72rem; padding: 1px 6px;">ลำดับขั้นตอน</span>
+              <button id="btn-quick-menu" class="btn btn-secondary" style="padding: 2px 9px; font-size: 0.75rem; border-color: #38bdf8; color: #7dd3fc; background: rgba(56, 189, 248, 0.15); display: inline-flex; align-items: center; gap: 4px;" title="เปิดเมนูเลือกด่านและกลับหน้าแรก">
+                📑 เลือกด่าน / เมนู
+              </button>
+            </div>
+            <span class="mission-goal" id="mission-goal-desc" style="font-size: 0.76rem; color: #94a3b8; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></span>
+          </div>
+        </div>
+
+        <div class="game-content-split" style="padding: 8px; gap: 8px;">
+          <!-- 2D Robot Simulation Arena -->
+          <div class="grid-stage-wrapper">
+            <canvas id="grid-canvas"></canvas>
+          </div>
+
+          <!-- Realtime Status Banner (Slim) -->
+          <div id="status-toast" style="font-size: 0.78rem; padding: 3px 10px; background: rgba(0,0,0,0.4); border-radius: 6px; border-left: 3px solid #3b82f6; color: #93c5fd; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+            พร้อมรับคำสั่ง: วางแผนอัลกอริทึมแล้วกดรันโค้ดได้เลย!
+          </div>
+
+          <!-- Code Sequence Timeline -->
+          <div class="code-timeline-section" style="padding: 6px 8px;">
+            <div class="timeline-header" style="margin-bottom: 4px;">
+              <span class="timeline-title" style="font-size: 0.78rem;">
+                <span>📝 ลำดับคำสั่งโปรแกรม</span>
+              </span>
+              <button id="btn-clear-code" class="btn btn-secondary" style="padding: 2px 6px; font-size: 0.72rem;">
+                ล้างคำสั่ง 🗑️
+              </button>
+            </div>
+
+            <!-- Scrollable List of Blocks -->
+            <div class="sequence-container" id="code-sequence-list">
+              <!-- Dynamically populated chips -->
+            </div>
+          </div>
+
+          <!-- Controls Bar (Clean 4 Action Buttons) -->
+          <div class="control-bar" style="margin-top: 0; padding-top: 4px;">
+            <div class="left-controls" style="gap: 6px;">
+              <button id="btn-prev-level" class="btn btn-secondary" style="padding: 5px 10px; font-size: 0.8rem;" title="ด่านก่อนหน้า">
+                ◀ ด่านก่อน
+              </button>
+              <button id="btn-next-level" class="btn btn-secondary" style="padding: 5px 10px; font-size: 0.8rem;" title="ด่านถัดไป">
+                ด่านถัดไป ▶
+              </button>
+            </div>
+
+            <div class="right-controls" style="gap: 6px;">
+              <button id="btn-reset-sim" class="btn btn-secondary" style="padding: 5px 10px; font-size: 0.8rem;">
+                🔄 รีเซ็ตหุ่น
+              </button>
+              <button id="btn-step-code" class="btn btn-secondary" style="padding: 5px 12px; font-size: 0.85rem; font-weight: 700; border-color: #38bdf8; color: #7dd3fc;" title="เดินตรวจโค้ดทีละคำสั่ง (Step-by-Step Debug)">
+                👣 เดินทีละก้าว
+              </button>
+              <button id="btn-run-code" class="btn btn-success" style="font-size: 0.92rem; padding: 6px 16px; font-weight: 700;">
+                ▶️ เริ่มรันโค้ด
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Modal 1: Knowledge Card (Scaffolding / Pre-mission Briefing) -->
+    <div class="modal-overlay" id="knowledge-modal">
+      <div class="modal-card" style="max-width: 620px;">
+        <div class="modal-header">
+          <div class="modal-title" style="display: flex; align-items: center; gap: 10px;">
+            <span>💡</span>
+            <span id="km-title">ความรู้ประจำภารกิจ</span>
+          </div>
+          <button class="btn btn-secondary" id="btn-close-knowledge" style="padding: 4px 10px;">✕</button>
+        </div>
+        <div class="modal-body">
+          <!-- Clean Voice Narration Bar with Speed Selector -->
+          <div class="tts-control-bar" style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 14px; padding: 8px 14px; background: rgba(15, 23, 42, 0.75); border-radius: 12px; border: 1px solid rgba(56, 189, 248, 0.3); font-size: 0.84rem;">
+            <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+              <button id="btn-speak-knowledge" class="btn btn-secondary" style="padding: 5px 16px; font-size: 0.86rem; background: rgba(56, 189, 248, 0.2); border-color: #38bdf8; color: #7dd3fc;">
+                🔊 ฟังโจทย์
+              </button>
+              <label style="display: flex; align-items: center; gap: 6px; cursor: pointer; color: #cbd5e1; user-select: none; font-size: 0.82rem;">
+                <input type="checkbox" id="toggle-auto-speak" checked style="cursor: pointer;"> อ่านออกเสียงอัตโนมัติ
+              </label>
+            </div>
+            <div style="display: flex; align-items: center; gap: 6px;">
+              <span style="color: #94a3b8; font-size: 0.78rem;">⚡ ความเร็ว:</span>
+              <select id="select-tts-speed" style="background: #1e293b; color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.4); border-radius: 6px; padding: 3px 8px; font-size: 0.78rem; cursor: pointer;">
+                <option value="slow">🐢 ช้า (ชัดเจน)</option>
+                <option value="normal" selected>🚶 ปกติ (พอดีคำ)</option>
+                <option value="fast">🐇 เร็ว (กระชับ)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="knowledge-banner">
+            <p id="km-desc" style="font-size: 1rem;"></p>
+          </div>
+
+          <div class="concept-box">
+            <h4>มโนทัศน์สำคัญ (Key Concept):</h4>
+            <p id="km-takeaway"></p>
+          </div>
+
+          <div class="concept-box" style="border-color: rgba(168, 85, 247, 0.4); background: rgba(168, 85, 247, 0.08);">
+            <h4 style="color: #c084fc;">กิจกรรม Active Learning (Pair Team):</h4>
+            <p id="km-active-tip"></p>
+          </div>
+        </div>
+        <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 0.75rem; color: #94a3b8;">
+            💡 สามารถกดปุ่มหยุดเสียง หรือปิดการอ่านอัตโนมัติได้ตลอดเวลา
+          </span>
+          <button class="btn btn-primary" id="btn-start-knowledge" style="padding: 8px 24px;">
+            เข้าใจแล้ว เริ่มลุยภารกิจ! 🚀
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 2: Victory & Star Rewards Modal -->
+    <div class="modal-overlay" id="victory-modal">
+      <div class="modal-card victory-card">
+        <h2 style="font-size: 1.6rem; color: #34d399;">🎉 ยอดเยี่ยมมาก! ภารกิจสำเร็จ</h2>
+        <div class="victory-stars">
+          <span class="star">⭐</span>
+          <span class="star">⭐</span>
+          <span class="star">⭐</span>
+        </div>
+        <p id="victory-score-text" style="font-size: 1.1rem; color: #fbbf24; font-weight: 700; margin-bottom: 10px;"></p>
+        <div id="victory-badge-box" class="badge-reward" style="display: none;"></div>
+
+        <div id="victory-final-actions" style="margin-top: 15px; display: none; justify-content: center; gap: 10px; flex-wrap: wrap;">
+          <button id="btn-take-winner-photo" class="btn btn-warning" style="padding: 8px 18px; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 6px;">
+            📸 ถ่ายภาพเกียรติยศ
+          </button>
+          <button id="btn-victory-cert" class="btn btn-primary" style="padding: 8px 18px; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border-color: #a855f7;">
+            📜 รับเกียรติบัตร
+          </button>
+        </div>
+        <div style="margin-top: 15px;">
+          <button id="btn-victory-next" class="btn btn-success" style="padding: 10px 28px; font-size: 1.05rem; margin: 0 auto; display: inline-flex; align-items: center; gap: 8px;">
+            ลุยด่านต่อไป 🚀 (5 วิ...)
+          </button>
+          <div id="victory-countdown-bar" style="margin-top: 10px; font-size: 0.9rem; color: #94a3b8;">
+            ⏱️ ระบบจะพาไปด่านถัดไปอัตโนมัติใน <span id="victory-countdown-sec" style="color: #38bdf8; font-weight: bold; font-size: 1.15rem;">5</span> วินาที
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 3: Classroom Leaderboard (Grade 4 & Grade 5 Separation + CSV Export) -->
+    <div class="modal-overlay" id="leaderboard-modal">
+      <div class="modal-card" style="max-width: 680px;">
+        <div class="modal-header">
+          <div class="modal-title">
+            <span>🏅</span>
+            <span>กระดานคะแนนในชั้นเรียน (Classroom Leaderboard)</span>
+          </div>
+          <button class="btn btn-secondary" id="btn-close-leaderboard" style="padding: 4px 10px;">✕</button>
+        </div>
+        <div class="modal-body">
+          <!-- Grade Filter Tabs -->
+          <div class="leaderboard-tabs" style="display: flex; gap: 8px; margin-bottom: 12px;">
+            <button id="tab-lb-p4" class="btn btn-primary active-lb-tab" style="flex: 1; padding: 8px;">
+              🏆 ตารางอันดับ ป.4
+            </button>
+            <button id="tab-lb-p5" class="btn btn-secondary" style="flex: 1; padding: 8px;">
+              🏆 ตารางอันดับ ป.5
+            </button>
+          </div>
+
+          <div style="max-height: 280px; overflow-y: auto;">
+            <table class="leaderboard-table">
+              <thead>
+                <tr>
+                  <th style="width: 55px;">อันดับ</th>
+                  <th>ทีม / คู่หู</th>
+                  <th>ภาพ</th>
+                  <th>ดาว ⭐</th>
+                  <th>คะแนน XP</th>
+                </tr>
+              </thead>
+              <tbody id="leaderboard-tbody">
+                <!-- Dynamically populated -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
+          <div style="display: flex; gap: 8px;">
+            <button id="btn-export-csv" class="btn btn-secondary" style="font-size: 0.85rem; border-color: #10b981; color: #34d399;" title="ส่งออกข้อมูลสถิติสำหรับงานวิจัยในชั้นเรียน (Excel CSV)">
+              📊 ส่งออก CSV วิจัย
+            </button>
+            <button id="btn-clear-leaderboard" class="btn btn-secondary" style="font-size: 0.85rem; border-color: #ef4444; color: #f87171;" title="สำหรับคุณครูเมื่อต้องการเริ่มคาบเรียนใหม่">
+              🗑️ ล้างสถิติห้อง
+            </button>
+          </div>
+          <button class="btn btn-primary" onclick="document.getElementById('leaderboard-modal').classList.remove('active')">
+            ปิด
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 4: Winner Photo Capture Modal (AR Cosmic Frame) -->
+    <div class="modal-overlay" id="winner-photo-modal">
+      <div class="modal-card" style="max-width: 780px;">
+        <div class="modal-header">
+          <div class="modal-title">
+            <span id="photo-modal-header-icon">📸</span>
+            <span id="photo-modal-header-title">ถ่ายภาพเกียรติยศยอดนักสำรวจ (Space Explorer Photo)</span>
+          </div>
+          <button class="btn btn-secondary" id="btn-close-winner-photo" style="padding: 4px 10px;">✕</button>
+        </div>
+        <div class="modal-body" style="text-align: center; padding: 14px 16px;">
+          <p id="photo-modal-hint-text" style="font-size: 0.9rem; color: #cbd5e1; margin-bottom: 12px;">
+            ยิ้มหวานๆ มองกล้องแล้วโพสท่าเท่ๆ! ระบบจะประทับตราเกียรติยศและบันทึกเป็นที่ระลึก
+          </p>
+          <div style="position: relative; display: inline-block; border-radius: 16px; overflow: hidden; border: 2.5px solid #38bdf8; box-shadow: 0 0 25px rgba(56, 189, 248, 0.4); max-width: 100%;">
+            <canvas id="winner-photo-canvas" width="800" height="540" style="width: 100%; max-width: 720px; height: auto; display: block;"></canvas>
+          </div>
+        </div>
+        <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center;">
+          <button id="btn-retake-photo" class="btn btn-secondary" style="padding: 8px 16px;">
+            🔄 ถ่ายภาพใหม่
+          </button>
+          <div style="display: flex; gap: 10px;">
+            <button id="btn-download-winner-photo" class="btn btn-warning" style="padding: 8px 18px;">
+              💾 ดาวน์โหลดรูปภาพ (.PNG)
+            </button>
+            <button id="btn-use-photo-in-cert" class="btn btn-primary" style="background: linear-gradient(135deg, #6366f1, #8b5cf6); padding: 8px 18px;">
+              📜 ดูเกียรติบัตรฉบับเต็ม
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal 5: Official E-Certificate Modal (Print & PDF Ready) -->
+    <div class="modal-overlay" id="certificate-modal">
+      <div class="modal-card certificate-card" style="max-width: 860px;">
+        <div class="modal-header">
+          <div class="modal-title">
+            <span>📜</span>
+            <span>เกียรติบัตรอิเล็กทรอนิกส์ (E-Certificate of Achievement)</span>
+          </div>
+          <button class="btn btn-secondary" id="btn-close-certificate" style="padding: 4px 10px;">✕</button>
+        </div>
+        <div class="modal-body" style="padding: 10px; background: #0b1120; border-radius: 8px; text-align: center;">
+          <div id="cert-printable-area" class="cert-printable-area" style="box-shadow: 0 10px 30px rgba(0,0,0,0.6); border-radius: 8px; overflow: hidden; display: inline-block;">
+            <canvas id="certificate-canvas" width="1200" height="848" style="width: 100%; max-width: 800px; height: auto; display: block;"></canvas>
+          </div>
+        </div>
+        <div class="modal-footer" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <span style="font-size: 0.82rem; color: #94a3b8;">
+            💡 บันทึกภาพเกียรติบัตรเป็นที่ระลึก หรือพิมพ์เป็นเอกสาร A4
+          </span>
+          <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+            <button id="btn-cert-home" class="btn btn-secondary" style="font-weight: 700; padding: 8px 16px; display: inline-flex; align-items: center; gap: 6px;">
+              🏠 กลับหน้าหลัก
+            </button>
+            <button id="btn-download-cert-png" class="btn btn-warning" style="font-weight: 700; padding: 8px 18px; display: inline-flex; align-items: center; gap: 6px;">
+              📥 ดาวน์โหลดเกียรติบัตร (PNG)
+            </button>
+            <button id="btn-print-certificate" class="btn btn-success" style="padding: 8px 20px; font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+              🖨️ พิมพ์เกียรติบัตร (Print / PDF)
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal 6: Game Over Emergency Modal (Tournament / Speedrun Mode) -->
+    <div class="modal-overlay" id="game-over-modal">
+      <div class="modal-card game-over-card" style="max-width: 560px; border-color: #ef4444; box-shadow: 0 0 50px rgba(239, 68, 68, 0.4);">
+        <div class="modal-header" style="background: rgba(239, 68, 68, 0.15); border-bottom-color: rgba(239, 68, 68, 0.3);">
+          <div class="modal-title" style="display: flex; align-items: center; gap: 8px; color: #f87171;">
+            <span class="game-over-alarm-icon">🚨</span>
+            <span style="font-weight: 800;">สัญญาณเตือนภัยฉุกเฉิน (MISSION ALERT)</span>
+          </div>
+          <button class="btn btn-secondary" id="btn-close-game-over" style="padding: 4px 10px;">✕</button>
+        </div>
+        <div class="modal-body" style="text-align: center; padding: 22px 20px;">
+          <div class="game-over-big-icon" style="font-size: 3.5rem; margin-bottom: 6px;">💥🤖</div>
+          <h2 style="font-size: 1.7rem; font-weight: 900; color: #f87171; margin-bottom: 6px;">ภารกิจล้มเหลว! (GAME OVER)</h2>
+          <p id="game-over-reason-text" style="font-size: 0.98rem; color: #fca5a5; margin-bottom: 16px; line-height: 1.5;">
+            พลังงานแบตเตอรี่หุ่นยนต์หมดลงแล้ว
+          </p>
+          
+          <div class="game-over-stats-box" style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(239, 68, 68, 0.3); border-radius: 12px; padding: 12px 14px; margin-bottom: 18px; display: flex; justify-content: space-around;">
+            <div>
+              <div style="font-size: 0.78rem; color: #94a3b8;">คะแนนสะสม</div>
+              <div id="game-over-score-val" style="font-size: 1.25rem; font-weight: 800; color: #fbbf24;">0 XP</div>
+            </div>
+            <div style="border-left: 1px solid rgba(255,255,255,0.1); padding-left: 14px;">
+              <div style="font-size: 0.78rem; color: #94a3b8;">ดาวทั้งหมด</div>
+              <div id="game-over-stars-val" style="font-size: 1.25rem; font-weight: 800; color: #38bdf8;">0 ⭐</div>
+            </div>
+            <div style="border-left: 1px solid rgba(255,255,255,0.1); padding-left: 14px;">
+              <div style="font-size: 0.78rem; color: #94a3b8;">ระดับชั้น</div>
+              <div id="game-over-grade-val" style="font-size: 1.25rem; font-weight: 800; color: #a78bfa;">ป.4</div>
+            </div>
+          </div>
+
+          <div style="font-size: 0.85rem; color: #cbd5e1; margin-bottom: 18px; line-height: 1.5;">
+            💡 <em>"ความล้มเหลวคือบันไดสู่การเรียนรู้! ตรวจสอบอัลกอริทึม จัดลำดับคำสั่งใหม่ แล้วลุยอีกครั้ง!"</em>
+          </div>
+
+          <div id="game-over-top-banner" style="display: none; margin-bottom: 14px; padding: 10px 14px; background: rgba(245, 158, 11, 0.15); border: 1.5px solid #f59e0b; border-radius: 12px; color: #fef08a; font-size: 0.92rem; font-weight: 800; line-height: 1.4;">
+            👑 ยอดเยี่ยมมาก! คุณทำลายสถิติคะแนนสูงสุดอันดับ 1 ของห้อง!
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <button id="btn-take-game-over-photo" class="btn btn-warning" style="padding: 10px 18px; font-size: 0.95rem; justify-content: center; display: none;">
+              📸 ถ่ายภาพเกียรติยศบันทึกสถิติสูงสุด (Top Score Photo)
+            </button>
+            <div style="display: flex; gap: 10px; justify-content: center;">
+              <button id="btn-retry-mission" class="btn btn-danger" style="flex: 1; padding: 10px 14px; font-weight: 700; justify-content: center;">
+                🔄 ลองใหม่อีกครั้ง (Retry)
+              </button>
+              <button id="btn-switch-to-practice" class="btn btn-secondary" style="flex: 1; padding: 10px 14px; border-color: #10b981; color: #34d399; justify-content: center;">
+                🛡️ สลับเป็นโหมดฝึกซ้อม
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Game Menu & Cartoon Level Selector (⚙️ เมนูเกมและเลือกด่าน) -->
+  <div class="modal-overlay" id="game-menu-modal">
+    <div class="modal-card" id="game-menu-card" style="max-width: 660px; background: linear-gradient(180deg, #0284c7 0%, #0f172a 100%); border: 3px solid #38bdf8; box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85); border-radius: 24px; overflow: hidden;">
+      
+      <!-- Cartoon Level Select Screen (Matching User Reference Image 100%!) -->
+      <div id="menu-view-level-select" style="display: flex; flex-direction: column;">
+        <div class="level-select-top-bar" style="padding: 16px 20px 10px 20px; background: linear-gradient(180deg, #38bdf8 0%, #0284c7 100%); border-bottom: 3px solid #0369a1; text-align: center; position: relative;">
+          <div class="level-select-title-cartoon">
+            Level Select
+          </div>
+          
+          <!-- Grade Switcher Tabs inside the header -->
+          <div class="level-select-grade-tabs">
+            <button type="button" class="level-select-grade-tab active" id="modal-tab-grade-p4" data-grade="p4">
+              🎒 ชั้น ป.4 (ด่าน 1-10)
+            </button>
+            <button type="button" class="level-select-grade-tab" id="modal-tab-grade-p5" data-grade="p5">
+              🎓 ชั้น ป.5 (ด่าน 1-10)
+            </button>
+          </div>
+
+          <!-- Close button top-right -->
+          <button class="btn btn-secondary" id="btn-close-level-select" style="position: absolute; top: 12px; right: 14px; padding: 4px 10px; background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.4); color: #fff; border-radius: 8px; font-weight: 800;">✕</button>
+        </div>
+
+        <div class="modal-body" style="padding: 16px 20px; display: flex; flex-direction: column; gap: 12px;">
+          <!-- Active / Hovered Level Preview Banner -->
+          <div id="level-tile-preview-banner" style="background: rgba(15, 23, 42, 0.85); border: 1.5px solid rgba(56, 189, 248, 0.5); border-radius: 12px; padding: 8px 14px; display: flex; align-items: center; justify-content: space-between; gap: 8px;">
+            <div style="display: flex; align-items: center; gap: 8px; overflow: hidden;">
+              <span style="font-size: 1.1rem;">📍</span>
+              <span id="level-tile-preview-title" style="font-size: 0.9rem; font-weight: 700; color: #7dd3fc; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+                ด่านที่ 1: ก้าวแรกของโค้ดบอท
+              </span>
+            </div>
+            <span id="level-tile-preview-badge" style="font-size: 0.75rem; padding: 2px 10px; border-radius: 6px; background: rgba(56, 189, 248, 0.2); color: #38bdf8; font-weight: 700; white-space: nowrap;">
+              ลำดับขั้นตอน
+            </span>
+          </div>
+
+          <!-- Cartoon Level Blocks Grid (5 columns x 2 rows = 10 tiles) -->
+          <div class="cartoon-level-grid" id="cartoon-level-grid">
+            <!-- Dynamically populated 1-10 tiles -->
+          </div>
+
+          <!-- Bottom Navigation: Go Back Button (Matching Image!) + Quick Actions -->
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.15); flex-wrap: wrap; gap: 8px;">
+            <button id="btn-menu-level-back" class="btn-game-go-back">
+              <span class="btn-yellow-dot"></span>
+              <span>Go Back (ย้อนกลับ)</span>
+            </button>
+            <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+              <button id="btn-menu-restart-level" class="btn btn-secondary" style="padding: 7px 12px; font-size: 0.82rem; font-weight: 700; background: rgba(245, 158, 11, 0.18); border-color: #f59e0b; color: #fde047; border-radius: 10px;">
+                🔄 เริ่มด่านใหม่
+              </button>
+              <button id="btn-menu-back-home" class="btn btn-secondary" style="padding: 7px 12px; font-size: 0.82rem; font-weight: 700; background: rgba(59, 130, 246, 0.18); border-color: #3b82f6; color: #93c5fd; border-radius: 10px;">
+                🏠 กลับหน้าแรก
+              </button>
+              <button id="btn-menu-toggle-sound" class="btn btn-secondary" style="padding: 7px 10px; font-size: 0.82rem; font-weight: 700; border-radius: 10px;" title="เปิด/ปิดเสียง">
+                <span id="menu-sound-icon">🔊</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Local Offline MediaPipe Hands (Google Official Hand Tracking Library) -->
+  <script src="vendor/mediapipe/camera_utils.js?v=6.7_final_level_and_top_score_photo"></script>
+  <script src="vendor/mediapipe/drawing_utils.js?v=6.7_final_level_and_top_score_photo"></script>
+  <script src="vendor/mediapipe/hands.js?v=6.7_final_level_and_top_score_photo"></script>
+
+  <!-- Game Scripts with cache buster -->
+  <script src="js/audio.js?v=7.5_unlock_all_levels_no_padlocks"></script>
+  <script src="js/levels.js?v=7.5_unlock_all_levels_no_padlocks"></script>
+  <script src="js/camera-engine.js?v=7.5_unlock_all_levels_no_padlocks"></script>
+  <script src="js/game-engine.js?v=7.5_unlock_all_levels_no_padlocks"></script>
+  <script src="js/app.js?v=7.5_unlock_all_levels_no_padlocks"></script>
+</body>
+</html>

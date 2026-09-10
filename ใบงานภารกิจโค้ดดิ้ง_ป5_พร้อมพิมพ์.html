@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>ใบงานภารกิจนักสืบโค้ดดิ้ง (Mission Log) - ชั้นประถมศึกษาปีที่ 5</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&family=Prompt:wght@400;600;700&display=swap');
+    
+    * {
+      box-sizing: border-box;
+      -webkit-print-color-adjust: exact !important;
+      print-color-adjust: exact !important;
+    }
+    body {
+      font-family: 'Sarabun', 'TH Sarabun New', sans-serif;
+      font-size: 14pt;
+      line-height: 1.4;
+      color: #1f2937;
+      margin: 0;
+      padding: 20px;
+      background-color: #f3f4f6;
+    }
+    .page {
+      max-width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      background: white;
+      padding: 18mm 18mm;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+      border-radius: 8px;
+      position: relative;
+    }
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+      }
+      .page {
+        box-shadow: none;
+        border-radius: 0;
+        margin: 0;
+        padding: 12mm 15mm;
+        width: 100%;
+        min-height: auto;
+        page-break-after: always;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+    .print-bar {
+      max-width: 210mm;
+      margin: 0 auto 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #1e3a8a;
+      color: white;
+      padding: 12px 20px;
+      border-radius: 8px;
+    }
+    .btn-print {
+      background: #38bdf8;
+      color: #0f172a;
+      font-family: 'Prompt', sans-serif;
+      font-weight: 700;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+    .btn-print:hover {
+      background: #7dd3fc;
+      transform: translateY(-1px);
+    }
+    .header {
+      text-align: center;
+      border-bottom: 2px solid #1e3a8a;
+      padding-bottom: 10px;
+      margin-bottom: 12px;
+    }
+    .header h1 {
+      font-family: 'Prompt', sans-serif;
+      font-size: 19pt;
+      color: #1e3a8a;
+      margin: 0 0 4px 0;
+    }
+    .header p {
+      font-size: 12pt;
+      color: #4b5563;
+      margin: 0;
+    }
+    .team-badge {
+      display: flex;
+      justify-content: space-between;
+      background: #f0fdf4;
+      border: 1.5px dashed #22c55e;
+      border-radius: 8px;
+      padding: 8px 15px;
+      margin-bottom: 12px;
+      font-size: 13pt;
+    }
+    .team-badge span {
+      font-weight: 600;
+      color: #166534;
+    }
+    .mission-card {
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      margin-bottom: 12px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+    .mission-head {
+      background: #eff6ff;
+      border-left: 5px solid #2563eb;
+      padding: 6px 14px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .mission-head h3 {
+      margin: 0;
+      font-family: 'Prompt', sans-serif;
+      font-size: 13pt;
+      color: #1e3a8a;
+    }
+    .mission-body {
+      padding: 10px 14px;
+    }
+    table.grid-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 6px 0;
+      font-size: 12.5pt;
+    }
+    table.grid-table th {
+      background: #1e3a8a;
+      color: white;
+      padding: 5px 8px;
+      font-weight: 600;
+      text-align: center;
+      border: 1px solid #1e3a8a;
+    }
+    table.grid-table td {
+      border: 1px solid #cbd5e1;
+      padding: 4px 8px;
+    }
+    .dots {
+      border-bottom: 1px dotted #94a3b8;
+      display: inline-block;
+      min-width: 120px;
+      height: 18px;
+    }
+    .checkbox-box {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      border: 1.5px solid #475569;
+      border-radius: 3px;
+      vertical-align: middle;
+      margin-right: 4px;
+    }
+    .star-rating {
+      background: #fefce8;
+      border: 1px solid #facc15;
+      padding: 4px 10px;
+      border-radius: 6px;
+      font-size: 11.5pt;
+      color: #854d0e;
+      display: inline-block;
+      margin-top: 4px;
+    }
+    .footer-sign {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 14px;
+      border-top: 1px solid #cbd5e1;
+      padding-top: 10px;
+      font-size: 11.5pt;
+    }
+    .sign-box {
+      width: 48%;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 8px 12px;
+      background: #fafafa;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="print-bar no-print">
+    <div>
+      <strong>🖨️ ใบงานภารกิจนักสืบโค้ดดิ้ง ป.5 (ฉบับพร้อมพิมพ์ขนาด A4)</strong>
+      <span style="opacity: 0.8; font-size: 13px; margin-left: 10px;">ออกแบบสวยงาม รองรับสีและขาวดำ</span>
+    </div>
+    <button class="btn-print" onclick="window.print()">กดพิมพ์ใบงาน (Print to PDF / Printer)</button>
+  </div>
+
+  <div class="page">
+    <div class="header">
+      <h1>🤖 ใบงานกิจกรรมภารกิจนักสืบโค้ดดิ้ง (Mission Log) 🚀</h1>
+      <p>รายวิชาเทคโนโลยี (วิทยาการคำนวณ) ว15101 ชั้นประถมศึกษาปีที่ 5 | นวัตกรรมเกม CodeBot AR Adventure</p>
+      <p style="font-size: 11pt; color: #6b7280;">โรงเรียนบ้านโนนป่าหว้านเชียงฮาย สพป.หนองบัวลำภู เขต 2 | ครูผู้สอน: นายเตชินท์ อินทมล</p>
+    </div>
+
+    <!-- ข้อมูลคู่หู -->
+    <div class="team-badge">
+      <div><span>ชื่อคู่หู/ทีม:</span> .....................................................................</div>
+      <div><span>กลุ่มที่:</span> .........</div>
+      <div><span>วันที่:</span> ......./......./2568</div>
+    </div>
+    <div style="display: flex; justify-content: space-between; font-size: 12pt; margin-bottom: 10px; background: #f8fafc; padding: 6px 12px; border-radius: 6px;">
+      <div><strong>คนที่ 1:</strong> ................................................................ เลขที่ ......... [ ] Driver [ ] Navigator</div>
+      <div><strong>คนที่ 2:</strong> ................................................................ เลขที่ ......... [ ] Driver [ ] Navigator</div>
+    </div>
+
+    <!-- ภารกิจที่ 1 -->
+    <div class="mission-card">
+      <div class="mission-head">
+        <h3>ภารกิจที่ 1: วางแผนเส้นทางและอัลกอริทึม (Algorithm & Sequence)</h3>
+        <span class="star-rating">เป้าหมาย: ⭐⭐⭐ 3 ดาว</span>
+      </div>
+      <div class="mission-body">
+        <p style="margin: 0 0 6px 0; font-size: 11.5pt;">ให้นักเรียนช่วยกันวางแผนพาหุ่นยนต์ CodeBot จากจุดเริ่มต้น (Start) ไปเก็บแบตเตอรี่และเข้ายานอวกาศ (Goal):</p>
+        <table class="grid-table">
+          <thead>
+            <tr>
+              <th style="width: 18%;">ขั้นตอน</th>
+              <th>บล็อกคำสั่งที่เลือกใช้ (เช่น เดินหน้า, หันซ้าย, หันขวา)</th>
+              <th style="width: 32%;">ผลการทดสอบหน้ากล้อง AR</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td align="center">ก้าวที่ 1</td><td>................................................................................................</td><td><span class="checkbox-box"></span> ผ่านฉลุย &nbsp; <span class="checkbox-box"></span> ชนสิ่งกีดขวาง</td></tr>
+            <tr><td align="center">ก้าวที่ 2</td><td>................................................................................................</td><td><span class="checkbox-box"></span> ผ่านฉลุย &nbsp; <span class="checkbox-box"></span> ชนสิ่งกีดขวาง</td></tr>
+            <tr><td align="center">ก้าวที่ 3</td><td>................................................................................................</td><td><span class="checkbox-box"></span> ผ่านฉลุย &nbsp; <span class="checkbox-box"></span> ชนสิ่งกีดขวาง</td></tr>
+            <tr><td align="center">ก้าวที่ 4</td><td>................................................................................................</td><td><span class="checkbox-box"></span> ผ่านฉลุย &nbsp; <span class="checkbox-box"></span> ชนสิ่งกีดขวาง</td></tr>
+            <tr><td align="center">ก้าวที่ 5</td><td>................................................................................................</td><td><span class="checkbox-box"></span> ผ่านฉลุย &nbsp; <span class="checkbox-box"></span> ชนสิ่งกีดขวาง</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ภารกิจที่ 2 & 3 สองคอลัมน์ -->
+    <div style="display: flex; gap: 10px; margin-bottom: 12px;">
+      
+      <!-- ภารกิจที่ 2 -->
+      <div class="mission-card" style="flex: 1; margin-bottom: 0;">
+        <div class="mission-head" style="border-left-color: #f59e0b;">
+          <h3>ภารกิจที่ 2: ไขความลับพลังวนซ้ำ (Loop)</h3>
+        </div>
+        <div class="mission-body" style="font-size: 11.5pt;">
+          <div>1. คำสั่งที่ต้องทำซ้ำติดต่อกัน คือ: <span class="dots" style="min-width: 140px;"></span></div>
+          <div>2. ทำซ้ำทั้งหมดจำนวน: <span class="dots" style="min-width: 50px;"></span> ครั้ง</div>
+          <div style="margin-top: 4px;">3. เมื่อใช้บล็อก <strong>[วนซ้ำ Loop]</strong> ช่วยให้โค้ดสั้นลงอย่างไร?</div>
+          <div style="border: 1px dashed #cbd5e1; border-radius: 4px; padding: 4px 8px; margin-top: 4px; background: #fafafa; font-size: 11pt;">
+            เดิมใช้ ......... บล็อก ➔ เหลือเพียง ......... บล็อก<br>
+            [ ] ได้รับดาวโบนัสประสิทธิภาพโค้ดสั้น!
+          </div>
+        </div>
+      </div>
+
+      <!-- ภารกิจที่ 3 -->
+      <div class="mission-card" style="flex: 1; margin-bottom: 0;">
+        <div class="mission-head" style="border-left-color: #8b5cf6;">
+          <h3>ภารกิจที่ 3: เงื่อนไขกุญแจเลเซอร์ (If-Then)</h3>
+        </div>
+        <div class="mission-body" style="font-size: 11.5pt;">
+          <div>ให้นักเรียนเขียนประโยคเงื่อนไขตรรกะของด่านนี้:</div>
+          <div style="background: #fdf4ff; border-left: 3px solid #c084fc; padding: 5px 8px; margin-top: 4px; border-radius: 4px;">
+            • <strong>ถ้า (IF)</strong>: หุ่นยนต์เก็บ <span class="dots" style="min-width: 100px;"></span> ได้แล้ว<br>
+            • <strong>แล้ว (THEN)</strong>: ประตูจะ <span class="dots" style="min-width: 100px;"></span><br>
+            • <strong>มิฉะนั้น (ELSE)</strong>: ถ้าเดินชนจะ <span class="dots" style="min-width: 80px;"></span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- ภารกิจที่ 4: ล่าบั๊ก -->
+    <div class="mission-card">
+      <div class="mission-head" style="border-left-color: #ef4444;">
+        <h3>ภารกิจที่ 4: ยอดนักสืบตามล่าและกำจัดบั๊ก (Debugging Challenge)</h3>
+        <span style="font-size: 11pt; color: #b91c1c; font-weight: 600;">🐞 ตรวจจับจุดผิดพลาด</span>
+      </div>
+      <div class="mission-body">
+        <table class="grid-table">
+          <thead>
+            <tr>
+              <th style="width: 25%;">จุดที่พบบั๊ก</th>
+              <th>คำสั่งเดิมที่ผิดพลาด</th>
+              <th>คำสั่งใหม่ที่ถูกต้องหลังแก้ไข</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td align="center">บั๊กจุดที่ 1</td>
+              <td>................................................................................</td>
+              <td>................................................................................</td>
+            </tr>
+            <tr>
+              <td align="center">บั๊กจุดที่ 2</td>
+              <td>................................................................................</td>
+              <td>................................................................................</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- ลงนามท้ายใบงาน -->
+    <div class="footer-sign">
+      <div class="sign-box">
+        <strong>ประเมินความรู้สึกของคู่หูวันนี้:</strong><br>
+        [ ] สนุกและเข้าใจง่าย &nbsp; [ ] ท้าทายกำลังดี &nbsp; [ ] ต้องฝึกเพิ่มเติม<br>
+        ลายมือชื่อคู่หู: 1) ................................. 2) .................................
+      </div>
+      <div class="sign-box" style="background: #f8fafc; border-color: #bfdbfe;">
+        <strong>การประเมินของครูผู้สอน:</strong><br>
+        คะแนนภารกิจ: [ ........ / 20 ] | ระดับ: [ ] ดีเยี่ยม [ ] ดี [ ] พอใช้<br>
+        (ลงชื่อ)........................................................ ครูผู้สอน (นายเตชินท์ อินทมล)
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>

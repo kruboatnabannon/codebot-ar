@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ทดสอบ MediaPipe Hands แยกมือซ้าย-ขวา</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #0f172a;
+      color: #f8fafc;
+      font-family: system-ui, -apple-system, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 { margin: 0 0 10px; color: #38bdf8; font-size: 1.5rem; }
+    p { margin: 0 0 15px; color: #94a3b8; font-size: 0.95rem; }
+    .stage {
+      position: relative;
+      width: 640px;
+      height: 480px;
+      background: #1e293b;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.5);
+      border: 2px solid #334155;
+    }
+    video { display: none; }
+    canvas {
+      width: 640px;
+      height: 480px;
+      display: block;
+    }
+    .hud {
+      margin-top: 15px;
+      display: flex;
+      gap: 15px;
+      width: 640px;
+    }
+    .card {
+      flex: 1;
+      background: #1e293b;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid #334155;
+    }
+    .card-title { font-size: 0.75rem; text-transform: uppercase; color: #64748b; margin-bottom: 4px; }
+    .card-value { font-size: 1.25rem; font-weight: bold; color: #38bdf8; }
+    .status-ok { color: #10b981; }
+    .status-err { color: #ef4444; }
+    .status-wait { color: #f59e0b; }
+    #log-box {
+      margin-top: 15px;
+      width: 640px;
+      height: 100px;
+      background: #020617;
+      border-radius: 8px;
+      border: 1px solid #1e293b;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 0.8rem;
+      color: #94a3b8;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+    .btn {
+      margin-top: 10px;
+      padding: 8px 16px;
+      background: #0284c7;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .btn:hover { background: #0369a1; }
+  </style>
+</head>
+<body>
+  <h1>🤖 ทดสอบระบบตรวจจับ: แยกมือซ้าย-มือขวา</h1>
+  <p>ยกมือซ้ายของน้องๆ = หันซ้าย | ยกมือขวา = หันขวา | 1 นิ้ว = เดินหน้า | 3 นิ้ว = วนลูป</p>
+
+  <div class="stage">
+    <video id="webcam" playsinline autoplay muted></video>
+    <canvas id="canvas" width="640" height="480"></canvas>
+  </div>
+
+  <div class="hud">
+    <div class="card">
+      <div class="card-title">ข้างของมือ (เด็กจริง)</div>
+      <div class="card-value status-ok" id="hand-side">-</div>
+    </div>
+    <div class="card">
+      <div class="card-title">จำนวนนิ้ว</div>
+      <div class="card-value" id="finger-count">-</div>
+    </div>
+    <div class="card">
+      <div class="card-title">คำสั่งที่ตรวจจับได้</div>
+      <div class="card-value" id="gesture-name">-</div>
+    </div>
+    <div class="card">
+      <div class="card-title">FPS</div>
+      <div class="card-value" id="fps-counter">0</div>
+    </div>
+  </div>
+
+  <div id="log-box"></div>
+  <button class="btn" onclick="location.href='index.html'">⬅️ กลับสู่เกมหลัก CodeBot AR</button>
+
+  <!-- MediaPipe Libraries from local vendor directory -->
+  <script src="vendor/mediapipe/camera_utils.js"></script>
+  <script src="vendor/mediapipe/drawing_utils.js"></script>
+  <script src="vendor/mediapipe/hands.js"></script>
+
+  <script>
+    const logBox = document.getElementById('log-box');
+    function log(msg) {
+      const line = document.createElement('div');
+      line.textContent = `[${new Date().toLocaleTimeString()}] ${msg}`;
+      logBox.appendChild(line);
+      logBox.scrollTop = logBox.scrollHeight;
+      console.log(msg);
+    }
+
+    const video = document.getElementById('webcam');
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const handSideEl = document.getElementById('hand-side');
+    const fingerCountEl = document.getElementById('finger-count');
+    const gestureNameEl = document.getElementById('gesture-name');
+    const fpsEl = document.getElementById('fps-counter');
+
+    let fps = 0, frameCount = 0, lastFpsTime = performance.now();
+    let hands = null;
+    let camera = null;
+
+    function getStudentHandSide(lm, handedness) {
+      if (handedness && handedness.label) {
+        if (handedness.score > 0.7) {
+          // MediaPipe default camera perspective: 'Right' label = physical Left hand of student
+          return handedness.label === 'Right' ? 'LEFT' : 'RIGHT';
+        }
+      }
+      // Fallback anatomy in raw image coordinates
+      const vIndex = { x: lm[5].x - lm[0].x, y: lm[5].y - lm[0].y };
+      const vPinky = { x: lm[17].x - lm[0].x, y: lm[17].y - lm[0].y };
+      const crossZ = vIndex.x * vPinky.y - vIndex.y * vPinky.x;
+      const isPalmFacing = crossZ > 0;
+      return (isPalmFacing ? (lm[4].x < lm[17].x) : (lm[4].x > lm[17].x)) ? 'LEFT' : 'RIGHT';
+    }
+
+    async function init() {
+      log('ตรวจสอบ URL protocol: ' + window.location.protocol);
+      if (window.location.protocol === 'file:') {
+        log('คำเตือน: ต้องเปิดผ่าน http://localhost:8000');
+        return;
+      }
+
+      log('เริ่มต้น MediaPipe Hands (แยกมือซ้าย-ขวา)...');
+      try {
+        hands = new window.Hands({
+          locateFile: (file) => `vendor/mediapipe/${file}`
+        });
+
+        hands.setOptions({
+          maxNumHands: 2,
+          modelComplexity: 0,
+          minDetectionConfidence: 0.5,
+          minTrackingConfidence: 0.5
+        });
+
+        hands.onResults(onResults);
+        await hands.initialize();
+        log('MediaPipe Hands Initialized สำเร็จ!');
+      } catch (err) {
+        log('เกิดข้อผิดพลาดในการโหลด MediaPipe: ' + err.message);
+        return;
+      }
+
+      // Start Camera
+      try {
+        log('กำลังขอสิทธิ์เปิดกล้องเว็บแคม...');
+        camera = new window.Camera(video, {
+          onFrame: async () => {
+            if (hands) {
+              await hands.send({ image: video });
+            }
+          },
+          width: 640,
+          height: 480
+        });
+        await camera.start();
+        log('กล้องเปิดสำเร็จ! ลองยกมือซ้าย หรือ มือขวา หน้ากล้องได้เลย');
+      } catch (err) {
+        log('เปิดกล้องไม่สำเร็จ: ' + err.message);
+      }
+    }
+
+    function onResults(results) {
+      frameCount++;
+      const now = performance.now();
+      if (now - lastFpsTime >= 1000) {
+        fps = frameCount;
+        frameCount = 0;
+        lastFpsTime = now;
+        fpsEl.textContent = fps;
+      }
+
+      ctx.save();
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.scale(-1, 1);
+      ctx.drawImage(results.image, -canvas.width, 0, canvas.width, canvas.height);
+      ctx.restore();
+
+      if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+        for (let i = 0; i < results.multiHandLandmarks.length; i++) {
+          const lm = results.multiHandLandmarks[i];
+          const handedness = results.multiHandedness ? results.multiHandedness[i] : null;
+          const side = getStudentHandSide(lm, handedness);
+          drawSkeleton(lm, side);
+        }
+
+        analyzeGestures(results.multiHandLandmarks, results.multiHandedness);
+      } else {
+        handSideEl.textContent = '-';
+        fingerCountEl.textContent = 'ไม่พบมือ';
+        gestureNameEl.textContent = 'ยกมือขึ้นหน้ากล้อง';
+      }
+    }
+
+    function drawSkeleton(lm, side) {
+      const w = canvas.width;
+      const h = canvas.height;
+      const connections = [
+        [0, 1], [1, 2], [2, 3], [3, 4],       // Thumb
+        [0, 5], [5, 6], [6, 7], [7, 8],       // Index
+        [5, 9], [9, 10], [10, 11], [11, 12],  // Middle
+        [0, 13], [13, 14], [14, 15], [15, 16],// Ring
+        [0, 17], [17, 18], [18, 19], [19, 20],// Pinky
+        [5, 9], [9, 13], [13, 17]             // Palm
+      ];
+
+      ctx.save();
+      // Color: Cyan for Left hand, Gold/Orange for Right hand
+      const boneColor = side === 'LEFT' ? '#38bdf8' : '#fbbf24';
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = boneColor;
+      ctx.shadowColor = boneColor;
+      ctx.shadowBlur = 10;
+
+      ctx.beginPath();
+      connections.forEach(([i, j]) => {
+        const x1 = (1 - lm[i].x) * w;
+        const y1 = lm[i].y * h;
+        const x2 = (1 - lm[j].x) * w;
+        const y2 = lm[j].y * h;
+        ctx.moveTo(x1, y1);
+        ctx.lineTo(x2, y2);
+      });
+      ctx.stroke();
+
+      // Joints
+      for (let i = 0; i < lm.length; i++) {
+        const x = (1 - lm[i].x) * w;
+        const y = lm[i].y * h;
+        const isTip = (i === 4 || i === 8 || i === 12 || i === 16 || i === 20);
+
+        ctx.beginPath();
+        ctx.arc(x, y, isTip ? 7 : 4, 0, Math.PI * 2);
+        ctx.fillStyle = isTip ? '#10b981' : boneColor;
+        ctx.shadowColor = isTip ? '#10b981' : boneColor;
+        ctx.shadowBlur = 8;
+        ctx.fill();
+
+        ctx.strokeStyle = '#ffffff';
+        ctx.lineWidth = 1.5;
+        ctx.stroke();
+      }
+
+      // Wrist Tag
+      const wx = (1 - lm[0].x) * w;
+      const wy = lm[0].y * h + 24;
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.85)';
+      ctx.beginPath();
+      ctx.roundRect(wx - 45, wy - 12, 90, 24, 12);
+      ctx.fill();
+      ctx.strokeStyle = boneColor;
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+
+      ctx.font = 'bold 11px system-ui, sans-serif';
+      ctx.fillStyle = '#ffffff';
+      ctx.textAlign = 'center';
+      ctx.textBaseline = 'middle';
+      ctx.fillText(side === 'LEFT' ? '🖐️ มือซ้าย' : '🖐️ มือขวา', wx, wy);
+
+      ctx.restore();
+    }
+
+    function analyzeGestures(allHands, allHandedness) {
+      // 1. Cross Gesture 🙅 (two hands crossed or index crossed or double fists)
+      if (allHands.length >= 2) {
+        const lm0 = allHands[0], lm1 = allHands[1];
+        const p0 = lm0[9], p1 = lm1[9];
+        const w0 = lm0[0], w1 = lm1[0];
+        const idx0 = lm0[8], idx1 = lm1[8];
+
+        const dPalms = Math.hypot(p0.x - p1.x, p0.y - p1.y);
+        const dWrists = Math.hypot(w0.x - w1.x, w0.y - w1.y);
+        const dIndices = Math.hypot(idx0.x - idx1.x, idx0.y - idx1.y);
+
+        const isArmCross = (w0.x - w1.x) * (p0.x - p1.x) < 0;
+        const isHandsClose = (dPalms < 0.35 && dWrists < 0.45);
+        const isIndexCross = (dIndices < 0.18);
+
+        const isHand0Fist = (lm0[8].y > lm0[6].y && lm0[12].y > lm0[10].y && lm0[16].y > lm0[14].y && lm0[20].y > lm0[18].y);
+        const isHand1Fist = (lm1[8].y > lm1[6].y && lm1[12].y > lm1[10].y && lm1[16].y > lm1[14].y && lm1[20].y > lm1[18].y);
+        const isDoubleFist = isHand0Fist && isHand1Fist && dPalms < 0.40;
+
+        if (isArmCross || isHandsClose || isIndexCross || isDoubleFist) {
+          handSideEl.textContent = 'กากบาทสองมือ / ดับเบิ้ลกำปั้น';
+          fingerCountEl.textContent = '-';
+          gestureNameEl.textContent = '❌ กากบาท: รีเซ็ตและล้างคำสั่งใหม่ (RESET)';
+          return;
+        }
+      } else if (allHands.length === 1) {
+        const lm = allHands[0];
+        const isIndexExt = lm[8].y < lm[6].y;
+        const isMiddleExt = lm[12].y < lm[10].y;
+        const isRingFolded = lm[16].y > lm[14].y;
+        const isPinkyFolded = lm[20].y > lm[18].y;
+        const dTips = Math.hypot(lm[8].x - lm[12].x, lm[8].y - lm[12].y);
+        if (isIndexExt && isMiddleExt && isRingFolded && isPinkyFolded && dTips < 0.08) {
+          handSideEl.textContent = 'นิ้วไขว้';
+          fingerCountEl.textContent = '-';
+          gestureNameEl.textContent = '❌ กากบาท: รีเซ็ตและล้างคำสั่งใหม่ (RESET)';
+          return;
+        }
+      }
+
+      const lm = allHands[0];
+      const handedness = allHandedness ? allHandedness[0] : null;
+      const side = getStudentHandSide(lm, handedness);
+      handSideEl.textContent = side === 'LEFT' ? '🖐️ มือซ้าย (Left Hand)' : '🖐️ มือขวา (Right Hand)';
+
+      // 2. Mini Heart 🫰
+      const dThumbIndex = Math.hypot(lm[4].x - lm[8].x, lm[4].y - lm[8].y);
+      const isThumbCrossing = (dThumbIndex < 0.10 || Math.hypot(lm[4].x - lm[7].x, lm[4].y - lm[7].y) < 0.10);
+      const isMiddleFolded = lm[12].y > lm[10].y - 0.02;
+      const isRingFolded   = lm[16].y > lm[14].y - 0.02;
+      const isPinkyFolded  = lm[20].y > lm[18].y - 0.02;
+      const isThumbUp      = lm[4].y < lm[2].y;
+
+      if (isThumbCrossing && isMiddleFolded && isRingFolded && isPinkyFolded && isThumbUp) {
+        fingerCountEl.textContent = '🫰 มินิฮาร์ท';
+        gestureNameEl.textContent = '🚀 รันโค้ดโปรแกรม (RUN_CODE)';
+        return;
+      }
+
+      // 3. Undo 👎
+      const isIndexExt  = lm[8].y < lm[6].y;
+      const isMiddleExt = lm[12].y < lm[10].y;
+      const isRingExt   = lm[16].y < lm[14].y;
+      const isPinkyExt  = lm[20].y < lm[18].y;
+      const isThumbDown = lm[4].y > lm[3].y && lm[4].y > lm[2].y;
+      const allFolded = !isIndexExt && !isMiddleExt && !isRingExt && !isPinkyExt;
+
+      if (isThumbDown && allFolded) {
+        fingerCountEl.textContent = '👎 คว่ำมือ';
+        gestureNameEl.textContent = 'ลบคำสั่งล่าสุด (UNDO)';
+        return;
+      }
+
+      // 4. Extended Fingers
+      const isThumbExt = Math.hypot(lm[4].x - lm[9].x, lm[4].y - lm[9].y) > 0.15
+        && Math.hypot(lm[4].x - lm[17].x, lm[4].y - lm[17].y) > 0.16;
+
+      let count = 0;
+      const isBoyScoutThree = isIndexExt && isMiddleExt && isRingExt && !isPinkyExt;
+      const isThumbThree = isThumbExt && isIndexExt && isMiddleExt && !isRingExt && !isPinkyExt;
+      const isIlyThree = isThumbExt && isIndexExt && !isMiddleExt && !isRingExt && isPinkyExt;
+
+      if (isBoyScoutThree || isThumbThree || isIlyThree) {
+        count = 3;
+      } else if (isIndexExt && !isMiddleExt && !isRingExt && !isPinkyExt) {
+        count = 1;
+      } else if (isIndexExt && isMiddleExt && !isRingExt && !isPinkyExt) {
+        count = 2;
+      } else if (isIndexExt && isMiddleExt && isRingExt && isPinkyExt) {
+        count = isThumbExt ? 5 : 4;
+      } else if (!isIndexExt && !isMiddleExt && !isRingExt && !isPinkyExt) {
+        count = 0;
+      } else {
+        let ext = 0;
+        if (isIndexExt)  ext++;
+        if (isMiddleExt) ext++;
+        if (isRingExt)   ext++;
+        if (isPinkyExt)  ext++;
+        if (isThumbExt)  ext++;
+        count = ext;
+      }
+
+      fingerCountEl.textContent = `${count} นิ้ว`;
+
+      // 5. Action Rules
+      if (count === 1) {
+        gestureNameEl.textContent = '⬆️ ชู 1 นิ้ว = เดินหน้า (FORWARD)';
+      } else if (count === 3) {
+        gestureNameEl.textContent = '🔁 ชู 3 นิ้ว = วนลูป (LOOP) / ไขกุญแจ';
+      } else if (side === 'LEFT' && (count === 2 || count >= 4)) {
+        gestureNameEl.textContent = '↩️ ยกมือซ้าย = หันซ้าย (TURN_LEFT)';
+      } else if (side === 'RIGHT' && (count === 2 || count >= 4)) {
+        gestureNameEl.textContent = '↪️ ยกมือขวา = หันขวา (TURN_RIGHT)';
+      } else {
+        gestureNameEl.textContent = '✊ กำมือ / พัก (IDLE)';
+      }
+    }
+
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>
