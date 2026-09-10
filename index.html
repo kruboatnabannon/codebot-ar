@@ -25,69 +25,18 @@
             </p>
           </div>
 
-          <!-- STEP 1: CHOOSE GAME MODE FIRST (เมนูเลือกโหมดการเล่นหลัก - แสดงชัดเจนที่หน้าแรก) -->
-          <div style="margin: 18px 0 16px 0;">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-              <h3 style="margin: 0; font-size: 1.25rem; font-weight: 800; color: #38bdf8; display: flex; align-items: center; gap: 8px;">
-                <span>🎮</span> <span>เลือกโหมดการเล่น (Select Game Mode)</span>
-              </h3>
-              <span class="pair-badge" style="font-size: 0.8rem; padding: 4px 10px;">แตะเพื่อเลือกโหมด</span>
-            </div>
-
-            <!-- Mode Choice Buttons (Practice vs Challenge) -->
-            <div class="welcome-mode-choice-grid">
-              <button type="button" class="welcome-mode-choice-btn mode-practice" id="btn-choice-mode-practice">
-                <span class="wmode-big-icon">🛡️</span>
-                <div class="wmode-big-info">
-                  <div class="wmode-big-title">โหมดฝึกซ้อม (Practice Mode)</div>
-                  <div class="wmode-big-desc">ไม่จำกัดเวลา • เลือกชั้น ป.4 หรือ ป.5 • แตะเลือกระดับด่าน 1 ถึง 10 ได้อิสระ</div>
-                </div>
-                <span class="wmode-arrow">➔</span>
-              </button>
-
-              <button type="button" class="welcome-mode-choice-btn mode-challenge" id="btn-choice-mode-challenge">
-                <span class="wmode-big-icon">⚡</span>
-                <div class="wmode-big-info">
-                  <div class="wmode-big-title">โหมดแข่งขันประลองความเร็ว (Challenge Mode)</div>
-                  <div class="wmode-big-desc">จับเวลา 75 วิ/ด่าน • หัวใจ ❤️ 3 ดวง • ตั้งชื่อทีม • ลุย 10 ด่านต่อเนื่องชิง Top Score</div>
-                </div>
-                <span class="wmode-arrow">➔</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Gestures Guide Summary -->
-          <div class="welcome-mode-selection" style="margin-top: 10px;">
-            <div class="welcome-mode-card active" style="cursor: default; border-color: #38bdf8;">
-              <div class="wmode-badge" style="background: #0284c7; color: #fff;">คู่มือท่าทางมือ (Hand Gestures)</div>
-              <div class="wmode-desc" style="font-size: 0.9rem; line-height: 1.7; color: #cbd5e1; margin-top: 4px;">
-                ☝️ <strong>1 นิ้ว</strong> = เดินหน้า &nbsp;|&nbsp; 
-                🖐️ <strong>มือซ้าย</strong> = หันซ้าย &nbsp;|&nbsp; 
-                🖐️ <strong>มือขวา</strong> = หันขวา &nbsp;|&nbsp; 
-                🤟 <strong>3 นิ้ว</strong> = วนลูป / กุญแจ &nbsp;|&nbsp; 
-                🫰 <strong>มินิฮาร์ท</strong> = รันโค้ด &nbsp;|&nbsp; 
-                🙅 <strong>10 นิ้ว / กากบาท</strong> = รีเซ็ต &nbsp;|&nbsp; 
-                👎 <strong>คว่ำมือ</strong> = ลบล่าสุด
-              </div>
-              <div id="welcome-top-score-card" style="margin-top: 8px; padding: 6px 14px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
-                <span style="font-size: 0.85rem; color: #fbbf24; font-weight: bold;">👑 สถิติคะแนนสูงสุด (Top Score):</span>
-                <span id="welcome-top-score-val" style="font-size: 0.95rem; color: #fef08a; font-weight: 800;">กำลังโหลด...</span>
-              </div>
-            </div>
-          </div>
-
           <!-- Developer & School Banner -->
-          <div class="developer-banner" style="margin: 14px 0; background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(88, 28, 135, 0.4)); border: 1.5px solid rgba(96, 165, 250, 0.5); border-radius: 16px; padding: 12px 18px;">
-            <span class="dev-avatar" style="font-size: 2.5rem;">👨‍🏫</span>
+          <div class="developer-banner" style="margin: 12px 0 16px 0; background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(88, 28, 135, 0.4)); border: 1.5px solid rgba(96, 165, 250, 0.5); border-radius: 16px; padding: 14px 20px;">
+            <span class="dev-avatar" style="font-size: 2.8rem;">👨‍🏫</span>
             <div>
-              <div class="dev-info-title" style="color: #fbbf24; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.5px;">💡 สื่อนวัตกรรมการเรียนรู้พัฒนาโดย:</div>
-              <div class="dev-name" style="font-size: 1.15rem; font-weight: 800; color: #ffffff;">นายเตชินท์ อินทมล (ตำแหน่ง ครู)</div>
-              <div class="dev-school" style="font-size: 0.9rem; color: #93c5fd;">โรงเรียนบ้านโนนป่าหว้านเชียงฮาย สำนักงานเขตพื้นที่การศึกษาประถมศึกษาหนองบัวลำภู เขต 2</div>
+              <div class="dev-info-title" style="color: #fbbf24; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px;">💡 สื่อนวัตกรรมการเรียนรู้พัฒนาโดย:</div>
+              <div class="dev-name" style="font-size: 1.25rem; font-weight: 800; color: #ffffff;">นายเตชินท์ อินทมล (ตำแหน่ง ครู)</div>
+              <div class="dev-school" style="font-size: 0.95rem; color: #93c5fd;">โรงเรียนบ้านโนนป่าหว้านเชียงฮาย สำนักงานเขตพื้นที่การศึกษาประถมศึกษาหนองบัวลำภู เขต 2</div>
             </div>
           </div>
 
           <!-- 4 Feature Cards Grid: อธิบายว่าโปรแกรมนี้คืออะไร -->
-          <div class="welcome-cards-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: 12px;">
+          <div class="welcome-cards-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-bottom: 14px;">
             <div class="welcome-feature-card">
               <span class="feat-icon">🤖</span>
               <h3 class="feat-title">นวัตกรรม AR สั่งการไร้สัมผัส</h3>
@@ -115,6 +64,57 @@
               <p class="feat-desc">
                 ประทับตราเกียรติยศลงภาพถ่าย AR และพิมพ์ <strong>เกียรติบัตรอิเล็กทรอนิกส์ A4</strong> ได้ทันทีหลังพิชิตภารกิจ
               </p>
+            </div>
+          </div>
+
+          <!-- Gestures Guide Summary -->
+          <div class="welcome-mode-selection" style="margin-top: 10px;">
+            <div class="welcome-mode-card active" style="cursor: default; border-color: #38bdf8;">
+              <div class="wmode-badge" style="background: #0284c7; color: #fff;">คู่มือท่าทางมือ (Hand Gestures)</div>
+              <div class="wmode-desc" style="font-size: 0.9rem; line-height: 1.7; color: #cbd5e1; margin-top: 4px;">
+                ☝️ <strong>1 นิ้ว</strong> = เดินหน้า &nbsp;|&nbsp; 
+                🖐️ <strong>มือซ้าย</strong> = หันซ้าย &nbsp;|&nbsp; 
+                🖐️ <strong>มือขวา</strong> = หันขวา &nbsp;|&nbsp; 
+                🤟 <strong>3 นิ้ว</strong> = วนลูป / กุญแจ &nbsp;|&nbsp; 
+                🫰 <strong>มินิฮาร์ท</strong> = รันโค้ด &nbsp;|&nbsp; 
+                🙅 <strong>10 นิ้ว / กากบาท</strong> = รีเซ็ต &nbsp;|&nbsp; 
+                👎 <strong>คว่ำมือ</strong> = ลบล่าสุด
+              </div>
+              <div id="welcome-top-score-card" style="margin-top: 8px; padding: 6px 14px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
+                <span style="font-size: 0.85rem; color: #fbbf24; font-weight: bold;">👑 สถิติคะแนนสูงสุด (Top Score):</span>
+                <span id="welcome-top-score-val" style="font-size: 0.95rem; color: #fef08a; font-weight: 800;">กำลังโหลด...</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- STEP 1: CHOOSE GAME MODE (เลือกโหมดการเล่น - อยู่ล่างสุดเหมือนเดิม) -->
+          <div style="margin-top: 20px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+              <h3 style="margin: 0; font-size: 1.25rem; font-weight: 800; color: #38bdf8; display: flex; align-items: center; gap: 8px;">
+                <span>🎮</span> <span>เลือกโหมดการเล่น (Select Game Mode)</span>
+              </h3>
+              <span class="pair-badge" style="font-size: 0.8rem; padding: 4px 10px;">แตะเพื่อเริ่ม</span>
+            </div>
+
+            <!-- Mode Choice Buttons (Practice vs Challenge) -->
+            <div class="welcome-mode-choice-grid">
+              <button type="button" class="welcome-mode-choice-btn mode-practice" id="btn-choice-mode-practice">
+                <span class="wmode-big-icon">🛡️</span>
+                <div class="wmode-big-info">
+                  <div class="wmode-big-title">โหมดฝึกซ้อม (Practice Mode)</div>
+                  <div class="wmode-big-desc">ไม่จำกัดเวลา • เลือกชั้น ป.4 หรือ ป.5 • แตะเลือกระดับด่าน 1 ถึง 10 ได้อิสระ</div>
+                </div>
+                <span class="wmode-arrow">➔</span>
+              </button>
+
+              <button type="button" class="welcome-mode-choice-btn mode-challenge" id="btn-choice-mode-challenge">
+                <span class="wmode-big-icon">⚡</span>
+                <div class="wmode-big-info">
+                  <div class="wmode-big-title">โหมดแข่งขันประลองความเร็ว (Challenge Mode)</div>
+                  <div class="wmode-big-desc">จับเวลา 75 วิ/ด่าน • หัวใจ ❤️ 3 ดวง • ตั้งชื่อทีม • ลุย 10 ด่านต่อเนื่องชิง Top Score</div>
+                </div>
+                <span class="wmode-arrow">➔</span>
+              </button>
             </div>
           </div>
 
