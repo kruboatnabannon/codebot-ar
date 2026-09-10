@@ -54,16 +54,22 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 16px;
+  padding: 0 12px;
   background: rgba(15, 23, 42, 0.95);
   backdrop-filter: blur(8px);
   border-bottom: 2px solid rgba(59, 130, 246, 0.3);
-  z-index: 50;
-  height: 46px;
-  min-height: 46px;
-  max-height: 46px;
+  z-index: 100;
+  height: 48px;
+  min-height: 48px;
+  max-height: 48px;
   flex-shrink: 0;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: hidden;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.top-nav::-webkit-scrollbar {
+  display: none;
 }
 
 .brand-section {
@@ -2121,28 +2127,48 @@ body {
     overflow: hidden;
   }
   .top-nav {
-    height: 44px;
-    min-height: 44px;
-    padding: 0 10px;
+    height: 46px;
+    min-height: 46px;
+    padding: 0 6px;
+    gap: 4px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+  }
+  .header-left {
+    flex-shrink: 0;
+    gap: 4px !important;
   }
   .brand-logo {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
   }
   #team-name-badge {
-    max-width: 90px;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    display: none !important;
+  }
+  .header-right {
+    flex-shrink: 0;
+    gap: 3px !important;
+  }
+  .header-right .btn {
+    padding: 3px 6px !important;
+    font-size: 0.72rem !important;
     white-space: nowrap;
-    font-size: 0.72rem;
-    padding: 2px 6px;
+  }
+  .header-right .stat-pill {
+    padding: 2px 4px !important;
+    font-size: 0.72rem !important;
+  }
+  #btn-header-back-home {
+    padding: 4px 8px !important;
+    font-size: 0.76rem !important;
+    font-weight: 800 !important;
+    background: linear-gradient(135deg, #2563eb, #1d4ed8) !important;
+    border-color: #60a5fa !important;
+    color: #ffffff !important;
   }
   #btn-open-knowledge {
-    padding: 3px 8px;
-    font-size: 0.76rem;
-  }
-  .stat-pill {
-    padding: 2px 8px;
-    font-size: 0.8rem;
+    padding: 3px 6px;
+    font-size: 0.72rem;
   }
 
   /* Main Workspace Stage */

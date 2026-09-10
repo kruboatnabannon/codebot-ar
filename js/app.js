@@ -1325,9 +1325,15 @@ class AppController {
     });
 
     // Universal Return to Home handler (Header, Menu modal, Victory modal, Game over modal, Leaderboard, Cert, etc.)
+    // As explicitly requested: ตั้งปุ่มหน้าแรกเป็นปุ่มรีเฟรชหน้าเว็บเพื่อกลับสู่หน้าแรกเริ่มต้นทันที 100%
     const handleReturnHome = (e) => {
-      if (e) e.stopPropagation();
-      if (window.soundEngine) window.soundEngine.playTouch();
+      if (e) {
+        try { e.preventDefault(); } catch (_) {}
+        try { e.stopPropagation(); } catch (_) {}
+      }
+      if (window.soundEngine) {
+        try { window.soundEngine.playTouch(); } catch (_) {}
+      }
       this.returnToWelcomeScreen();
     };
 
@@ -3125,7 +3131,21 @@ class AppController {
     if (window.soundEngine) {
       window.soundEngine.playTurn();
     }
-    this.showStatusToast('🏠 กลับสู่หน้าหลักพร้อมเริ่มภารกิจใหม่แล้ว!', false);
+    this.showStatusToast('🏠 กำลังรีเฟรชกลับสู่หน้าแรกเริ่มต้น...', false);
+
+    // 9. Clean reload/refresh to base URL (User explicit request: "ตั้งปุ่มหน้าแรกเป็นปุ่มรีเฟรช")
+    try {
+      if (typeof window !== 'undefined' && window.location) {
+        const cleanUrl = window.location.origin + window.location.pathname;
+        if (window.location.href === cleanUrl) {
+          window.location.reload();
+        } else {
+          window.location.href = cleanUrl;
+        }
+      }
+    } catch (err) {
+      console.warn('Reload fallback:', err);
+    }
   }
 
   closeModal(modalId) {
