@@ -949,17 +949,13 @@ class AppController {
       this.speakKnowledgeText('โหมดแข่งขันประลองความเร็ว ลุย 10 ด่านต่อเนื่อง');
     });
 
-    // Back to Mode Buttons on Sub-screens
+    // Back to Mode Buttons on Sub-screens (Return to Screen 1)
     document.getElementById('btn-practice-back-mode')?.addEventListener('click', () => {
-      if (window.soundEngine) window.soundEngine.playTouch();
-      this.switchWelcomeScreen('mode');
-      this.speakKnowledgeText('กลับสู่หน้าเลือกโหมด');
+      this.returnToWelcomeScreen();
     });
 
     document.getElementById('btn-challenge-back-mode')?.addEventListener('click', () => {
-      if (window.soundEngine) window.soundEngine.playTouch();
-      this.switchWelcomeScreen('mode');
-      this.speakKnowledgeText('กลับสู่หน้าเลือกโหมด');
+      this.returnToWelcomeScreen();
     });
 
     // Practice Mode Grade Buttons (ป.4 vs ป.5)
@@ -1328,15 +1324,33 @@ class AppController {
       this.closeGameMenu();
     });
 
-    // Return to Home handlers (Modal bottom, modal top-left, and top navigation bar)
-    const handleReturnHome = () => {
+    // Universal Return to Home handler (Header, Menu modal, Victory modal, Game over modal, Leaderboard, Cert, etc.)
+    const handleReturnHome = (e) => {
+      if (e) e.stopPropagation();
       if (window.soundEngine) window.soundEngine.playTouch();
       this.returnToWelcomeScreen();
     };
 
-    document.getElementById('btn-menu-back-home')?.addEventListener('click', handleReturnHome);
-    document.getElementById('btn-top-menu-back-home')?.addEventListener('click', handleReturnHome);
-    document.getElementById('btn-header-back-home')?.addEventListener('click', handleReturnHome);
+    [
+      'btn-menu-back-home',
+      'btn-top-menu-back-home',
+      'btn-header-back-home',
+      'header-brand-home',
+      'btn-quick-home',
+      'btn-practice-back-mode',
+      'btn-challenge-back-mode',
+      'btn-cert-home',
+      'btn-victory-home',
+      'btn-game-over-home',
+      'btn-leaderboard-home',
+      'btn-open-welcome'
+    ].forEach(id => {
+      document.getElementById(id)?.addEventListener('click', handleReturnHome);
+    });
+
+    document.querySelectorAll('.action-go-home').forEach(el => {
+      el.addEventListener('click', handleReturnHome);
+    });
 
     document.getElementById('btn-menu-toggle-sound')?.addEventListener('click', (e) => {
       const isMuted = window.soundEngine.toggleMute();

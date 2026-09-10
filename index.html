@@ -185,7 +185,7 @@
                 <button id="btn-quick-start" class="btn-start-mission" style="flex: 1; min-width: 260px; padding: 14px 28px; font-size: 1.15rem; font-weight: 900; background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 5px 22px rgba(16, 185, 129, 0.55); border-radius: 14px;">
                   🚀 เริ่มฝึกซ้อม ชั้น ป.4 ด่านที่ 1 ทันที!
                 </button>
-                <button id="btn-practice-back-mode" class="btn btn-secondary" style="padding: 14px 24px; font-size: 0.95rem; font-weight: 700; border-radius: 14px;">
+                <button id="btn-practice-back-mode" class="btn btn-secondary action-go-home" style="padding: 14px 24px; font-size: 0.95rem; font-weight: 700; border-radius: 14px;" title="กลับหน้าแรก">
                   ⬅ ย้อนกลับหน้าแรก
                 </button>
               </div>
@@ -268,7 +268,7 @@
                 <button id="btn-start-challenge-direct" class="btn-start-mission" style="flex: 1; min-width: 280px; padding: 14px 28px; font-size: 1.18rem; font-weight: 900; background: linear-gradient(135deg, #ef4444, #b91c1c); box-shadow: 0 5px 22px rgba(239, 68, 68, 0.55); border-radius: 14px;">
                   ⚡ เริ่มประลองความเร็ว ชั้น ป.4 (เริ่มด่านที่ 1) 🚀
                 </button>
-                <button id="btn-challenge-back-mode" class="btn btn-secondary" style="padding: 14px 24px; font-size: 0.95rem; font-weight: 700; border-radius: 14px;">
+                <button id="btn-challenge-back-mode" class="btn btn-secondary action-go-home" style="padding: 14px 24px; font-size: 0.95rem; font-weight: 700; border-radius: 14px;" title="กลับหน้าแรก">
                   ⬅ ย้อนกลับหน้าแรก
                 </button>
               </div>
@@ -285,7 +285,7 @@
     <!-- Top Navigation & Classroom Stats Bar (Clean & Focused) -->
     <!-- Top Navigation: Clean, Minimal, Single Row -->
     <header id="game-header" class="top-nav">
-      <div class="header-left" style="display: flex; align-items: center; gap: 12px;">
+      <div class="header-left action-go-home" id="header-brand-home" style="display: flex; align-items: center; gap: 12px; cursor: pointer;" title="กลับหน้าแรก (Home)">
         <span class="brand-logo" style="font-size: 1.3rem;">🤖</span>
         <span style="font-weight: 800; font-size: 1rem; color: #60a5fa; letter-spacing: -0.5px;">CodeBot AR</span>
         <span id="team-name-badge" class="pair-badge" style="font-size: 0.8rem; padding: 2px 8px; background: rgba(59, 130, 246, 0.2); border-color: #3b82f6; color: #93c5fd;">🚀 ทีม: อวกาศ 01</span>
@@ -314,7 +314,7 @@
         <button id="btn-open-game-menu" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.82rem; font-weight: 700; background: rgba(56, 189, 248, 0.2); border-color: #38bdf8; color: #7dd3fc; display: flex; align-items: center; gap: 4px;" title="เปิดเมนูเกม เลือกด่าน และตั้งค่า">
           ⚙️ เมนูเกม
         </button>
-        <button id="btn-header-back-home" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.82rem; font-weight: 700; background: rgba(37, 99, 235, 0.25); border-color: #60a5fa; color: #93c5fd; display: flex; align-items: center; gap: 4px;" title="กลับหน้าแรก (Home)">
+        <button id="btn-header-back-home" class="btn btn-secondary action-go-home" style="padding: 4px 10px; font-size: 0.82rem; font-weight: 700; background: rgba(37, 99, 235, 0.25); border-color: #60a5fa; color: #93c5fd; display: flex; align-items: center; gap: 4px;" title="กลับหน้าแรก (Home)">
           🏠 หน้าแรก
         </button>
         <button id="btn-toggle-sound" class="btn btn-secondary" style="padding: 4px 8px; font-size: 0.82rem;" title="เปิด/ปิดเสียง">
@@ -370,6 +370,9 @@
               <span class="pair-badge" id="level-concept-badge" style="font-size: 0.72rem; padding: 1px 6px;">ลำดับขั้นตอน</span>
               <button id="btn-quick-menu" class="btn btn-secondary" style="padding: 2px 9px; font-size: 0.75rem; border-color: #38bdf8; color: #7dd3fc; background: rgba(56, 189, 248, 0.15); display: inline-flex; align-items: center; gap: 4px;" title="เปิดเมนูเลือกด่านและกลับหน้าแรก">
                 📑 เลือกด่าน / เมนู
+              </button>
+              <button id="btn-quick-home" class="btn btn-secondary action-go-home" style="padding: 2px 9px; font-size: 0.75rem; border-color: #60a5fa; color: #93c5fd; background: rgba(59, 130, 246, 0.2); display: inline-flex; align-items: center; gap: 4px;" title="กลับหน้าแรก (Home)">
+                🏠 หน้าแรก
               </button>
             </div>
             <span class="mission-goal" id="mission-goal-desc" style="font-size: 0.76rem; color: #94a3b8; max-width: 220px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;"></span>
@@ -506,6 +509,9 @@
           <button id="btn-victory-cert" class="btn btn-primary" style="padding: 8px 18px; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #6366f1, #8b5cf6); border-color: #a855f7;">
             📜 รับเกียรติบัตร
           </button>
+          <button id="btn-victory-home" class="btn btn-secondary action-go-home" style="padding: 8px 16px; font-size: 0.95rem; display: inline-flex; align-items: center; gap: 6px;">
+            🏠 กลับหน้าแรก
+          </button>
         </div>
         <div style="margin-top: 15px;">
           <button id="btn-victory-next" class="btn btn-success" style="padding: 10px 28px; font-size: 1.05rem; margin: 0 auto; display: inline-flex; align-items: center; gap: 8px;">
@@ -565,9 +571,14 @@
               🗑️ ล้างสถิติห้อง
             </button>
           </div>
-          <button class="btn btn-primary" onclick="document.getElementById('leaderboard-modal').classList.remove('active')">
-            ปิด
-          </button>
+          <div style="display: flex; gap: 8px;">
+            <button id="btn-leaderboard-home" class="btn btn-secondary action-go-home" style="font-size: 0.85rem; border-color: #60a5fa; color: #93c5fd; display: inline-flex; align-items: center; gap: 4px;" title="กลับหน้าแรก">
+              🏠 กลับหน้าแรก
+            </button>
+            <button class="btn btn-primary" onclick="document.getElementById('leaderboard-modal').classList.remove('active')">
+              ปิด
+            </button>
+          </div>
         </div>
       </div>
     </div>
@@ -626,8 +637,8 @@
             💡 บันทึกภาพเกียรติบัตรเป็นที่ระลึก หรือพิมพ์เป็นเอกสาร A4
           </span>
           <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-            <button id="btn-cert-home" class="btn btn-secondary" style="font-weight: 700; padding: 8px 16px; display: inline-flex; align-items: center; gap: 6px;">
-              🏠 กลับหน้าหลัก
+            <button id="btn-cert-home" class="btn btn-secondary action-go-home" style="font-weight: 700; padding: 8px 16px; display: inline-flex; align-items: center; gap: 6px;" title="กลับหน้าแรก">
+              🏠 กลับหน้าแรก
             </button>
             <button id="btn-download-cert-png" class="btn btn-warning" style="font-weight: 700; padding: 8px 18px; display: inline-flex; align-items: center; gap: 6px;">
               📥 ดาวน์โหลดเกียรติบัตร (PNG)
@@ -683,12 +694,15 @@
             <button id="btn-take-game-over-photo" class="btn btn-warning" style="padding: 10px 18px; font-size: 0.95rem; justify-content: center; display: none;">
               📸 ถ่ายภาพเกียรติยศบันทึกสถิติสูงสุด (Top Score Photo)
             </button>
-            <div style="display: flex; gap: 10px; justify-content: center;">
-              <button id="btn-retry-mission" class="btn btn-danger" style="flex: 1; padding: 10px 14px; font-weight: 700; justify-content: center;">
+            <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+              <button id="btn-retry-mission" class="btn btn-danger" style="flex: 1; min-width: 130px; padding: 10px 14px; font-weight: 700; justify-content: center;">
                 🔄 ลองใหม่อีกครั้ง (Retry)
               </button>
-              <button id="btn-switch-to-practice" class="btn btn-secondary" style="flex: 1; padding: 10px 14px; border-color: #10b981; color: #34d399; justify-content: center;">
+              <button id="btn-switch-to-practice" class="btn btn-secondary" style="flex: 1; min-width: 130px; padding: 10px 14px; border-color: #10b981; color: #34d399; justify-content: center;">
                 🛡️ สลับเป็นโหมดฝึกซ้อม
+              </button>
+              <button id="btn-game-over-home" class="btn btn-secondary action-go-home" style="flex: 1; min-width: 130px; padding: 10px 14px; border-color: #60a5fa; color: #93c5fd; justify-content: center; display: inline-flex; align-items: center; gap: 6px;" title="กลับหน้าแรก">
+                🏠 กลับหน้าแรก
               </button>
             </div>
           </div>
@@ -719,7 +733,7 @@
           </div>
 
           <!-- Return to Home button top-left -->
-          <button class="btn btn-secondary" id="btn-top-menu-back-home" style="position: absolute; top: 12px; left: 14px; padding: 5px 12px; background: rgba(0,0,0,0.35); border-color: rgba(56, 189, 248, 0.6); color: #7dd3fc; border-radius: 8px; font-weight: 800; font-size: 0.8rem; display: flex; align-items: center; gap: 4px;">
+          <button class="btn btn-secondary action-go-home" id="btn-top-menu-back-home" style="position: absolute; top: 12px; left: 14px; padding: 5px 12px; background: rgba(0,0,0,0.35); border-color: rgba(56, 189, 248, 0.6); color: #7dd3fc; border-radius: 8px; font-weight: 800; font-size: 0.8rem; display: flex; align-items: center; gap: 4px;" title="กลับหน้าแรก (Home)">
             🏠 หน้าแรก
           </button>
 
@@ -748,7 +762,7 @@
 
           <!-- Bottom Navigation: Go Back Button (Matching Image!) + Quick Actions -->
           <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.15); flex-wrap: wrap; gap: 8px;">
-            <button id="btn-menu-back-home" class="btn btn-secondary" style="padding: 10px 18px; font-size: 0.92rem; font-weight: 800; background: linear-gradient(135deg, #2563eb, #1d4ed8); border: 2px solid #60a5fa; color: #fff; border-radius: 12px; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4); display: flex; align-items: center; gap: 6px; cursor: pointer;">
+            <button id="btn-menu-back-home" class="btn btn-secondary action-go-home" style="padding: 10px 18px; font-size: 0.92rem; font-weight: 800; background: linear-gradient(135deg, #2563eb, #1d4ed8); border: 2px solid #60a5fa; color: #fff; border-radius: 12px; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4); display: flex; align-items: center; gap: 6px; cursor: pointer;" title="กลับหน้าแรก (Home)">
               🏠 กลับหน้าแรก (Home)
             </button>
             <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
@@ -779,10 +793,10 @@
   <script src="vendor/mediapipe/hands.js?v=6.7_final_level_and_top_score_photo"></script>
 
   <!-- Game Scripts with cache buster -->
-  <script src="js/audio.js?v=7.8_screen_wake_lock_mobile"></script>
-  <script src="js/levels.js?v=7.8_screen_wake_lock_mobile"></script>
-  <script src="js/camera-engine.js?v=7.8_screen_wake_lock_mobile"></script>
-  <script src="js/game-engine.js?v=7.8_screen_wake_lock_mobile"></script>
-  <script src="js/app.js?v=7.8_screen_wake_lock_mobile"></script>
+  <script src="js/audio.js?v=7.9_universal_home_navigation"></script>
+  <script src="js/levels.js?v=7.9_universal_home_navigation"></script>
+  <script src="js/camera-engine.js?v=7.9_universal_home_navigation"></script>
+  <script src="js/game-engine.js?v=7.9_universal_home_navigation"></script>
+  <script src="js/app.js?v=7.9_universal_home_navigation"></script>
 </body>
 </html>
