@@ -251,12 +251,6 @@ class AppController {
     if (btnChoicePractice) btnChoicePractice.classList.toggle('active', !isChallenge);
     if (btnChoiceChallenge) btnChoiceChallenge.classList.toggle('active', isChallenge);
 
-    // Welcome Panels Toggle (Practice with Grade & Level vs Challenge with Grade only)
-    const panelPractice = document.getElementById('panel-practice-config');
-    const panelChallenge = document.getElementById('panel-challenge-config');
-    if (panelPractice) panelPractice.style.display = isChallenge ? 'none' : 'block';
-    if (panelChallenge) panelChallenge.style.display = isChallenge ? 'block' : 'none';
-
     // In-game Mission Bar quick level select button: Only visible in Practice Mode!
     const btnQuickMenu = document.getElementById('btn-quick-menu');
     if (btnQuickMenu) {
@@ -842,19 +836,39 @@ class AppController {
     modal.classList.add('active');
   }
 
-  switchWelcomeStep(stepNumber) {
-    const step1 = document.getElementById('welcome-step-1');
-    const step2 = document.getElementById('welcome-step-2');
-    if (!step1 || !step2) return;
+  switchWelcomeScreen(screenName) {
+    const stepMode = document.getElementById('welcome-step-1');
+    const stepPractice = document.getElementById('welcome-step-practice');
+    const stepChallenge = document.getElementById('welcome-step-challenge');
 
-    if (stepNumber === 2) {
-      step1.style.display = 'none';
-      step2.style.display = 'block';
-      const teamInput = document.getElementById('input-team-name');
-      if (teamInput) teamInput.focus();
+    if (stepMode) stepMode.style.display = (screenName === 'mode' || !screenName) ? 'block' : 'none';
+    if (stepPractice) stepPractice.style.display = (screenName === 'practice') ? 'block' : 'none';
+    if (stepChallenge) stepChallenge.style.display = (screenName === 'challenge') ? 'block' : 'none';
+
+    const welcome = document.getElementById('welcome-screen');
+    if (welcome) {
+      welcome.classList.remove('hidden');
+      welcome.style.display = 'flex';
+      welcome.scrollTop = 0;
+    }
+
+    if (screenName === 'practice') {
+      this.gameMode = 'PRACTICE';
+      this.updateGameModeUI();
+      this.renderWelcomeCartoonGrid();
+    } else if (screenName === 'challenge') {
+      this.gameMode = 'CHALLENGE';
+      this.updateGameModeUI();
+    }
+  }
+
+  switchWelcomeStep(stepNumber) {
+    if (stepNumber === 'practice' || stepNumber === 2) {
+      this.switchWelcomeScreen('practice');
+    } else if (stepNumber === 'challenge') {
+      this.switchWelcomeScreen('challenge');
     } else {
-      step2.style.display = 'none';
-      step1.style.display = 'block';
+      this.switchWelcomeScreen('mode');
     }
   }
 
@@ -868,14 +882,17 @@ class AppController {
     if (driverInput && driverInput.value.trim()) this.driverName = driverInput.value.trim();
     if (navInput && navInput.value.trim()) this.navigatorName = navInput.value.trim();
 
-    // Priority: selectedStartGrade from Welcome Step 1 selection
+    // Priority: selectedStartGrade from Welcome selection
     const chosenGrade = this.selectedStartGrade || (gradeSelect ? gradeSelect.value : null) || this.gradeLevel || 'p4';
     this.gradeLevel = chosenGrade;
     this.updateGradeTrack(this.gradeLevel);
 
     // Immediately hide the welcome screen for instant response
     const welcome = document.getElementById('welcome-screen');
-    if (welcome) welcome.classList.add('hidden');
+    if (welcome) {
+      welcome.classList.add('hidden');
+      welcome.style.display = 'none';
+    }
 
     const targetStartLevel = (typeof this.selectedStartLevel === 'number')
       ? this.selectedStartLevel
@@ -911,17 +928,30 @@ class AppController {
   }
 
   bindDOMEvents() {
-    // Mode Choice Buttons on Welcome Screen
+    // Mode Choice Buttons on Welcome Screen: Click -> Switch to dedicated screen
     document.getElementById('btn-choice-mode-practice')?.addEventListener('click', () => {
       if (window.soundEngine) window.soundEngine.playTouch();
-      this.setGameMode('PRACTICE');
-      this.speakKnowledgeText('เลือกโหมดฝึกซ้อม เลือกชั้นและเลือกระดับด่านได้อิสระ');
+      this.switchWelcomeScreen('practice');
+      this.speakKnowledgeText('โหมดฝึกซ้อม เลือกชั้นและเลือกระดับด่านได้อิสระ');
     });
 
     document.getElementById('btn-choice-mode-challenge')?.addEventListener('click', () => {
       if (window.soundEngine) window.soundEngine.playTouch();
-      this.setGameMode('CHALLENGE');
-      this.speakKnowledgeText('เลือกโหมดประลองความเร็ว ลุย 10 ด่านต่อเนื่อง');
+      this.switchWelcomeScreen('challenge');
+      this.speakKnowledgeText('โหมดแข่งขันประลองความเร็ว ลุย 10 ด่านต่อเนื่อง');
+    });
+
+    // Back to Mode Buttons on Sub-screens
+    document.getElementById('btn-practice-back-mode')?.addEventListener('click', () => {
+      if (window.soundEngine) window.soundEngine.playTouch();
+      this.switchWelcomeScreen('mode');
+      this.speakKnowledgeText('กลับสู่หน้าเลือกโหมด');
+    });
+
+    document.getElementById('btn-challenge-back-mode')?.addEventListener('click', () => {
+      if (window.soundEngine) window.soundEngine.playTouch();
+      this.switchWelcomeScreen('mode');
+      this.speakKnowledgeText('กลับสู่หน้าเลือกโหมด');
     });
 
     // Practice Mode Grade Buttons (ป.4 vs ป.5)
@@ -954,11 +984,11 @@ class AppController {
       this.speakKnowledgeText('ประลองระดับชั้นประถมศึกษาปีที่ 5');
     });
 
-    // Start Challenge Direct Button (No Level Grid - Always Starts at Level 1)
+    // Start Challenge Direct Button (Always Starts at Level 1)
     document.getElementById('btn-start-challenge-direct')?.addEventListener('click', () => {
-      const chalTeam = document.getElementById('input-challenge-team-name');
-      const chalDriver = document.getElementById('input-challenge-driver-name');
-      const chalNav = document.getElementById('input-challenge-nav-name');
+      const chalTeam = document.getElementById('input-team-name');
+      const chalDriver = document.getElementById('input-driver-name');
+      const chalNav = document.getElementById('input-navigator-name');
       if (chalTeam && chalTeam.value.trim()) this.teamName = chalTeam.value.trim();
       if (chalDriver && chalDriver.value.trim()) this.driverName = chalDriver.value.trim();
       if (chalNav && chalNav.value.trim()) this.navigatorName = chalNav.value.trim();
@@ -979,39 +1009,10 @@ class AppController {
       this.renderCartoonLevelGrid('p5');
     });
 
-    // 2-Step Welcome Navigation
+    // Quick Start Practice Button
     document.getElementById('btn-quick-start')?.addEventListener('click', () => {
       this.gameMode = 'PRACTICE';
       this.startMission();
-    });
-
-    document.getElementById('btn-goto-step2')?.addEventListener('click', () => {
-      this.switchWelcomeStep(2);
-    });
-
-    document.getElementById('btn-back-to-step1')?.addEventListener('click', () => {
-      this.switchWelcomeStep(1);
-    });
-
-    document.getElementById('btn-back-to-step1-bottom')?.addEventListener('click', () => {
-      this.switchWelcomeStep(1);
-    });
-
-    document.getElementById('btn-start-mission')?.addEventListener('click', () => {
-      this.startMission();
-    });
-
-    document.getElementById('input-grade-level')?.addEventListener('change', (e) => {
-      this.updateGradeTrack(e.target.value);
-    });
-
-    // Game Mode selection buttons
-    document.getElementById('btn-mode-practice')?.addEventListener('click', () => {
-      this.setGameMode('PRACTICE');
-    });
-
-    document.getElementById('btn-mode-challenge')?.addEventListener('click', () => {
-      this.setGameMode('CHALLENGE');
     });
 
     document.getElementById('nav-mode-pill')?.addEventListener('click', () => {
@@ -1020,13 +1021,7 @@ class AppController {
     });
 
     document.getElementById('btn-open-welcome')?.addEventListener('click', () => {
-      const welcome = document.getElementById('welcome-screen');
-      if (welcome) {
-        this.switchWelcomeStep(1);
-        this.updateTopScoreBanners();
-        this.updateGameModeUI();
-        welcome.classList.remove('hidden');
-      }
+      this.returnToWelcomeScreen();
     });
 
     document.getElementById('btn-prev-level')?.addEventListener('click', () => {
@@ -1325,20 +1320,15 @@ class AppController {
       this.closeGameMenu();
     });
 
-    document.getElementById('btn-menu-back-home')?.addEventListener('click', () => {
+    // Return to Home handlers (Modal bottom, modal top-left, and top navigation bar)
+    const handleReturnHome = () => {
       if (window.soundEngine) window.soundEngine.playTouch();
-      this.closeGameMenu();
-      this.stopStageTimer();
-      this.stopRoleTimer();
-      const welcome = document.getElementById('welcome-screen');
-      if (welcome) {
-        this.switchWelcomeStep(1);
-        this.renderWelcomeCartoonGrid();
-        this.updateTopScoreBanners();
-        this.updateGameModeUI();
-        welcome.classList.remove('hidden');
-      }
-    });
+      this.returnToWelcomeScreen();
+    };
+
+    document.getElementById('btn-menu-back-home')?.addEventListener('click', handleReturnHome);
+    document.getElementById('btn-top-menu-back-home')?.addEventListener('click', handleReturnHome);
+    document.getElementById('btn-header-back-home')?.addEventListener('click', handleReturnHome);
 
     document.getElementById('btn-menu-toggle-sound')?.addEventListener('click', (e) => {
       const isMuted = window.soundEngine.toggleMute();
@@ -3043,9 +3033,10 @@ class AppController {
   }
 
   returnToWelcomeScreen() {
-    // 1. Close all active modals
+    // 1. Close all active modals and game menu
     const activeModals = document.querySelectorAll('.modal-overlay.active');
     activeModals.forEach(m => m.classList.remove('active'));
+    this.closeGameMenu();
 
     // 2. Stop all timers
     if (this.victoryTimer) {
@@ -3057,6 +3048,8 @@ class AppController {
       this.roleTimerInterval = null;
     }
     this.pauseStageTimer();
+    this.stopStageTimer();
+    this.stopRoleTimer();
 
     // 3. Halt robot simulation execution
     if (this.gameEngine) {
@@ -3081,13 +3074,15 @@ class AppController {
     // 6. Reset gameStarted flag
     this.gameStarted = false;
 
-    // 7. Show Welcome Screen and switch to Step 1
+    // 7. Show Welcome Screen and switch to Step 'mode'
     const welcome = document.getElementById('welcome-screen');
     if (welcome) {
-      this.switchWelcomeStep(1);
+      this.switchWelcomeScreen('mode');
       this.updateTopScoreBanners();
       this.updateGameModeUI();
       welcome.classList.remove('hidden');
+      welcome.style.display = 'flex';
+      welcome.scrollTop = 0;
     }
 
     // 8. Audio and toast feedback

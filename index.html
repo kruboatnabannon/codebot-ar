@@ -25,18 +25,69 @@
             </p>
           </div>
 
+          <!-- STEP 1: CHOOSE GAME MODE FIRST (เมนูเลือกโหมดการเล่นหลัก - แสดงชัดเจนที่หน้าแรก) -->
+          <div style="margin: 18px 0 16px 0;">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+              <h3 style="margin: 0; font-size: 1.25rem; font-weight: 800; color: #38bdf8; display: flex; align-items: center; gap: 8px;">
+                <span>🎮</span> <span>เลือกโหมดการเล่น (Select Game Mode)</span>
+              </h3>
+              <span class="pair-badge" style="font-size: 0.8rem; padding: 4px 10px;">แตะเพื่อเลือกโหมด</span>
+            </div>
+
+            <!-- Mode Choice Buttons (Practice vs Challenge) -->
+            <div class="welcome-mode-choice-grid">
+              <button type="button" class="welcome-mode-choice-btn mode-practice" id="btn-choice-mode-practice">
+                <span class="wmode-big-icon">🛡️</span>
+                <div class="wmode-big-info">
+                  <div class="wmode-big-title">โหมดฝึกซ้อม (Practice Mode)</div>
+                  <div class="wmode-big-desc">ไม่จำกัดเวลา • เลือกชั้น ป.4 หรือ ป.5 • แตะเลือกระดับด่าน 1 ถึง 10 ได้อิสระ</div>
+                </div>
+                <span class="wmode-arrow">➔</span>
+              </button>
+
+              <button type="button" class="welcome-mode-choice-btn mode-challenge" id="btn-choice-mode-challenge">
+                <span class="wmode-big-icon">⚡</span>
+                <div class="wmode-big-info">
+                  <div class="wmode-big-title">โหมดแข่งขันประลองความเร็ว (Challenge Mode)</div>
+                  <div class="wmode-big-desc">จับเวลา 75 วิ/ด่าน • หัวใจ ❤️ 3 ดวง • ตั้งชื่อทีม • ลุย 10 ด่านต่อเนื่องชิง Top Score</div>
+                </div>
+                <span class="wmode-arrow">➔</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Gestures Guide Summary -->
+          <div class="welcome-mode-selection" style="margin-top: 10px;">
+            <div class="welcome-mode-card active" style="cursor: default; border-color: #38bdf8;">
+              <div class="wmode-badge" style="background: #0284c7; color: #fff;">คู่มือท่าทางมือ (Hand Gestures)</div>
+              <div class="wmode-desc" style="font-size: 0.9rem; line-height: 1.7; color: #cbd5e1; margin-top: 4px;">
+                ☝️ <strong>1 นิ้ว</strong> = เดินหน้า &nbsp;|&nbsp; 
+                🖐️ <strong>มือซ้าย</strong> = หันซ้าย &nbsp;|&nbsp; 
+                🖐️ <strong>มือขวา</strong> = หันขวา &nbsp;|&nbsp; 
+                🤟 <strong>3 นิ้ว</strong> = วนลูป / กุญแจ &nbsp;|&nbsp; 
+                🫰 <strong>มินิฮาร์ท</strong> = รันโค้ด &nbsp;|&nbsp; 
+                🙅 <strong>10 นิ้ว / กากบาท</strong> = รีเซ็ต &nbsp;|&nbsp; 
+                👎 <strong>คว่ำมือ</strong> = ลบล่าสุด
+              </div>
+              <div id="welcome-top-score-card" style="margin-top: 8px; padding: 6px 14px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
+                <span style="font-size: 0.85rem; color: #fbbf24; font-weight: bold;">👑 สถิติคะแนนสูงสุด (Top Score):</span>
+                <span id="welcome-top-score-val" style="font-size: 0.95rem; color: #fef08a; font-weight: 800;">กำลังโหลด...</span>
+              </div>
+            </div>
+          </div>
+
           <!-- Developer & School Banner -->
-          <div class="developer-banner" style="margin: 12px 0 16px 0; background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(88, 28, 135, 0.4)); border: 1.5px solid rgba(96, 165, 250, 0.5); border-radius: 16px; padding: 14px 20px;">
-            <span class="dev-avatar" style="font-size: 2.8rem;">👨‍🏫</span>
+          <div class="developer-banner" style="margin: 14px 0; background: linear-gradient(135deg, rgba(30, 58, 138, 0.4), rgba(88, 28, 135, 0.4)); border: 1.5px solid rgba(96, 165, 250, 0.5); border-radius: 16px; padding: 12px 18px;">
+            <span class="dev-avatar" style="font-size: 2.5rem;">👨‍🏫</span>
             <div>
-              <div class="dev-info-title" style="color: #fbbf24; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.5px;">💡 สื่อนวัตกรรมการเรียนรู้พัฒนาโดย:</div>
-              <div class="dev-name" style="font-size: 1.25rem; font-weight: 800; color: #ffffff;">นายเตชินท์ อินทมล (ตำแหน่ง ครู)</div>
-              <div class="dev-school" style="font-size: 0.95rem; color: #93c5fd;">โรงเรียนบ้านโนนป่าหว้านเชียงฮาย สำนักงานเขตพื้นที่การศึกษาประถมศึกษาหนองบัวลำภู เขต 2</div>
+              <div class="dev-info-title" style="color: #fbbf24; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.5px;">💡 สื่อนวัตกรรมการเรียนรู้พัฒนาโดย:</div>
+              <div class="dev-name" style="font-size: 1.15rem; font-weight: 800; color: #ffffff;">นายเตชินท์ อินทมล (ตำแหน่ง ครู)</div>
+              <div class="dev-school" style="font-size: 0.9rem; color: #93c5fd;">โรงเรียนบ้านโนนป่าหว้านเชียงฮาย สำนักงานเขตพื้นที่การศึกษาประถมศึกษาหนองบัวลำภู เขต 2</div>
             </div>
           </div>
 
           <!-- 4 Feature Cards Grid: อธิบายว่าโปรแกรมนี้คืออะไร -->
-          <div class="welcome-cards-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-bottom: 14px;">
+          <div class="welcome-cards-row" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 10px; margin-top: 12px;">
             <div class="welcome-feature-card">
               <span class="feat-icon">🤖</span>
               <h3 class="feat-title">นวัตกรรม AR สั่งการไร้สัมผัส</h3>
@@ -67,75 +118,27 @@
             </div>
           </div>
 
-          <!-- Gestures Guide Summary -->
-          <div class="welcome-mode-selection" style="margin-top: 10px;">
-            <div class="welcome-mode-card active" style="cursor: default; border-color: #38bdf8;">
-              <div class="wmode-badge" style="background: #0284c7; color: #fff;">คู่มือท่าทางมือ (Hand Gestures)</div>
-              <div class="wmode-desc" style="font-size: 0.9rem; line-height: 1.7; color: #cbd5e1; margin-top: 4px;">
-                ☝️ <strong>1 นิ้ว</strong> = เดินหน้า &nbsp;|&nbsp; 
-                🖐️ <strong>มือซ้าย</strong> = หันซ้าย &nbsp;|&nbsp; 
-                🖐️ <strong>มือขวา</strong> = หันขวา &nbsp;|&nbsp; 
-                🤟 <strong>3 นิ้ว</strong> = วนลูป / กุญแจ &nbsp;|&nbsp; 
-                🫰 <strong>มินิฮาร์ท</strong> = รันโค้ด &nbsp;|&nbsp; 
-                🙅 <strong>10 นิ้ว / กากบาท</strong> = รีเซ็ต &nbsp;|&nbsp; 
-                👎 <strong>คว่ำมือ</strong> = ลบล่าสุด
-              </div>
-              <div id="welcome-top-score-card" style="margin-top: 8px; padding: 6px 14px; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.4); border-radius: 8px; display: flex; align-items: center; justify-content: space-between;">
-                <span style="font-size: 0.85rem; color: #fbbf24; font-weight: bold;">👑 สถิติคะแนนสูงสุด (Top Score):</span>
-                <span id="welcome-top-score-val" style="font-size: 0.95rem; color: #fef08a; font-weight: 800;">กำลังโหลด...</span>
-              </div>
-            </div>
-          </div>
+        </div> <!-- End of welcome-step-1 (Main Home Mode Select) -->
 
-          <!-- STEP 1: CHOOSE GAME MODE FIRST (เลือกโหมดการเล่นก่อน) -->
-          <div style="margin-top: 18px;">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px;">
-              <h3 style="margin: 0; font-size: 1.15rem; font-weight: 800; color: #38bdf8; display: flex; align-items: center; gap: 8px;">
-                <span>🎮</span> <span>เลือกโหมดการเล่น (Select Game Mode)</span>
-              </h3>
-              <span class="pair-badge" style="font-size: 0.76rem; padding: 2px 8px;">ขั้นตอนที่ 1</span>
-            </div>
-
-            <!-- Mode Choice Buttons (Practice vs Challenge) -->
-            <div class="welcome-mode-choice-grid">
-              <button type="button" class="welcome-mode-choice-btn active mode-practice" id="btn-choice-mode-practice">
-                <span class="wmode-big-icon">🛡️</span>
-                <div class="wmode-big-info">
-                  <div class="wmode-big-title">โหมดฝึกซ้อม (Practice Mode)</div>
-                  <div class="wmode-big-desc">ไม่จำกัดเวลา • เลือกชั้น ป.4 หรือ ป.5 • เลือกเล่นด่าน 1 ถึง 10 ได้อิสระ</div>
-                </div>
-                <span class="wmode-arrow">➔</span>
-              </button>
-
-              <button type="button" class="welcome-mode-choice-btn mode-challenge" id="btn-choice-mode-challenge">
-                <span class="wmode-big-icon">⚡</span>
-                <div class="wmode-big-info">
-                  <div class="wmode-big-title">โหมดประลองความเร็ว (Challenge Mode)</div>
-                  <div class="wmode-big-desc">จับเวลา 75 วิ/ด่าน • หัวใจ ❤️ 3 ดวง • ลุย 10 ด่านต่อเนื่อง • ลุ้น Top Score</div>
-                </div>
-                <span class="wmode-arrow">➔</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- SUB-PANEL A: เมื่อกดโหมดฝึกซ้อม -> เลือกชั้น และเลือกด่าน 1-10 เป็นบล็อก -->
-          <div id="panel-practice-config" class="welcome-start-config-card" style="margin-top: 12px; padding: 18px 20px; background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(30, 41, 59, 0.95)); border: 2px solid #10b981; border-radius: 18px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);">
+        <!-- SCREEN 2: PRACTICE MODE (โหมดฝึกซ้อม - ดังรูปที่ผู้ใช้ส่งมา 100%) -->
+        <div id="welcome-step-practice" class="welcome-step-content" style="display: none;">
+          <div class="welcome-start-config-card" style="padding: 22px 24px; background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(30, 41, 59, 0.98)); border: 2px solid #10b981; border-radius: 20px; box-shadow: 0 10px 35px rgba(0, 0, 0, 0.65);">
             
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
-              <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 1.4rem;">🛡️</span>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; flex-wrap: wrap; gap: 8px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.6rem;">🛡️</span>
                 <div>
-                  <h3 style="margin: 0; font-size: 1.15rem; font-weight: 800; color: #34d399;">โหมดฝึกซ้อม: เลือกชั้นเรียน และ เลือกระดับด่าน (1 - 10)</h3>
-                  <span style="font-size: 0.8rem; color: #94a3b8;">เลือกชั้น ป.4 หรือ ป.5 แล้วแตะเลือกบล็อกด่านที่ต้องการเล่น</span>
+                  <h3 style="margin: 0; font-size: 1.2rem; font-weight: 800; color: #34d399;">โหมดฝึกซ้อม: เลือกชั้นเรียน และ เลือกระดับด่าน (1 - 10)</h3>
+                  <span style="font-size: 0.82rem; color: #94a3b8;">เลือกชั้น ป.4 หรือ ป.5 แล้วแตะเลือกบล็อกด่านที่ต้องการเล่น</span>
                 </div>
               </div>
-              <div class="pair-badge" style="font-size: 0.78rem; padding: 3px 10px; background: rgba(16, 185, 129, 0.2); border-color: #10b981; color: #34d399;">
+              <div class="pair-badge" style="font-size: 0.8rem; padding: 4px 12px; background: rgba(16, 185, 129, 0.2); border-color: #10b981; color: #34d399;">
                 🛡️ ฝึกซ้อมอิสระ
               </div>
             </div>
 
             <!-- 1. Grade Selection Toggle: ป.4 vs ป.5 (บล็อกการ์ตูน) -->
-            <div class="welcome-grade-choice-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px;">
+            <div class="welcome-grade-choice-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px;">
               <button type="button" class="welcome-grade-btn active" id="btn-welcome-grade-p4" data-grade="p4">
                 <span class="wgrade-icon">🎒</span>
                 <div class="wgrade-info">
@@ -156,7 +159,7 @@
             </div>
 
             <!-- 2. Selected Level Preview Banner -->
-            <div id="welcome-selected-level-banner" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 12px; padding: 10px 16px; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+            <div id="welcome-selected-level-banner" style="background: rgba(15, 23, 42, 0.8); border: 1.5px solid rgba(16, 185, 129, 0.4); border-radius: 12px; padding: 10px 16px; margin-bottom: 14px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
               <div style="display: flex; align-items: center; gap: 10px;">
                 <span style="font-size: 1.25rem;">🚩</span>
                 <div>
@@ -177,13 +180,13 @@
             </div>
 
             <!-- 4. Launch Action Buttons for Practice -->
-            <div class="welcome-actions" style="margin-top: 16px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px;">
+            <div class="welcome-actions" style="margin-top: 20px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 12px;">
               <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; width: 100%;">
                 <button id="btn-quick-start" class="btn-start-mission" style="flex: 1; min-width: 260px; padding: 14px 28px; font-size: 1.15rem; font-weight: 900; background: linear-gradient(135deg, #10b981, #059669); box-shadow: 0 5px 22px rgba(16, 185, 129, 0.55); border-radius: 14px;">
                   🚀 เริ่มฝึกซ้อม ชั้น ป.4 ด่านที่ 1 ทันที!
                 </button>
-                <button id="btn-goto-step2" class="btn-start-mission" style="padding: 14px 24px; font-size: 0.98rem; font-weight: 700; background: linear-gradient(135deg, #2563eb, #7c3aed); box-shadow: 0 4px 18px rgba(99, 102, 241, 0.45); border-radius: 14px;">
-                  ⚙️ ตั้งชื่อทีมผู้เล่น ➔
+                <button id="btn-practice-back-mode" class="btn btn-secondary" style="padding: 14px 24px; font-size: 0.95rem; font-weight: 700; border-radius: 14px;">
+                  ⬅ ย้อนกลับหน้าแรก
                 </button>
               </div>
               <span class="welcome-hint-text" style="color: #94a3b8; font-size: 0.82rem;">
@@ -192,32 +195,34 @@
             </div>
 
           </div>
+        </div>
 
-          <!-- SUB-PANEL B: เมื่อกดโหมดประลอง -> เอาเมนูฝึกออก แล้วเลือกชั้น เป็นบล็อกเหมือนกัน แต่ไม่ให้เลือกด่าน! -->
-          <div id="panel-challenge-config" class="welcome-start-config-card" style="display: none; margin-top: 12px; padding: 18px 20px; background: linear-gradient(135deg, rgba(15, 23, 42, 0.95), rgba(45, 20, 20, 0.95)); border: 2px solid #ef4444; border-radius: 18px; box-shadow: 0 10px 30px rgba(239, 68, 68, 0.25);">
+        <!-- SCREEN 3: CHALLENGE MODE (โหมดแข่งขันประลองความเร็ว) -->
+        <div id="welcome-step-challenge" class="welcome-step-content" style="display: none;">
+          <div class="welcome-start-config-card" style="padding: 22px 24px; background: linear-gradient(135deg, rgba(15, 23, 42, 0.98), rgba(45, 20, 20, 0.98)); border: 2px solid #ef4444; border-radius: 20px; box-shadow: 0 10px 35px rgba(239, 68, 68, 0.35);">
             
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
-              <div style="display: flex; align-items: center; gap: 8px;">
-                <span style="font-size: 1.4rem;">⚡</span>
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; flex-wrap: wrap; gap: 8px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <span style="font-size: 1.6rem;">⚡</span>
                 <div>
-                  <h3 style="margin: 0; font-size: 1.15rem; font-weight: 800; color: #f87171;">โหมดประลองความเร็ว: เลือกระดับชั้นเรียน</h3>
-                  <span style="font-size: 0.8rem; color: #cbd5e1;">ลุยต่อเนื่อง 10 ด่านตั้งแต่ด่านที่ 1 เพื่อสะสมคะแนนและชิงอันดับ Top Score</span>
+                  <h3 style="margin: 0; font-size: 1.2rem; font-weight: 800; color: #f87171;">โหมดแข่งขันประลองความเร็ว: เลือกระดับชั้นและลงทะเบียนทีม</h3>
+                  <span style="font-size: 0.82rem; color: #cbd5e1;">ลุยต่อเนื่อง 10 ด่านตั้งแต่ด่านที่ 1 เพื่อสะสมคะแนนและชิงอันดับ Top Score</span>
                 </div>
               </div>
-              <div class="pair-badge" style="font-size: 0.78rem; padding: 3px 10px; background: rgba(239, 68, 68, 0.2); border-color: #ef4444; color: #f87171;">
+              <div class="pair-badge" style="font-size: 0.8rem; padding: 4px 12px; background: rgba(239, 68, 68, 0.2); border-color: #ef4444; color: #f87171;">
                 ⚡ แข่งขันจับเวลา
               </div>
             </div>
 
             <!-- Challenge Rules Alert -->
-            <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 12px; padding: 12px 16px; margin-bottom: 14px; color: #fecaca; font-size: 0.88rem; line-height: 1.6;">
+            <div style="background: rgba(239, 68, 68, 0.12); border: 1px solid rgba(239, 68, 68, 0.35); border-radius: 12px; padding: 12px 16px; margin-bottom: 16px; color: #fecaca; font-size: 0.88rem; line-height: 1.6;">
               ⏱️ <strong>กติกาการแข่งขัน:</strong> จับเวลา <strong>75 วินาที/ด่าน</strong>, มีพลังชีวิตหัวใจ ❤️ <strong>3 ดวง</strong>, ระบบจะเริ่มตั้งแต่ <strong>ด่านที่ 1 ต่อเนื่องไปจนถึงด่านที่ 10</strong> (ไม่มีเมนูเลือกข้ามด่าน เพื่อความโปร่งใสและยุติธรรมในการจัดอันดับคะแนนและพิมพ์เกียรติบัตร)
             </div>
 
-            <!-- 1. Grade Selection for Challenge: ป.4 vs ป.5 (บล็อกการ์ตูนเหมือนกัน!) -->
-            <div style="margin-bottom: 14px;">
+            <!-- 1. Grade Selection for Challenge: ป.4 vs ป.5 (บล็อกการ์ตูน) -->
+            <div style="margin-bottom: 16px;">
               <label style="font-size: 0.88rem; font-weight: 700; color: #f87171; display: block; margin-bottom: 8px;">🎓 เลือกระดับชั้นที่จะประลอง:</label>
-              <div class="welcome-grade-choice-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+              <div class="welcome-grade-choice-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
                 <button type="button" class="welcome-grade-btn active" id="btn-challenge-grade-p4" data-grade="p4">
                   <span class="wgrade-icon">🎒</span>
                   <div class="wgrade-info">
@@ -238,120 +243,40 @@
               </div>
             </div>
 
-            <!-- Quick Team Name Inputs inside Challenge Panel -->
-            <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.1); border-radius: 12px; padding: 12px 16px; margin-bottom: 14px;">
-              <div style="font-size: 0.85rem; font-weight: 700; color: #38bdf8; margin-bottom: 8px;">📝 ข้อมูลทีมผู้เข้าแข่งขัน:</div>
-              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 10px;">
+            <!-- Team Registration Form -->
+            <div style="background: rgba(15, 23, 42, 0.7); border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 14px; padding: 14px 18px; margin-bottom: 16px;">
+              <div style="font-size: 0.9rem; font-weight: 700; color: #38bdf8; margin-bottom: 10px;">📝 ข้อมูลทีมผู้เข้าแข่งขัน (สำหรับพิมพ์เกียรติบัตร):</div>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 12px;">
                 <div>
-                  <label style="font-size: 0.76rem; color: #94a3b8;">🏷️ ชื่อทีม:</label>
-                  <input type="text" id="input-challenge-team-name" value="ทีมนักสำรวจ 01" style="width: 100%; padding: 6px 10px; background: rgba(0,0,0,0.4); border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 0.88rem;">
+                  <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">🏷️ ชื่อทีม:</label>
+                  <input type="text" id="input-team-name" value="ทีมนักสำรวจ 01" style="width: 100%; padding: 8px 12px; background: rgba(0,0,0,0.4); border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 0.9rem;">
                 </div>
                 <div>
-                  <label style="font-size: 0.76rem; color: #94a3b8;">🎮 คนที่ 1 (Driver):</label>
-                  <input type="text" id="input-challenge-driver-name" value="ต้นกล้า" style="width: 100%; padding: 6px 10px; background: rgba(0,0,0,0.4); border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 0.88rem;">
+                  <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">🎮 คนที่ 1 (Driver สั่งการ):</label>
+                  <input type="text" id="input-driver-name" value="ต้นกล้า" style="width: 100%; padding: 8px 12px; background: rgba(0,0,0,0.4); border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 0.9rem;">
                 </div>
                 <div>
-                  <label style="font-size: 0.76rem; color: #94a3b8;">🗺️ คนที่ 2 (Navigator):</label>
-                  <input type="text" id="input-challenge-nav-name" value="ฟ้าใส" style="width: 100%; padding: 6px 10px; background: rgba(0,0,0,0.4); border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 0.88rem;">
+                  <label style="font-size: 0.78rem; color: #94a3b8; display: block; margin-bottom: 4px;">🗺️ คนที่ 2 (Navigator วางแผน):</label>
+                  <input type="text" id="input-navigator-name" value="ฟ้าใส" style="width: 100%; padding: 8px 12px; background: rgba(0,0,0,0.4); border: 1px solid #334155; border-radius: 8px; color: #fff; font-size: 0.9rem;">
                 </div>
               </div>
             </div>
 
             <!-- Launch Action Button for Challenge -->
-            <div class="welcome-actions" style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px;">
-              <button id="btn-start-challenge-direct" class="btn-start-mission" style="width: 100%; max-width: 440px; padding: 14px 28px; font-size: 1.18rem; font-weight: 900; background: linear-gradient(135deg, #ef4444, #b91c1c); box-shadow: 0 5px 22px rgba(239, 68, 68, 0.55); border-radius: 14px;">
-                ⚡ เริ่มประลองความเร็ว ชั้น ป.4 (เริ่มด่านที่ 1) 🚀
-              </button>
+            <div class="welcome-actions" style="text-align: center; display: flex; flex-direction: column; align-items: center; gap: 10px;">
+              <div style="display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; width: 100%;">
+                <button id="btn-start-challenge-direct" class="btn-start-mission" style="flex: 1; min-width: 280px; padding: 14px 28px; font-size: 1.18rem; font-weight: 900; background: linear-gradient(135deg, #ef4444, #b91c1c); box-shadow: 0 5px 22px rgba(239, 68, 68, 0.55); border-radius: 14px;">
+                  ⚡ เริ่มประลองความเร็ว ชั้น ป.4 (เริ่มด่านที่ 1) 🚀
+                </button>
+                <button id="btn-challenge-back-mode" class="btn btn-secondary" style="padding: 14px 24px; font-size: 0.95rem; font-weight: 700; border-radius: 14px;">
+                  ⬅ ย้อนกลับหน้าแรก
+                </button>
+              </div>
               <span class="welcome-hint-text" style="color: #94a3b8; font-size: 0.82rem;">
                 💡 โหมดประลองเริ่มตั้งแต่ด่านที่ 1 มีระบบจับเวลาและ Game Over หากพลังชีวิตหมด
               </span>
             </div>
 
-          </div>
-        </div>
-
-        <!-- STEP 2: Team Registration & Mode Selection -->
-        <div id="welcome-step-2" class="welcome-step-content" style="display: none;">
-          <!-- Step Indicator Header -->
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.12);">
-            <div style="display: flex; align-items: center; gap: 10px;">
-              <span style="font-size: 1.8rem;">📝</span>
-              <div>
-                <h2 style="font-size: 1.35rem; font-weight: 800; color: #38bdf8; margin: 0;">ลงทะเบียนทีมผู้เข้าแข่งขัน</h2>
-                <span style="font-size: 0.82rem; color: #94a3b8;">ขั้นตอนที่ 2 จาก 2: กรอกข้อมูลคู่หูและเลือกโหมดการเล่น</span>
-              </div>
-            </div>
-            <button id="btn-back-to-step1" class="btn btn-secondary" style="padding: 6px 14px; font-size: 0.85rem;">
-              ⬅ ย้อนกลับไปหน้าแรก
-            </button>
-          </div>
-
-          <!-- Registration Form Section -->
-          <div class="welcome-form-section" style="padding-top: 0;">
-            <div class="form-grid">
-              <div class="form-group full-width">
-                <label for="input-team-name">🏷️ ชื่อทีม / ชื่อคู่หู:</label>
-                <input type="text" id="input-team-name" placeholder="เช่น ยานอพอลโล, ซูเปอร์โค้ด" value="ทีมนักสำรวจ 01">
-              </div>
-              <div class="form-group">
-                <label for="input-driver-name">🎮 คนที่ 1 (Driver สั่งการ):</label>
-                <input type="text" id="input-driver-name" placeholder="เช่น ต้นกล้า" value="ต้นกล้า">
-              </div>
-              <div class="form-group">
-                <label for="input-navigator-name">🗺️ คนที่ 2 (Navigator วางแผน):</label>
-                <input type="text" id="input-navigator-name" placeholder="เช่น ฟ้าใส" value="ฟ้าใส">
-              </div>
-              <div class="form-group full-width">
-                <label for="input-grade-level">🎓 เลือกระดับชั้นการเรียนรู้:</label>
-                <select id="input-grade-level">
-                  <option value="p5" selected>ประถมศึกษาปีที่ 5 (การใช้เหตุผลเชิงตรรกะ ลูปผสม เงื่อนไข If-Then ว 4.2)</option>
-                  <option value="p4">ประถมศึกษาปีที่ 4 (อัลกอริทึม ลำดับขั้นตอน ลูปเบื้องต้น ว 4.2)</option>
-                </select>
-              </div>
-              <div class="form-group full-width">
-                <label>🎮 เลือกโหมดการเล่น (Game Mode):</label>
-                <div class="mode-select-grid">
-                  <button type="button" class="mode-card-btn active" id="btn-mode-practice" data-mode="PRACTICE">
-                    <span class="mode-card-icon">🛡️</span>
-                    <div class="mode-card-info">
-                      <strong class="mode-card-title">โหมดฝึกซ้อม (Practice)</strong>
-                      <p class="mode-card-desc">ไม่จำกัดเวลา รันโค้ดได้อิสระ ฝึกคิดวิเคราะห์และแก้ปัญหาตามสบาย</p>
-                    </div>
-                  </button>
-                  <button type="button" class="mode-card-btn" id="btn-mode-challenge" data-mode="CHALLENGE">
-                    <span class="mode-card-icon">⚡</span>
-                    <div class="mode-card-info">
-                      <strong class="mode-card-title">โหมดประลอง (Challenge)</strong>
-                      <p class="mode-card-desc">จับเวลา 75 วิ/ด่าน, หัวใจ ❤️ 3 ดวง, มี Time Bonus XP และ Game Over</p>
-                    </div>
-                  </button>
-                </div>
-
-                <!-- Practice Level Select inside Welcome Screen -->
-                <div id="welcome-practice-levels-section" style="margin-top: 10px; padding: 10px 14px; background: rgba(16, 185, 129, 0.12); border: 1px solid rgba(16, 185, 129, 0.35); border-radius: 10px;">
-                  <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; flex-wrap: wrap; gap: 4px;">
-                    <span style="font-size: 0.84rem; font-weight: 700; color: #34d399;">🎯 เลือกระดับด่านที่จะเริ่มฝึก (1 - 10):</span>
-                    <span id="welcome-level-title-preview" style="font-size: 0.8rem; font-weight: 600; color: #a7f3d0;">ด่านที่ 1: ก้าวแรกของโค้ดบอท</span>
-                  </div>
-                  <div class="level-blocks-container" id="welcome-level-blocks-container">
-                    <!-- Populated blocks 1-10 -->
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Action Buttons -->
-          <div class="welcome-actions" style="margin-top: 20px; display: flex; justify-content: space-between; align-items: center;">
-            <button id="btn-back-to-step1-bottom" class="btn btn-secondary" style="padding: 10px 18px; font-size: 0.95rem;">
-              ⬅ ย้อนกลับ
-            </button>
-            <button id="btn-start-mission" class="btn-start-mission" style="padding: 12px 36px; font-size: 1.15rem;">
-              <span>🚀</span> เริ่มต้นการผจญภัยสู่ด่านที่ 1
-            </button>
-          </div>
-          <div style="text-align: center; margin-top: 10px;">
-            <span class="welcome-hint-text">💡 เมื่อกดเริ่ม สามารถใช้กล้องเว็บแคมหรือคลิกปุ่มบนหน้าจอเพื่อเล่นได้ทันที</span>
           </div>
         </div>
       </div>
@@ -388,6 +313,9 @@
         </button>
         <button id="btn-open-game-menu" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.82rem; font-weight: 700; background: rgba(56, 189, 248, 0.2); border-color: #38bdf8; color: #7dd3fc; display: flex; align-items: center; gap: 4px;" title="เปิดเมนูเกม เลือกด่าน และตั้งค่า">
           ⚙️ เมนูเกม
+        </button>
+        <button id="btn-header-back-home" class="btn btn-secondary" style="padding: 4px 10px; font-size: 0.82rem; font-weight: 700; background: rgba(37, 99, 235, 0.25); border-color: #60a5fa; color: #93c5fd; display: flex; align-items: center; gap: 4px;" title="กลับหน้าแรก (Home)">
+          🏠 หน้าแรก
         </button>
         <button id="btn-toggle-sound" class="btn btn-secondary" style="padding: 4px 8px; font-size: 0.82rem;" title="เปิด/ปิดเสียง">
           🔊
@@ -787,6 +715,11 @@
             </button>
           </div>
 
+          <!-- Return to Home button top-left -->
+          <button class="btn btn-secondary" id="btn-top-menu-back-home" style="position: absolute; top: 12px; left: 14px; padding: 5px 12px; background: rgba(0,0,0,0.35); border-color: rgba(56, 189, 248, 0.6); color: #7dd3fc; border-radius: 8px; font-weight: 800; font-size: 0.8rem; display: flex; align-items: center; gap: 4px;">
+            🏠 หน้าแรก
+          </button>
+
           <!-- Close button top-right -->
           <button class="btn btn-secondary" id="btn-close-level-select" style="position: absolute; top: 12px; right: 14px; padding: 4px 10px; background: rgba(0,0,0,0.3); border-color: rgba(255,255,255,0.4); color: #fff; border-radius: 8px; font-weight: 800;">✕</button>
         </div>
@@ -812,18 +745,18 @@
 
           <!-- Bottom Navigation: Go Back Button (Matching Image!) + Quick Actions -->
           <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 6px; padding-top: 10px; border-top: 1px solid rgba(255, 255, 255, 0.15); flex-wrap: wrap; gap: 8px;">
-            <button id="btn-menu-level-back" class="btn-game-go-back">
-              <span class="btn-yellow-dot"></span>
-              <span>Go Back (ย้อนกลับ)</span>
+            <button id="btn-menu-back-home" class="btn btn-secondary" style="padding: 10px 18px; font-size: 0.92rem; font-weight: 800; background: linear-gradient(135deg, #2563eb, #1d4ed8); border: 2px solid #60a5fa; color: #fff; border-radius: 12px; box-shadow: 0 4px 14px rgba(37, 99, 235, 0.4); display: flex; align-items: center; gap: 6px; cursor: pointer;">
+              🏠 กลับหน้าแรก (Home)
             </button>
             <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
-              <button id="btn-menu-restart-level" class="btn btn-secondary" style="padding: 7px 12px; font-size: 0.82rem; font-weight: 700; background: rgba(245, 158, 11, 0.18); border-color: #f59e0b; color: #fde047; border-radius: 10px;">
+              <button id="btn-menu-restart-level" class="btn btn-secondary" style="padding: 8px 14px; font-size: 0.82rem; font-weight: 700; background: rgba(245, 158, 11, 0.18); border-color: #f59e0b; color: #fde047; border-radius: 10px;">
                 🔄 เริ่มด่านใหม่
               </button>
-              <button id="btn-menu-back-home" class="btn btn-secondary" style="padding: 7px 12px; font-size: 0.82rem; font-weight: 700; background: rgba(59, 130, 246, 0.18); border-color: #3b82f6; color: #93c5fd; border-radius: 10px;">
-                🏠 กลับหน้าแรก
+              <button id="btn-menu-level-back" class="btn-game-go-back">
+                <span class="btn-yellow-dot"></span>
+                <span>◀ ปิดเมนู (กลับเข้าเกม)</span>
               </button>
-              <button id="btn-menu-toggle-sound" class="btn btn-secondary" style="padding: 7px 10px; font-size: 0.82rem; font-weight: 700; border-radius: 10px;" title="เปิด/ปิดเสียง">
+              <button id="btn-menu-toggle-sound" class="btn btn-secondary" style="padding: 8px 12px; font-size: 0.82rem; font-weight: 700; border-radius: 10px;" title="เปิด/ปิดเสียง">
                 <span id="menu-sound-icon">🔊</span>
               </button>
             </div>
@@ -840,10 +773,10 @@
   <script src="vendor/mediapipe/hands.js?v=6.7_final_level_and_top_score_photo"></script>
 
   <!-- Game Scripts with cache buster -->
-  <script src="js/audio.js?v=7.5_unlock_all_levels_no_padlocks"></script>
-  <script src="js/levels.js?v=7.5_unlock_all_levels_no_padlocks"></script>
-  <script src="js/camera-engine.js?v=7.5_unlock_all_levels_no_padlocks"></script>
-  <script src="js/game-engine.js?v=7.5_unlock_all_levels_no_padlocks"></script>
-  <script src="js/app.js?v=7.5_unlock_all_levels_no_padlocks"></script>
+  <script src="js/audio.js?v=7.7_home_nav_and_3_clean_screens"></script>
+  <script src="js/levels.js?v=7.7_home_nav_and_3_clean_screens"></script>
+  <script src="js/camera-engine.js?v=7.7_home_nav_and_3_clean_screens"></script>
+  <script src="js/game-engine.js?v=7.7_home_nav_and_3_clean_screens"></script>
+  <script src="js/app.js?v=7.7_home_nav_and_3_clean_screens"></script>
 </body>
 </html>
