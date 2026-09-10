@@ -431,14 +431,27 @@ class GameEngine {
       this.robot.dir = (this.robot.dir + 1) % 4;
       if (window.soundEngine) window.soundEngine.playTurn();
     } else if (action === 'USE_KEY') {
-      // Check if robot is adjacent or in front of laser door
-      const door = this.items.find(it => it.type === 'laser_door');
-      if (door && this.hasKey) {
-        door.open = true;
+      // 1. If standing on or adjacent to an uncollected key, collect it!
+      const nearbyKey = this.items.find(it => it.type === 'key' && !it.collected && (
+        (it.x === this.robot.x && it.y === this.robot.y) ||
+        Math.hypot(it.x - this.robot.x, it.y - this.robot.y) <= 1.05
+      ));
+      if (nearbyKey && !this.hasKey) {
+        nearbyKey.collected = true;
+        this.hasKey = true;
         if (window.soundEngine) window.soundEngine.playItem();
-      } else if (!this.hasKey) {
-        failed = true;
-        failReason = "ไม่มีกุญแจในกระเป๋า! ต้องไปเก็บกุญแจมาก่อนนะ";
+        if (this.onStatusMsg) this.onStatusMsg("🔑 เก็บกุญแจเรียบร้อยแล้ว!", false);
+      } else {
+        // 2. Check if robot is adjacent or in front of laser door
+        const door = this.items.find(it => it.type === 'laser_door');
+        if (door && this.hasKey) {
+          door.open = true;
+          if (window.soundEngine) window.soundEngine.playItem();
+          if (this.onStatusMsg) this.onStatusMsg("🔓 ปลดล็อกประตูเลเซอร์สำเร็จ!", false);
+        } else if (!this.hasKey) {
+          failed = true;
+          failReason = "ไม่มีกุญแจในกระเป๋า! ต้องไปเก็บกุญแจมาก่อนนะ";
+        }
       }
     }
 
@@ -622,13 +635,27 @@ class GameEngine {
       this.robot.dir = (this.robot.dir + 1) % 4;
       if (window.soundEngine) window.soundEngine.playTurn();
     } else if (action === 'USE_KEY') {
-      const door = this.items.find(it => it.type === 'laser_door');
-      if (door && this.hasKey) {
-        door.open = true;
+      // 1. If standing on or adjacent to an uncollected key, collect it!
+      const nearbyKey = this.items.find(it => it.type === 'key' && !it.collected && (
+        (it.x === this.robot.x && it.y === this.robot.y) ||
+        Math.hypot(it.x - this.robot.x, it.y - this.robot.y) <= 1.05
+      ));
+      if (nearbyKey && !this.hasKey) {
+        nearbyKey.collected = true;
+        this.hasKey = true;
         if (window.soundEngine) window.soundEngine.playItem();
-      } else if (!this.hasKey) {
-        failed = true;
-        failReason = "ไม่มีกุญแจในกระเป๋า! ต้องไปเก็บกุญแจมาก่อนนะ";
+        if (this.onStatusMsg) this.onStatusMsg("🔑 เก็บกุญแจเรียบร้อยแล้ว!", false);
+      } else {
+        // 2. Check if robot is adjacent or in front of laser door
+        const door = this.items.find(it => it.type === 'laser_door');
+        if (door && this.hasKey) {
+          door.open = true;
+          if (window.soundEngine) window.soundEngine.playItem();
+          if (this.onStatusMsg) this.onStatusMsg("🔓 ปลดล็อกประตูเลเซอร์สำเร็จ!", false);
+        } else if (!this.hasKey) {
+          failed = true;
+          failReason = "ไม่มีกุญแจในกระเป๋า! ต้องไปเก็บกุญแจมาก่อนนะ";
+        }
       }
     }
 

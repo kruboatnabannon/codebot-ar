@@ -1011,12 +1011,12 @@ const BLOCK_CATALOG = {
   },
   USE_KEY: {
     id: 'USE_KEY',
-    label: 'ใช้กุญแจปลดล็อก',
-    shortLabel: 'ไขประตู',
+    label: 'เก็บ/ไขกุญแจ',
+    shortLabel: 'เก็บ/ไขกุญแจ',
     icon: '🔑',
     type: 'action',
     color: '#eab308',
-    gestureHint: 'ชู 3 นิ้ว'
+    gestureHint: '🤏 จีบคว่ำ'
   }
 };
 

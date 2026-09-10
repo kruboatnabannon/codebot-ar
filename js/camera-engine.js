@@ -74,6 +74,14 @@ class CameraEngine {
     this.undoPoint = null;
     this.onUndoTrigger = null;
 
+    // Downward Pinch State (🤏 จีบคว่ำ = USE_KEY เก็บ/ไขกุญแจ)
+    this.pinchHoldTime = 0;
+    this.keyTriggerThreshold = 1000; // 1.0s hold time
+    this.keyCooldownUntil = 0;
+    this.keyAnimUntil = 0;
+    this.pinchPoint = null;
+    this.isDownwardPinchActive = false;
+
     // Hands-Free Loop Recording Mode State
     this.isLoopRecordingMode = false;
     this.awaitingLoopIteration = false;
@@ -484,11 +492,17 @@ class CameraEngine {
     const isRingFolded   = dist0(16) <= dist0(14) * 1.02 || primaryHand[16].y > primaryHand[14].y;
     const isPinkyFolded  = dist0(20) <= dist0(18) * 1.02 || primaryHand[20].y > primaryHand[18].y;
 
+    // Distance between thumb tip (4) and index tip (8)
+    const dThumbIndexTip = Math.hypot(primaryHand[4].x - primaryHand[8].x, primaryHand[4].y - primaryHand[8].y);
+    const dThumbMiddleTip = Math.hypot(primaryHand[4].x - primaryHand[12].x, primaryHand[4].y - primaryHand[12].y);
+    const isPinch = (dThumbIndexTip < pScale * 0.38) ||
+                    (dThumbMiddleTip < pScale * 0.38 && dThumbIndexTip < pScale * 0.52);
+
     const isThumbDown = primaryHand[4].y > primaryHand[3].y + (pScale * 0.15)
       && primaryHand[4].y > primaryHand[0].y;
     const isAllOtherFolded = !isIndexExt && isMiddleFolded && isRingFolded && isPinkyFolded;
 
-    if (isThumbDown && isAllOtherFolded && now >= this.undoCooldownUntil) {
+    if (isThumbDown && isAllOtherFolded && !isPinch && now >= this.undoCooldownUntil) {
       this.undoPoint = { x: (1 - primaryHand[4].x) * width, y: primaryHand[4].y * height };
       this.undoHoldTime += deltaTime;
       const ratio = Math.min(1.0, this.undoHoldTime / this.undoTriggerThreshold);
@@ -502,6 +516,41 @@ class CameraEngine {
     } else {
       this.undoHoldTime = Math.max(0, this.undoHoldTime - deltaTime * 2.0);
       this.undoPoint = null;
+    }
+
+    // -----------------------------------------------------------------------
+    // PRIORITY 3.5: Downward Pinch (🤏 จีบคว่ำ) = เก็บกุญแจ / ไขกุญแจ (USE_KEY)
+    // -----------------------------------------------------------------------
+    const pinchPtY = (primaryHand[4].y + primaryHand[8].y) / 2;
+    const pinchPtX = (primaryHand[4].x + primaryHand[8].x) / 2;
+
+    // Downward orientation:
+    // 1. Pinch point is pointing down (lower than index knuckle or wrist)
+    // 2. Index tip points downward (lower than PIP or knuckle)
+    // 3. Thumb tip points downward or horizontal (distinct from mini heart)
+    const isDownward = (pinchPtY > primaryHand[5].y || pinchPtY > primaryHand[0].y - pScale * 0.10) &&
+                       (primaryHand[8].y > primaryHand[6].y - pScale * 0.10 || primaryHand[8].y > primaryHand[5].y) &&
+                       (primaryHand[4].y > primaryHand[2].y - pScale * 0.10);
+
+    const isKeyLevelAllowed = !this.availableBlockIds || this.availableBlockIds.length === 0 || this.availableBlockIds.includes('USE_KEY');
+    const isDownwardPinch = isPinch && isDownward && !isMiniHeart && isKeyLevelAllowed;
+
+    if (isDownwardPinch && now >= this.keyCooldownUntil) {
+      this.isDownwardPinchActive = true;
+      this.pinchPoint = { x: (1 - pinchPtX) * width, y: pinchPtY * height };
+      this.pinchHoldTime += deltaTime;
+      const ratio = Math.min(1.0, this.pinchHoldTime / this.keyTriggerThreshold);
+      this.updateLiveFeedback('USE_KEY', ratio);
+      this.decayOtherHoldTimes('USE_KEY', deltaTime);
+
+      if (this.pinchHoldTime >= this.keyTriggerThreshold) {
+        this.triggerKeyAction();
+      }
+      return;
+    } else {
+      this.isDownwardPinchActive = false;
+      this.pinchHoldTime = Math.max(0, this.pinchHoldTime - deltaTime * 2.0);
+      if (this.pinchHoldTime === 0) this.pinchPoint = null;
     }
 
     // -----------------------------------------------------------------------
@@ -660,9 +709,11 @@ class CameraEngine {
     this.runHoldTime = Math.max(0, this.runHoldTime - deltaTime * 2.0);
     this.resetHoldTime = Math.max(0, this.resetHoldTime - deltaTime * 2.0);
     this.undoHoldTime = Math.max(0, this.undoHoldTime - deltaTime * 2.0);
+    this.pinchHoldTime = Math.max(0, this.pinchHoldTime - deltaTime * 2.0);
     if (this.gestureHoldTime === 0) this.currentGesture = null;
     this.isMiniHeartActive = false;
     this.isCrossActive = false;
+    this.isDownwardPinchActive = false;
   }
 
   decayOtherHoldTimes(activeMode, deltaTime) {
@@ -670,6 +721,7 @@ class CameraEngine {
     if (activeMode !== 'RUN')     this.runHoldTime = Math.max(0, this.runHoldTime - deltaTime * 2.0);
     if (activeMode !== 'RESET')   this.resetHoldTime = Math.max(0, this.resetHoldTime - deltaTime * 2.0);
     if (activeMode !== 'UNDO')    this.undoHoldTime = Math.max(0, this.undoHoldTime - deltaTime * 2.0);
+    if (activeMode !== 'USE_KEY') this.pinchHoldTime = Math.max(0, this.pinchHoldTime - deltaTime * 2.0);
   }
 
   // =========================================================================
@@ -759,6 +811,8 @@ class CameraEngine {
       } else {
         tagText = 'ชู 2, 3, 4 หรือ 5 นิ้ว';
       }
+    } else if (this.isDownwardPinchActive) {
+      tagText = '🤏 จีบคว่ำ (กุญแจ 🔑)';
     } else if (this.currentGesture === 'START_LOOP' || this.currentGesture === 'FINISH_LOOP' || this.fingersCount === 3) {
       tagText = '🤟 3 นิ้ว (วนลูป)';
     } else if (this.currentGesture === 'FORWARD' || this.fingersCount === 1) {
@@ -810,10 +864,17 @@ class CameraEngine {
       return;
     }
 
+    if (actionType === 'USE_KEY') {
+      const pct = Math.floor(ratio * 100);
+      this.liveTextEl.textContent = `🔑 ตรวจพบ: จีบคว่ำ (เก็บ/ไขกุญแจ)... ${pct}%`;
+      this.liveDotEl.className = 'live-pulse-dot charging';
+      return;
+    }
+
     if (actionType) {
       const meta = this.getGestureMeta(actionType);
       const pct = Math.floor(ratio * 100);
-      if (actionType === 'START_LOOP' || actionType === 'FINISH_LOOP' || actionType === 'USE_KEY') {
+      if (actionType === 'START_LOOP' || actionType === 'FINISH_LOOP') {
         this.liveTextEl.textContent = `${meta.icon} ตรวจพบ: ${meta.label} — ค้างไว้... ${pct}%`;
       } else {
         const sideText = this.primaryHandSide === 'LEFT' ? 'มือซ้าย' : 'มือขวา';
@@ -823,7 +884,7 @@ class CameraEngine {
     } else {
       if (this.lastLandmarks) {
         const sideText = this.primaryHandSide === 'LEFT' ? 'มือซ้าย' : 'มือขวา';
-        this.liveTextEl.textContent = `ตรวจพบ: ${sideText} (☝️ 1 นิ้ว: เดินหน้า / 🖐️ แบมือ: เลี้ยวตามข้างมือ / 🤟 3 นิ้ว: วนลูป)`;
+        this.liveTextEl.textContent = `ตรวจพบ: ${sideText} (☝️ 1 นิ้ว: เดินหน้า / 🖐️ เลี้ยว / 🤏 จีบคว่ำ: กุญแจ / 🤟 3 นิ้ว: ลูป)`;
       } else {
         this.liveTextEl.textContent = 'กล้องพร้อม: ยกมือขึ้นหน้ากล้อง';
       }
@@ -882,6 +943,20 @@ class CameraEngine {
     if (this.liveDotEl) this.liveDotEl.className = 'live-pulse-dot active';
     if (window.soundEngine) window.soundEngine.playError();
     if (this.onUndoTrigger) this.onUndoTrigger();
+  }
+
+  triggerKeyAction() {
+    const now = Date.now();
+    this.keyCooldownUntil = now + 1400; // 1.4s cooldown
+    this.keyAnimUntil = now + 800;
+    this.pinchHoldTime = 0;
+    this.isDownwardPinchActive = false;
+    this.lastTriggeredGesture = 'USE_KEY';
+    this.lastTriggerAnimUntil = now + 900;
+
+    if (this.liveDotEl) this.liveDotEl.className = 'live-pulse-dot active';
+    if (window.soundEngine) window.soundEngine.playItem();
+    if (this.onZoneTrigger) this.onZoneTrigger('USE_KEY');
   }
 
   // =========================================================================
@@ -968,6 +1043,12 @@ class CameraEngine {
       this.drawChargingRing(ctx, this.undoPoint.x, this.undoPoint.y, ratio, 'UNDO');
     }
 
+    // 3b. Downward Pinch Progress Ring (Golden Yellow 🔑)
+    if (this.pinchHoldTime > 50 && this.pinchPoint) {
+      const ratio = Math.min(1.0, this.pinchHoldTime / this.keyTriggerThreshold);
+      this.drawChargingRing(ctx, this.pinchPoint.x, this.pinchPoint.y, ratio, 'USE_KEY');
+    }
+
     // 4. Command Progress Ring (Cyan/Gold/Purple)
     if (!inCooldown && this.gestureHoldTime > 50 && this.currentGesture && this.lastLandmarks) {
       const curThreshold = this.gestureTriggerThreshold;
@@ -1034,11 +1115,11 @@ class CameraEngine {
     else if (isTriggerAnim) {
       const meta = this.getGestureMeta(this.lastTriggeredGesture);
       ctx.save();
-      ctx.fillStyle = 'rgba(16, 185, 129, 0.94)';
+      ctx.fillStyle = this.lastTriggeredGesture === 'USE_KEY' ? 'rgba(217, 119, 6, 0.95)' : 'rgba(16, 185, 129, 0.94)';
       ctx.beginPath();
-      ctx.roundRect(width / 2 - 150, 20, 300, 46, 23);
+      ctx.roundRect(width / 2 - 155, 20, 310, 46, 23);
       ctx.fill();
-      ctx.strokeStyle = '#a7f3d0';
+      ctx.strokeStyle = this.lastTriggeredGesture === 'USE_KEY' ? '#fef08a' : '#a7f3d0';
       ctx.lineWidth = 2;
       ctx.stroke();
 
@@ -1085,12 +1166,12 @@ class CameraEngine {
       ctx.beginPath();
       ctx.roundRect(14, 14, 240, 32, 16);
       ctx.fill();
-      ctx.strokeStyle = this.fingersCount > 0 || this.isMiniHeartActive || this.isCrossActive ? '#10b981' : 'rgba(56, 189, 248, 0.5)';
+      ctx.strokeStyle = this.fingersCount > 0 || this.isMiniHeartActive || this.isCrossActive || this.isDownwardPinchActive ? '#10b981' : 'rgba(56, 189, 248, 0.5)';
       ctx.lineWidth = 1.5;
       ctx.stroke();
 
       ctx.font = 'bold 12px system-ui, sans-serif';
-      ctx.fillStyle = this.fingersCount > 0 || this.isMiniHeartActive || this.isCrossActive ? '#34d399' : '#38bdf8';
+      ctx.fillStyle = this.fingersCount > 0 || this.isMiniHeartActive || this.isCrossActive || this.isDownwardPinchActive ? '#34d399' : '#38bdf8';
       ctx.textAlign = 'left';
       ctx.textBaseline = 'middle';
       let statusText = '🤖 AI แยกมือซ้าย-ขวาพร้อม';
@@ -1098,6 +1179,8 @@ class CameraEngine {
         statusText = '🙅 กากบาท: รีเซ็ตโค้ด';
       } else if (this.isMiniHeartActive) {
         statusText = '🫰 มินิฮาร์ท: รันโค้ด';
+      } else if (this.isDownwardPinchActive) {
+        statusText = '🔑 จีบคว่ำ: เก็บ/ไขกุญแจ';
       } else if (this.primaryHandSide) {
         const s = this.primaryHandSide === 'LEFT' ? 'มือซ้าย' : 'มือขวา';
         statusText = `🖐️ ${s} (${this.fingersCount} นิ้ว)`;
@@ -1114,6 +1197,7 @@ class CameraEngine {
     if (gesture === 'RESET') color = '#ef4444';
     else if (gesture === 'RUN') color = '#ec4899';
     else if (gesture === 'UNDO') color = '#f59e0b';
+    else if (gesture === 'USE_KEY') color = '#eab308';
     else if (gesture === 'START_LOOP' || gesture === 'FINISH_LOOP') color = '#a855f7';
     else if (gesture === 'TURN_RIGHT') color = '#fbbf24';
     else if (ratio > 0.65) color = '#34d399';
@@ -1138,7 +1222,7 @@ class CameraEngine {
     if (meta) {
       ctx.fillStyle = 'rgba(15, 23, 42, 0.94)';
       ctx.beginPath();
-      ctx.roundRect(cx - 80, cy - ringR - 38, 160, 30, 15);
+      ctx.roundRect(cx - 85, cy - ringR - 38, 170, 30, 15);
       ctx.fill();
       ctx.strokeStyle = color;
       ctx.lineWidth = 1.5;
@@ -1164,7 +1248,7 @@ class CameraEngine {
       LOOP_2:      { label: 'วนซ้ำ 2 รอบ',           icon: '🔁2' },
       LOOP_3:      { label: 'วนซ้ำ 3 รอบ',           icon: '🔁3' },
       LOOP_4:      { label: 'วนซ้ำ 4 รอบ',           icon: '🔁4' },
-      USE_KEY:     { label: 'ไขกุญแจ (3 นิ้ว)',       icon: '🔑' },
+      USE_KEY:     { label: 'เก็บ/ไขกุญแจ (จีบคว่ำ)', icon: '🔑' },
       RUN:         { label: 'รันโค้ด (มินิฮาร์ท)',     icon: '🫰' },
       RESET:       { label: 'รีเซ็ตโค้ดใหม่ (กากบาท)',   icon: '🙅' },
       UNDO:        { label: 'ยกเลิกล่าสุด (คว่ำมือ)',   icon: '👎' }

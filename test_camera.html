@@ -359,7 +359,20 @@
         return;
       }
 
-      // 3. Undo 👎
+      // 3. Downward Pinch (จีบคว่ำ) 🤏 = เก็บ/ไขกุญแจ (USE_KEY)
+      const dThumbIndexTip = Math.hypot(lm[4].x - lm[8].x, lm[4].y - lm[8].y);
+      const dThumbMiddleTip = Math.hypot(lm[4].x - lm[12].x, lm[4].y - lm[12].y);
+      const isPinch = (dThumbIndexTip < 0.08) || (dThumbMiddleTip < 0.08 && dThumbIndexTip < 0.11);
+      const pinchY = (lm[4].y + lm[8].y) / 2;
+      const isDownward = (pinchY > lm[5].y || pinchY > lm[0].y - 0.02) && (lm[4].y > lm[2].y - 0.02);
+
+      if (isPinch && isDownward) {
+        fingerCountEl.textContent = '🤏 จีบคว่ำ';
+        gestureNameEl.textContent = '🔑 เก็บ/ไขกุญแจ (USE_KEY)';
+        return;
+      }
+
+      // 4. Undo 👎
       const isIndexExt  = lm[8].y < lm[6].y;
       const isMiddleExt = lm[12].y < lm[10].y;
       const isRingExt   = lm[16].y < lm[14].y;
@@ -367,7 +380,7 @@
       const isThumbDown = lm[4].y > lm[3].y && lm[4].y > lm[2].y;
       const allFolded = !isIndexExt && !isMiddleExt && !isRingExt && !isPinkyExt;
 
-      if (isThumbDown && allFolded) {
+      if (isThumbDown && allFolded && !isPinch) {
         fingerCountEl.textContent = '👎 คว่ำมือ';
         gestureNameEl.textContent = 'ลบคำสั่งล่าสุด (UNDO)';
         return;

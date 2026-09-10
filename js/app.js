@@ -1433,6 +1433,7 @@ class AppController {
     this.updatePracticeLevelHighlight(index);
 
     this.renderBottomTouchButtons(level.availableBlocks);
+    this.updateGestureGuideBar();
     this.renderTimeline();
 
     if (this.gameMode === 'CHALLENGE') {
@@ -1560,11 +1561,14 @@ class AppController {
     const bar = document.getElementById('gesture-guide-bar');
     if (!bar) return;
 
+    const hasKeyInLevel = this.currentLevel && this.currentLevel.availableBlocks && this.currentLevel.availableBlocks.includes('USE_KEY');
+
     bar.innerHTML = `
       <div class="guide-chip"><span class="chip-badge">☝️ 1 นิ้ว</span> เดินหน้า</div>
       <div class="guide-chip" style="border-color: rgba(56, 189, 248, 0.4);"><span class="chip-badge" style="background: rgba(56, 189, 248, 0.2); color: #38bdf8;">🖐️ มือซ้าย</span> หันซ้าย</div>
       <div class="guide-chip" style="border-color: rgba(251, 191, 36, 0.4);"><span class="chip-badge" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24;">🖐️ มือขวา</span> หันขวา</div>
-      <div class="guide-chip" style="border-color: rgba(168, 85, 247, 0.4);"><span class="chip-badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc;">🤟 3 นิ้ว</span> เปิด/ปิดลูป</div>
+      ${hasKeyInLevel ? '<div class="guide-chip" style="border-color: rgba(234, 179, 8, 0.6);"><span class="chip-badge" style="background: rgba(234, 179, 8, 0.25); color: #facc15;">🤏 จีบคว่ำ</span> กุญแจ</div>' : ''}
+      <div class="guide-chip" style="border-color: rgba(168, 85, 247, 0.4);"><span class="chip-badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc;">🤟 3 นิ้ว</span> วนลูป</div>
       <div class="guide-chip" style="border-color: rgba(236, 72, 153, 0.4);"><span class="chip-badge" style="background: rgba(236, 72, 153, 0.2); color: #f472b6;">🫰 มินิฮาร์ท</span> รันโค้ด</div>
       <div class="guide-chip" style="border-color: rgba(239, 68, 68, 0.4);"><span class="chip-badge" style="background: rgba(239, 68, 68, 0.2); color: #f87171;">🙅 กากบาท</span> รีเซ็ต</div>
       <div class="guide-chip" style="border-color: rgba(245, 158, 11, 0.4);"><span class="chip-badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24;">👎 คว่ำมือ</span> ลบล่าสุด</div>
