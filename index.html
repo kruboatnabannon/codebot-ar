@@ -320,6 +320,9 @@
         <button id="btn-toggle-sound" class="btn btn-secondary" style="padding: 4px 8px; font-size: 0.82rem;" title="เปิด/ปิดเสียง">
           🔊
         </button>
+        <button id="btn-toggle-wakelock" class="btn btn-secondary" style="padding: 4px 8px; font-size: 0.82rem; background: rgba(16, 185, 129, 0.2); border-color: #10b981; color: #34d399;" title="ป้องกันหน้าจอดับ (Screen Wake Lock): แตะเพื่อเปิด/ปิด">
+          🔆
+        </button>
       </div>
     </header>
 
@@ -759,6 +762,9 @@
               <button id="btn-menu-toggle-sound" class="btn btn-secondary" style="padding: 8px 12px; font-size: 0.82rem; font-weight: 700; border-radius: 10px;" title="เปิด/ปิดเสียง">
                 <span id="menu-sound-icon">🔊</span>
               </button>
+              <button id="btn-menu-toggle-wakelock" class="btn btn-secondary" style="padding: 8px 12px; font-size: 0.82rem; font-weight: 700; border-radius: 10px; background: rgba(16, 185, 129, 0.2); border-color: #10b981; color: #34d399;" title="ป้องกันหน้าจอดับ (Screen Wake Lock)">
+                <span id="menu-wakelock-icon">🔆</span> จอไม่ดับ: เปิด
+              </button>
             </div>
           </div>
         </div>
@@ -773,10 +779,10 @@
   <script src="vendor/mediapipe/hands.js?v=6.7_final_level_and_top_score_photo"></script>
 
   <!-- Game Scripts with cache buster -->
-  <script src="js/audio.js?v=7.7_home_nav_and_3_clean_screens"></script>
-  <script src="js/levels.js?v=7.7_home_nav_and_3_clean_screens"></script>
-  <script src="js/camera-engine.js?v=7.7_home_nav_and_3_clean_screens"></script>
-  <script src="js/game-engine.js?v=7.7_home_nav_and_3_clean_screens"></script>
-  <script src="js/app.js?v=7.7_home_nav_and_3_clean_screens"></script>
+  <script src="js/audio.js?v=7.8_screen_wake_lock_mobile"></script>
+  <script src="js/levels.js?v=7.8_screen_wake_lock_mobile"></script>
+  <script src="js/camera-engine.js?v=7.8_screen_wake_lock_mobile"></script>
+  <script src="js/game-engine.js?v=7.8_screen_wake_lock_mobile"></script>
+  <script src="js/app.js?v=7.8_screen_wake_lock_mobile"></script>
 </body>
 </html>

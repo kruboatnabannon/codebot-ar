@@ -75,6 +75,11 @@ class AppController {
     // Hands-Free Loop Recording State
     this.currentRecordingLoop = null;
 
+    // Screen Wake Lock State (ป้องกันจอดับขณะวางเล่นบนมือถือ)
+    this.wakeLockSentinel = null;
+    this.wakeLockEnabled = true;
+    this.videoWakeLockFallback = null;
+
     this.init();
   }
 
@@ -83,6 +88,7 @@ class AppController {
     this.cameraEngine = new window.CameraEngine('ar-canvas', 'webcam-video');
     this.gameEngine = new window.GameEngine('grid-canvas');
     this.initTTSVoices();
+    this.initWakeLock();
 
     // 2. Setup Camera Engine Trigger Hook
     this.cameraEngine.onZoneTrigger = (zoneId) => {
@@ -427,6 +433,7 @@ class AppController {
 
     this.modalGrade = this.gradeLevel;
     this.renderCartoonLevelGrid(this.modalGrade);
+    this.updateWakeLockUI();
     document.getElementById('game-menu-modal')?.classList.add('active');
   }
 
@@ -909,6 +916,7 @@ class AppController {
 
     this.gameStarted = true;
     this.startRoleTimer();
+    this.requestWakeLock();
 
     this.loadCurrentLevel(targetStartLevel, true);
 
@@ -1339,6 +1347,16 @@ class AppController {
         topSoundBtn.innerHTML = isMuted ? '🔇' : '🔊';
         topSoundBtn.title = isMuted ? 'เสียง: ปิด' : 'เสียง: เปิด';
       }
+    });
+
+    document.getElementById('btn-toggle-wakelock')?.addEventListener('click', () => {
+      if (window.soundEngine) window.soundEngine.playTouch();
+      this.toggleWakeLock();
+    });
+
+    document.getElementById('btn-menu-toggle-wakelock')?.addEventListener('click', () => {
+      if (window.soundEngine) window.soundEngine.playTouch();
+      this.toggleWakeLock();
     });
 
     document.getElementById('btn-menu-restart-level')?.addEventListener('click', () => {
@@ -3194,6 +3212,144 @@ class AppController {
       });
     } else {
       this.showStatusToast(msg, false);
+    }
+  }
+
+  // ==========================================
+  // Screen Wake Lock API (ป้องกันจอดับบนมือถือ)
+  // ==========================================
+  initWakeLock() {
+    // 1. User gesture triggers wake lock request (required by mobile browsers)
+    const onUserInteraction = () => {
+      if (this.wakeLockEnabled && !this.wakeLockSentinel) {
+        this.requestWakeLock();
+      }
+    };
+    ['touchstart', 'touchend', 'click', 'pointerdown'].forEach(evt => {
+      document.addEventListener(evt, onUserInteraction, { passive: true });
+    });
+
+    // 2. Re-acquire wake lock if user switches tabs and returns
+    document.addEventListener('visibilitychange', async () => {
+      if (document.visibilityState === 'visible' && this.wakeLockEnabled) {
+        await this.requestWakeLock();
+      }
+    });
+
+    // 3. Attempt initial request
+    this.requestWakeLock();
+  }
+
+  async requestWakeLock() {
+    if (!this.wakeLockEnabled) return false;
+
+    if ('wakeLock' in navigator) {
+      try {
+        if (this.wakeLockSentinel !== null && !this.wakeLockSentinel.released) {
+          this.updateWakeLockUI(true);
+          return true;
+        }
+        this.wakeLockSentinel = await navigator.wakeLock.request('screen');
+        console.log('🔆 Screen Wake Lock activated: จอดับอัตโนมัติถูกปิดแล้ว');
+        this.wakeLockSentinel.addEventListener('release', () => {
+          this.wakeLockSentinel = null;
+          this.updateWakeLockUI(false);
+        });
+        this.updateWakeLockUI(true);
+        return true;
+      } catch (err) {
+        console.warn('Wake Lock request failed, using fallback:', err.name, err.message);
+        this.ensureVideoWakeLockFallback();
+        this.updateWakeLockUI(false);
+        return false;
+      }
+    } else {
+      this.ensureVideoWakeLockFallback();
+      this.updateWakeLockUI(true);
+      return false;
+    }
+  }
+
+  async releaseWakeLock() {
+    if (this.wakeLockSentinel) {
+      try {
+        await this.wakeLockSentinel.release();
+      } catch (e) {}
+      this.wakeLockSentinel = null;
+    }
+    if (this.videoWakeLockFallback) {
+      try {
+        this.videoWakeLockFallback.pause();
+      } catch (e) {}
+    }
+    this.updateWakeLockUI(false);
+  }
+
+  toggleWakeLock() {
+    this.wakeLockEnabled = !this.wakeLockEnabled;
+    if (this.wakeLockEnabled) {
+      this.requestWakeLock();
+      this.showStatusToast('🔆 เปิดระบบล็อกหน้าจอ: จอจะไม่ดับขณะเล่น!', false);
+    } else {
+      this.releaseWakeLock();
+      this.showStatusToast('💤 ปิดระบบล็อกหน้าจอ: จอจะดับตามเวลาตั้งค่าของเครื่อง', false);
+    }
+    this.updateWakeLockUI();
+  }
+
+  updateWakeLockUI(isActive = null) {
+    const active = (isActive !== null) ? isActive : (this.wakeLockEnabled && (this.wakeLockSentinel !== null || !('wakeLock' in navigator)));
+    
+    // Top bar icon
+    const topBtn = document.getElementById('btn-toggle-wakelock');
+    if (topBtn) {
+      topBtn.innerHTML = active ? '🔆' : '💤';
+      topBtn.title = active ? 'ป้องกันจอดับ: เปิดอยู่ (แตะเพื่อปิด)' : 'ป้องกันจอดับ: ปิดอยู่ (แตะเพื่อเปิด)';
+      topBtn.style.background = active ? 'rgba(16, 185, 129, 0.25)' : 'rgba(239, 68, 68, 0.2)';
+      topBtn.style.borderColor = active ? '#10b981' : '#ef4444';
+      topBtn.style.color = active ? '#34d399' : '#f87171';
+    }
+
+    // Modal menu button
+    const menuBtn = document.getElementById('btn-menu-toggle-wakelock');
+    if (menuBtn) {
+      menuBtn.style.background = active ? 'rgba(16, 185, 129, 0.25)' : 'rgba(239, 68, 68, 0.2)';
+      menuBtn.style.borderColor = active ? '#10b981' : '#ef4444';
+      menuBtn.style.color = active ? '#34d399' : '#f87171';
+      menuBtn.innerHTML = `<span id="menu-wakelock-icon">${active ? '🔆' : '💤'}</span> จอไม่ดับ: ${active ? 'เปิด' : 'ปิด'}`;
+    }
+  }
+
+  ensureVideoWakeLockFallback() {
+    if (this.videoWakeLockFallback) {
+      this.videoWakeLockFallback.play().catch(() => {});
+      return;
+    }
+    try {
+      const video = document.createElement('video');
+      video.setAttribute('playsinline', '');
+      video.setAttribute('webkit-playsinline', '');
+      video.setAttribute('muted', '');
+      video.setAttribute('loop', '');
+      video.muted = true;
+      video.style.position = 'fixed';
+      video.style.width = '1px';
+      video.style.height = '1px';
+      video.style.top = '-50px';
+      video.style.opacity = '0.01';
+      video.style.pointerEvents = 'none';
+
+      const canvas = document.createElement('canvas');
+      canvas.width = 2;
+      canvas.height = 2;
+      if (canvas.captureStream) {
+        video.srcObject = canvas.captureStream(1);
+        document.body.appendChild(video);
+        video.play().catch(() => {});
+        this.videoWakeLockFallback = video;
+      }
+    } catch (e) {
+      // Ignored
     }
   }
 }
