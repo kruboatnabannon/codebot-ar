@@ -100,7 +100,7 @@ class AppController {
       this.removeLastBlock();
     };
 
-    // 2c. Mini Heart gesture hook — 🫰 มินิฮาร์ท = รันโค้ดโปรแกรม
+    // 2c. Fist gesture hook — ✊ กำหมัด = รันโค้ดโปรแกรม
     this.cameraEngine.onRunTrigger = () => {
       if (this.gameEngine && this.gameEngine.isExecuting) return;
       if (this.codeSequence.length === 0) {
@@ -110,7 +110,7 @@ class AppController {
       if (window.soundEngine) window.soundEngine.playTouch();
       this.gameEngine.setCode(this.codeSequence);
       this.gameEngine.runAll();
-      this.showStatusToast('🚀 สั่งรันโค้ดด้วยท่ามินิฮาร์ทสำเร็จ!', false);
+      this.showStatusToast('🚀 สั่งรันโค้ดด้วยท่ากำหมัดสำเร็จ!', false);
     };
 
     // 2d. Cross gesture hook — 🙅 กากบาท = รีเซ็ตและล้างคำสั่งทั้งหมด
@@ -1575,7 +1575,7 @@ class AppController {
       <div class="guide-chip" style="border-color: rgba(251, 191, 36, 0.4);"><span class="chip-badge" style="background: rgba(251, 191, 36, 0.2); color: #fbbf24;">🖐️ มือขวา</span> หันขวา</div>
       ${hasKeyInLevel ? '<div class="guide-chip" style="border-color: rgba(234, 179, 8, 0.6);"><span class="chip-badge" style="background: rgba(234, 179, 8, 0.25); color: #facc15;">🤏 จีบคว่ำ</span> กุญแจ</div>' : ''}
       <div class="guide-chip" style="border-color: rgba(168, 85, 247, 0.4);"><span class="chip-badge" style="background: rgba(168, 85, 247, 0.2); color: #c084fc;">🤟 3 นิ้ว</span> วนลูป</div>
-      <div class="guide-chip" style="border-color: rgba(236, 72, 153, 0.4);"><span class="chip-badge" style="background: rgba(236, 72, 153, 0.2); color: #f472b6;">🫰 มินิฮาร์ท</span> รันโค้ด</div>
+      <div class="guide-chip" style="border-color: rgba(249, 115, 22, 0.4);"><span class="chip-badge" style="background: rgba(249, 115, 22, 0.2); color: #fb923c;">✊ กำหมัด</span> รันโค้ด</div>
       <div class="guide-chip" style="border-color: rgba(239, 68, 68, 0.4);"><span class="chip-badge" style="background: rgba(239, 68, 68, 0.2); color: #f87171;">🙅 กากบาท</span> รีเซ็ต</div>
       <div class="guide-chip" style="border-color: rgba(245, 158, 11, 0.4);"><span class="chip-badge" style="background: rgba(245, 158, 11, 0.2); color: #fbbf24;">👎 คว่ำมือ</span> ลบล่าสุด</div>
     `;

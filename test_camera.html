@@ -345,16 +345,15 @@
       const side = getStudentHandSide(lm, handedness);
       handSideEl.textContent = side === 'LEFT' ? '🖐️ มือซ้าย (Left Hand)' : '🖐️ มือขวา (Right Hand)';
 
-      // 2. Mini Heart 🫰
-      const dThumbIndex = Math.hypot(lm[4].x - lm[8].x, lm[4].y - lm[8].y);
-      const isThumbCrossing = (dThumbIndex < 0.10 || Math.hypot(lm[4].x - lm[7].x, lm[4].y - lm[7].y) < 0.10);
-      const isMiddleFolded = lm[12].y > lm[10].y - 0.02;
-      const isRingFolded   = lm[16].y > lm[14].y - 0.02;
-      const isPinkyFolded  = lm[20].y > lm[18].y - 0.02;
-      const isThumbUp      = lm[4].y < lm[2].y;
+      // 2. Clenched Fist ✊ = รันโค้ดโปรแกรม (RUN_CODE)
+      const isIndexFolded  = Math.hypot(lm[8].x - lm[0].x, lm[8].y - lm[0].y) <= Math.hypot(lm[6].x - lm[0].x, lm[6].y - lm[0].y) * 1.05;
+      const isMiddleFolded = Math.hypot(lm[12].x - lm[0].x, lm[12].y - lm[0].y) <= Math.hypot(lm[10].x - lm[0].x, lm[10].y - lm[0].y) * 1.05;
+      const isRingFolded   = Math.hypot(lm[16].x - lm[0].x, lm[16].y - lm[0].y) <= Math.hypot(lm[14].x - lm[0].x, lm[14].y - lm[0].y) * 1.05;
+      const isPinkyFolded  = Math.hypot(lm[20].x - lm[0].x, lm[20].y - lm[0].y) <= Math.hypot(lm[18].x - lm[0].x, lm[18].y - lm[0].y) * 1.05;
+      const isThumbDown    = lm[4].y > lm[3].y + 0.02 && lm[4].y > lm[0].y;
 
-      if (isThumbCrossing && isMiddleFolded && isRingFolded && isPinkyFolded && isThumbUp) {
-        fingerCountEl.textContent = '🫰 มินิฮาร์ท';
+      if (isIndexFolded && isMiddleFolded && isRingFolded && isPinkyFolded && !isThumbDown) {
+        fingerCountEl.textContent = '✊ กำหมัด';
         gestureNameEl.textContent = '🚀 รันโค้ดโปรแกรม (RUN_CODE)';
         return;
       }

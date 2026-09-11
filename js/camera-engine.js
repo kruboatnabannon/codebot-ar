@@ -11,11 +11,11 @@
  * - ☝️ 1 นิ้ว (มือใดก็ได้) = เดินหน้า (FORWARD)
  * - ✋ / ✌️ ยกมือซ้าย (แบมือ หรือ ชู 2 นิ้วมือซ้าย) = หันซ้าย (TURN_LEFT)
  * - ✋ / ✌️ ยกมือขวา (แบมือ หรือ ชู 2 นิ้วมือขวา) = หันขวา (TURN_RIGHT)
- * - 🤟 3 นิ้ว (มือใดก็ได้) = วนลูป (LOOP) หรือ ไขกุญแจ (USE_KEY)
- * - 🫰 มินิฮาร์ท = รันโค้ดโปรแกรม (RUN_CODE)
+ * - 🤟 3 นิ้ว (มือใดก็ได้) = วนลูป (LOOP)
+ * - 🤏 จีบคว่ำ = เก็บกุญแจ / ไขกุญแจ (USE_KEY)
+ * - ✊ กำหมัด = รันโค้ดโปรแกรม (RUN_CODE)
  * - 🙅 กากบาท (สองแขนไขว้) = รีเซ็ตและล้างคำสั่งทั้งหมด (RESET_CODE)
  * - 👎 คว่ำมือ/นิ้วโป้งลง = ลบคำสั่งล่าสุด (UNDO)
- * - ✊ กำมือ / วางมือ = สถานะพัก (IDLE) ปลอดภัย 100%
  */
 
 class CameraEngine {
@@ -48,13 +48,14 @@ class CameraEngine {
     this.lastTriggeredGesture = null;
     this.lastTriggerAnimUntil = 0;
 
-    // Mini Heart (🫰 RUN_CODE)
+    // Clenched Fist (✊ RUN_CODE) - รันโค้ดโปรแกรม
     this.runHoldTime = 0;
-    this.runTriggerThreshold = 1500; // 1.5s hold time
+    this.runTriggerThreshold = 1200; // 1.2s deliberate hold time
     this.runCooldownUntil = 0;
     this.runAnimUntil = 0;
-    this.isMiniHeartActive = false;
-    this.lastMiniHeartDetectedTime = 0;
+    this.isRunFistActive = false;
+    this.isMiniHeartActive = false; // Backward-compatible alias
+    this.lastFistDetectedTime = 0;
     this.onRunTrigger = null;
 
     // Cross Gesture (🙅 RESET_CODE)
@@ -406,7 +407,7 @@ class CameraEngine {
     }
 
     // -----------------------------------------------------------------------
-    // PRIORITY 2: Mini Heart (🫰 มินิฮาร์ท) = รันโค้ดโปรแกรม
+    // Single Hand Geometry & Scale Calculations
     // -----------------------------------------------------------------------
     const primaryHand = allHands[0];
     const h0 = allHandedness && allHandedness.length > 0 ? allHandedness[0] : null;
@@ -417,42 +418,6 @@ class CameraEngine {
     const palmY = primaryHand[9].y * height;
     this.handCenter = { x: palmX, y: palmY };
 
-    // Thumb tip (4) touches Index near tip (8) or joint (7)
-    const dThumbIndex = Math.hypot(primaryHand[4].x - primaryHand[8].x, primaryHand[4].y - primaryHand[8].y);
-    const dThumbJoint = Math.hypot(primaryHand[4].x - primaryHand[7].x, primaryHand[4].y - primaryHand[7].y);
-    const isThumbCrossingIndex = (dThumbIndex < 0.10 || dThumbJoint < 0.10);
-
-    const mhMiddleFolded = primaryHand[12].y > primaryHand[10].y - 0.02;
-    const mhRingFolded   = primaryHand[16].y > primaryHand[14].y - 0.02;
-    const mhPinkyFolded  = primaryHand[20].y > primaryHand[18].y - 0.02;
-    const isThumbUp      = primaryHand[4].y < primaryHand[2].y;
-
-    const isMiniHeart = isThumbCrossingIndex && mhMiddleFolded && mhRingFolded && mhPinkyFolded && isThumbUp;
-
-    if (isMiniHeart) {
-      this.lastMiniHeartDetectedTime = now;
-    }
-    const isRecentlyMiniHeart = isMiniHeart || (now - (this.lastMiniHeartDetectedTime || 0) < 200 && this.runHoldTime > 100);
-
-    if (isRecentlyMiniHeart && now >= this.runCooldownUntil) {
-      this.isMiniHeartActive = true;
-      this.runHoldTime += deltaTime;
-      const ratio = Math.min(1.0, this.runHoldTime / this.runTriggerThreshold);
-      this.updateLiveFeedback('RUN', ratio);
-      this.decayOtherHoldTimes('RUN', deltaTime);
-
-      if (this.runHoldTime >= this.runTriggerThreshold) {
-        this.triggerRunCode();
-      }
-      return;
-    } else {
-      this.isMiniHeartActive = false;
-      this.runHoldTime = Math.max(0, this.runHoldTime - deltaTime * 1.5);
-    }
-
-    // -----------------------------------------------------------------------
-    // PRIORITY 3: Undo Gesture (👎 คว่ำมือ / นิ้วโป้งลงอย่างจงใจ) = ลบคำสั่งล่าสุด
-    // -----------------------------------------------------------------------
     const palmScale = Math.hypot(primaryHand[9].x - primaryHand[0].x, primaryHand[9].y - primaryHand[0].y);
     const pScale = Math.max(0.06, palmScale);
 
@@ -461,7 +426,6 @@ class CameraEngine {
     const dist0 = (idx) => Math.hypot(primaryHand[idx].x - p0.x, primaryHand[idx].y - p0.y);
 
     // Finger is extended if tip is distinctly farther from wrist than PIP
-    // Highly reliable across small children and adults
     const isIndexExt  = dist0(8)  > dist0(6)  * 1.05;
     const isMiddleExt = dist0(12) > dist0(10) * 1.05;
     const isRingExt   = dist0(16) > dist0(14) * 1.05;
@@ -500,6 +464,39 @@ class CameraEngine {
 
     const isThumbDown = primaryHand[4].y > primaryHand[3].y + (pScale * 0.15)
       && primaryHand[4].y > primaryHand[0].y;
+
+    // -----------------------------------------------------------------------
+    // PRIORITY 2: Clenched Fist (✊ กำหมัด) = รันโค้ดโปรแกรม (RUN_CODE)
+    // -----------------------------------------------------------------------
+    const areAllFingersFolded = !isIndexExt && !isMiddleExt && !isRingExt && !isPinkyExt;
+    const isFist = areAllFingersFolded && !isThumbDown && (!isThumbExt || dThumbIndexMcp < pScale * 0.85);
+
+    if (isFist) {
+      this.lastFistDetectedTime = now;
+    }
+    const isRecentlyFist = isFist || (now - (this.lastFistDetectedTime || 0) < 200 && this.runHoldTime > 100);
+
+    if (isRecentlyFist && now >= this.runCooldownUntil) {
+      this.isRunFistActive = true;
+      this.isMiniHeartActive = true;
+      this.runHoldTime += deltaTime;
+      const ratio = Math.min(1.0, this.runHoldTime / this.runTriggerThreshold);
+      this.updateLiveFeedback('RUN', ratio);
+      this.decayOtherHoldTimes('RUN', deltaTime);
+
+      if (this.runHoldTime >= this.runTriggerThreshold) {
+        this.triggerRunCode();
+      }
+      return;
+    } else {
+      this.isRunFistActive = false;
+      this.isMiniHeartActive = false;
+      this.runHoldTime = Math.max(0, this.runHoldTime - deltaTime * 1.5);
+    }
+
+    // -----------------------------------------------------------------------
+    // PRIORITY 3: Undo Gesture (👎 คว่ำมือ / นิ้วโป้งลงอย่างจงใจ) = ลบคำสั่งล่าสุด
+    // -----------------------------------------------------------------------
     const isAllOtherFolded = !isIndexExt && isMiddleFolded && isRingFolded && isPinkyFolded;
 
     if (isThumbDown && isAllOtherFolded && !isPinch && now >= this.undoCooldownUntil) {
@@ -527,13 +524,13 @@ class CameraEngine {
     // Downward orientation:
     // 1. Pinch point is pointing down (lower than index knuckle or wrist)
     // 2. Index tip points downward (lower than PIP or knuckle)
-    // 3. Thumb tip points downward or horizontal (distinct from mini heart)
+    // 3. Thumb tip points downward or horizontal (distinct from upright gestures)
     const isDownward = (pinchPtY > primaryHand[5].y || pinchPtY > primaryHand[0].y - pScale * 0.10) &&
                        (primaryHand[8].y > primaryHand[6].y - pScale * 0.10 || primaryHand[8].y > primaryHand[5].y) &&
                        (primaryHand[4].y > primaryHand[2].y - pScale * 0.10);
 
     const isKeyLevelAllowed = !this.availableBlockIds || this.availableBlockIds.length === 0 || this.availableBlockIds.includes('USE_KEY');
-    const isDownwardPinch = isPinch && isDownward && !isMiniHeart && isKeyLevelAllowed;
+    const isDownwardPinch = isPinch && isDownward && !isFist && isKeyLevelAllowed;
 
     if (isDownwardPinch && now >= this.keyCooldownUntil) {
       this.isDownwardPinchActive = true;
@@ -711,6 +708,7 @@ class CameraEngine {
     this.undoHoldTime = Math.max(0, this.undoHoldTime - deltaTime * 2.0);
     this.pinchHoldTime = Math.max(0, this.pinchHoldTime - deltaTime * 2.0);
     if (this.gestureHoldTime === 0) this.currentGesture = null;
+    this.isRunFistActive = false;
     this.isMiniHeartActive = false;
     this.isCrossActive = false;
     this.isDownwardPinchActive = false;
@@ -821,8 +819,8 @@ class CameraEngine {
       tagText = '↩️ หันซ้าย (มือซ้าย)';
     } else if (this.currentGesture === 'TURN_RIGHT') {
       tagText = '↪️ หันขวา (มือขวา)';
-    } else if (this.isMiniHeartActive) {
-      tagText = '🫰 มินิฮาร์ท (รัน)';
+    } else if (this.isRunFistActive || this.isMiniHeartActive) {
+      tagText = '✊ กำหมัด (รันโค้ด)';
     } else if (this.fingersCount === 5) {
       tagText = side === 'LEFT' ? '🖐️ ยกมือซ้าย (หันซ้าย)' : '🖐️ ยกมือขวา (หันขวา)';
     } else if (this.fingersCount === 4) {
@@ -830,7 +828,7 @@ class CameraEngine {
     } else if (this.fingersCount === 2) {
       tagText = '✌️ 2 นิ้ว';
     } else if (this.fingersCount === 0) {
-      tagText = '✊ กำมือ (พัก)';
+      tagText = '✊ กำหมัด (รันโค้ด)';
     }
     ctx.fillText(tagText, wx, wy);
 
@@ -852,7 +850,7 @@ class CameraEngine {
 
     if (actionType === 'RUN') {
       const pct = Math.floor(ratio * 100);
-      this.liveTextEl.textContent = `🫰 ตรวจพบ: มินิฮาร์ทรันโค้ด... ${pct}%`;
+      this.liveTextEl.textContent = `✊ ตรวจพบ: กำหมัดรันโค้ด... ${pct}%`;
       this.liveDotEl.className = 'live-pulse-dot charging';
       return;
     }
@@ -913,6 +911,7 @@ class CameraEngine {
     this.runCooldownUntil = now + 1800;
     this.runHoldTime = 0;
     this.runAnimUntil = now + 900;
+    this.isRunFistActive = false;
     this.isMiniHeartActive = false;
 
     if (this.liveDotEl) this.liveDotEl.className = 'live-pulse-dot active';
@@ -1025,8 +1024,8 @@ class CameraEngine {
       ctx.restore();
     }
 
-    // 1. Mini Heart Progress Ring (Hot Pink 🫰)
-    if (this.isMiniHeartActive && this.runHoldTime > 50) {
+    // 1. Clenched Fist Run Progress Ring (Energetic Orange ✊)
+    if ((this.isRunFistActive || this.isMiniHeartActive) && this.runHoldTime > 50) {
       const ratio = Math.min(1.0, this.runHoldTime / this.runTriggerThreshold);
       this.drawChargingRing(ctx, this.handCenter.x, this.handCenter.y - 45, ratio, 'RUN');
     }
@@ -1166,19 +1165,19 @@ class CameraEngine {
       ctx.beginPath();
       ctx.roundRect(14, 14, 240, 32, 16);
       ctx.fill();
-      ctx.strokeStyle = this.fingersCount > 0 || this.isMiniHeartActive || this.isCrossActive || this.isDownwardPinchActive ? '#10b981' : 'rgba(56, 189, 248, 0.5)';
+      ctx.strokeStyle = this.fingersCount > 0 || this.isRunFistActive || this.isMiniHeartActive || this.isCrossActive || this.isDownwardPinchActive ? '#10b981' : 'rgba(56, 189, 248, 0.5)';
       ctx.lineWidth = 1.5;
       ctx.stroke();
 
       ctx.font = 'bold 12px system-ui, sans-serif';
-      ctx.fillStyle = this.fingersCount > 0 || this.isMiniHeartActive || this.isCrossActive || this.isDownwardPinchActive ? '#34d399' : '#38bdf8';
+      ctx.fillStyle = this.fingersCount > 0 || this.isRunFistActive || this.isMiniHeartActive || this.isCrossActive || this.isDownwardPinchActive ? '#34d399' : '#38bdf8';
       ctx.textAlign = 'left';
       ctx.textBaseline = 'middle';
       let statusText = '🤖 AI แยกมือซ้าย-ขวาพร้อม';
       if (this.isCrossActive) {
         statusText = '🙅 กากบาท: รีเซ็ตโค้ด';
-      } else if (this.isMiniHeartActive) {
-        statusText = '🫰 มินิฮาร์ท: รันโค้ด';
+      } else if (this.isRunFistActive || this.isMiniHeartActive) {
+        statusText = '✊ กำหมัด: รันโค้ด';
       } else if (this.isDownwardPinchActive) {
         statusText = '🔑 จีบคว่ำ: เก็บ/ไขกุญแจ';
       } else if (this.primaryHandSide) {
@@ -1195,7 +1194,7 @@ class CameraEngine {
     const ringR = 42;
     let color = '#38bdf8';
     if (gesture === 'RESET') color = '#ef4444';
-    else if (gesture === 'RUN') color = '#ec4899';
+    else if (gesture === 'RUN') color = '#f97316';
     else if (gesture === 'UNDO') color = '#f59e0b';
     else if (gesture === 'USE_KEY') color = '#eab308';
     else if (gesture === 'START_LOOP' || gesture === 'FINISH_LOOP') color = '#a855f7';
@@ -1249,7 +1248,7 @@ class CameraEngine {
       LOOP_3:      { label: 'วนซ้ำ 3 รอบ',           icon: '🔁3' },
       LOOP_4:      { label: 'วนซ้ำ 4 รอบ',           icon: '🔁4' },
       USE_KEY:     { label: 'เก็บ/ไขกุญแจ (จีบคว่ำ)', icon: '🔑' },
-      RUN:         { label: 'รันโค้ด (มินิฮาร์ท)',     icon: '🫰' },
+      RUN:         { label: 'รันโค้ด (กำหมัด)',       icon: '✊' },
       RESET:       { label: 'รีเซ็ตโค้ดใหม่ (กากบาท)',   icon: '🙅' },
       UNDO:        { label: 'ยกเลิกล่าสุด (คว่ำมือ)',   icon: '👎' }
     };
